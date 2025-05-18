@@ -28,6 +28,14 @@
 			sendMessage(e);
 		}
 	}
+
+	onMount(() => {
+		const chatContainer = document.querySelector('.chat-container');
+		const observer = new MutationObserver(() => {
+			chatContainer.scrollTop = chatContainer.scrollHeight;
+		});
+		observer.observe(chatContainer, { childList: true });
+	});
 </script>
 
 <div class="chat-container">
@@ -68,7 +76,7 @@
 	.chat-container {
 		display: flex;
 		flex-direction: column;
-		justify-content: flex-end;
+		justify-content: flex-start;
 		height: calc(100vh - 60px);
 		width: 100%;
 		max-width: 600px;
@@ -77,6 +85,7 @@
 		border-radius: 10px 10px 0 0;
 		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 		overflow-y: auto;
+		scroll-behavior: smooth;
 	}
 
 	.message {
