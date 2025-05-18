@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+	import MessageBubble from '$components/MessageBubble.svelte';
 
 	let messages = [
 		{ sender: '신부', text: '안녕! 이제 결혼식 준비 시작했어?', time: '오전 10:30' },
@@ -39,17 +40,8 @@
 </script>
 
 <div class="chat-container">
-	{#each messages as message}
-		<div
-			class="message {message.sender === '신부'
-				? 'shinbu'
-				: message.sender === '신랑'
-					? 'shinlang'
-					: 'me'}"
-		>
-			<div class="bubble">{message.text}</div>
-			<div class="time">{message.time}</div>
-		</div>
+	{#each messages as { sender, text, time }}
+		<MessageBubble {sender} {text} {time} />
 	{/each}
 </div>
 
@@ -86,50 +78,6 @@
 		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 		overflow-y: auto;
 		scroll-behavior: smooth;
-	}
-
-	.message {
-		display: flex;
-		flex-direction: column;
-		margin: 10px;
-	}
-
-	.message.shinbu {
-		align-items: flex-end;
-	}
-
-	.message.shinlang {
-		align-items: flex-start;
-	}
-
-	.message.me {
-		align-items: flex-end;
-	}
-
-	.bubble {
-		max-width: 70%;
-		padding: 10px;
-		border-radius: 15px;
-		margin-bottom: 2px;
-	}
-
-	.shinbu .bubble {
-		background-color: #ffe0e6;
-		margin-left: auto;
-	}
-
-	.shinlang .bubble {
-		background-color: #e6f7ff;
-	}
-
-	.me .bubble {
-		background-color: #d4af37;
-		color: white;
-	}
-
-	.time {
-		font-size: 0.8rem;
-		color: #999;
 	}
 
 	.input-container {
