@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 
 	let weddingDate = new Date('2025-09-13T00:00:00');
-	let weddingPlace = '대한믹국 어디어디 결혼식장';
+	let weddingPlace = '대한민국 어디어디 예식장';
 
 	let daysLeft = 0;
 	onMount(() => {
