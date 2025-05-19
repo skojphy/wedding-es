@@ -9,6 +9,12 @@
 	let currentDay = weddingDate.getDate();
 	let showFirstMeeting = false;
 
+	let hour = 10;
+	let minute = 0;
+
+	let minuteAngle = 0;
+	let hourAngle = -120; // 10시를 가리키도록 수정 (-120도)
+
 	const animateDateChange = () => {
 		let yearInterval = setInterval(() => {
 			if (currentYear <= 2017) {
@@ -16,25 +22,44 @@
 				return;
 			}
 			currentYear--;
-		}, 200);
+		}, 100); // 연도 감소 속도 증가
 
-		let monthCycles = 0;
 		let monthInterval = setInterval(() => {
-			if (monthCycles >= 3) {
+			if (currentYear === 2017 && currentMonth === 7) {
 				clearInterval(monthInterval);
 				return;
 			}
 			currentMonth--;
 			if (currentMonth < 1) {
-				currentMonth = 2;
-				monthCycles++;
+				currentMonth = 12;
 			}
-		}, 80);
+		}, 50); // 월 감소 속도 증가
 
-		let dayCycles = 0;
+		let clockInterval = setInterval(() => {
+			if (
+				currentYear === 2017 &&
+				currentMonth === 7 &&
+				currentDay <= 8 &&
+				hourAngle <= -150 &&
+				minuteAngle <= -1080
+			) {
+				clearInterval(clockInterval);
+				return;
+			}
+
+			// 시계 반대 방향으로 회전
+			minuteAngle -= 30; // 30도씩 빠르게 이동
+			hourAngle -= 3; // 시침도 빠르게 이동
+
+			// 스타일에 직접 각도 적용
+			document.querySelector('.minute-hand').style.transform = `rotate(${minuteAngle}deg)`;
+			document.querySelector('.hour-hand').style.transform = `rotate(${hourAngle}deg)`;
+		}, 50); // 시계 애니메이션도 속도 증가
+
 		let dayInterval = setInterval(() => {
-			if (dayCycles >= 1) {
+			if (currentYear === 2017 && currentMonth === 7 && currentDay <= 8) {
 				clearInterval(dayInterval);
+				clearInterval(clockInterval);
 				setTimeout(() => {
 					showFirstMeeting = true;
 				}, 300);
@@ -42,10 +67,14 @@
 			}
 			currentDay--;
 			if (currentDay < 1) {
-				currentDay = 16;
-				dayCycles++;
+				currentDay = 31;
+				currentMonth--;
+				if (currentMonth < 1) {
+					currentMonth = 12;
+					currentYear--;
+				}
 			}
-		}, 30);
+		}, 30); // 날짜 감소 속도 증가
 	};
 
 	onMount(() => {
@@ -56,18 +85,28 @@
 </script>
 
 <div class="intro-container">
-	<div class="date">
-		{currentYear}.{String(currentMonth).padStart(2, '0')}.{String(currentDay).padStart(2, '0')}
+	<div class="clock">
+		<div class="outer-ring">
+			<div class="inner-ring">
+				<div class="clock-face">
+					<div
+						class="hour-hand"
+						style="transform: rotate(-120deg); transition: transform 0.2s linear;"
+					></div>
+					<div class="minute-hand" style="transition: transform 0.2s linear;"></div>
+					<div class="center-circle"></div>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div class="main-text">
-		{#if !showFirstMeeting}
-			<div class="fade-out">우리 결혼합니다</div>
-		{:else}
-			<a href="/start" class="fade-in link-button"> 우리가 처음 만난 날 &gt; </a>
-		{/if}
+
+	<div class="date">
+		{currentYear}년 {String(currentMonth).padStart(2, '0')}월 {String(currentDay).padStart(
+			2,
+			'0'
+		)}일
 	</div>
 </div>
-<a href="/start" class="start-link">시작하기 🚀</a>
 
 <style>
 	.intro-container {
@@ -76,83 +115,92 @@
 		justify-content: center;
 		align-items: center;
 		height: 100vh;
-		background-color: #f9f9f9;
+		background-color: #e0e5ec;
 		font-family: 'Georgia', serif;
+	}
+
+	.clock {
+		margin-bottom: 2rem;
+		position: relative;
+	}
+
+	.outer-ring {
+		width: 180px;
+		height: 180px;
+		border-radius: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background: #e0e5ec;
+		box-shadow:
+			5px 5px 15px #a3b1c6,
+			-5px -5px 15px #ffffff;
+	}
+
+	.inner-ring {
+		width: 160px;
+		height: 160px;
+		border-radius: 50%;
+		background-color: #e0e5ec;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: relative;
+		box-shadow:
+			inset 5px 5px 15px #a3b1c6,
+			inset -5px -5px 15px #ffffff;
+	}
+
+	.clock-face {
+		position: relative;
+		width: 140px;
+		height: 140px;
+		border-radius: 50%;
+		background-color: #e0e5ec;
+		box-shadow:
+			inset 3px 3px 8px #a3b1c6,
+			inset -3px -3px 8px #ffffff;
+	}
+
+	.hour-hand,
+	.minute-hand {
+		position: absolute;
+		width: 4px;
+		background-color: #6c7889;
+		left: 50%;
+		transform-origin: bottom center;
+		border-radius: 2px;
+		box-shadow:
+			1px 1px 2px #a3b1c6,
+			-1px -1px 2px #ffffff;
+	}
+
+	.hour-hand {
+		height: 40px;
+		top: 30px;
+	}
+
+	.minute-hand {
+		height: 60px;
+		top: 10px;
+	}
+
+	.center-circle {
+		position: absolute;
+		width: 12px;
+		height: 12px;
+		background-color: #e0e5ec;
+		border-radius: 50%;
+		top: 64px;
+		left: 64px;
+		box-shadow:
+			inset 2px 2px 4px #a3b1c6,
+			inset -2px -2px 4px #ffffff;
 	}
 
 	.date {
 		font-size: 2.5rem;
-		margin-bottom: 1rem;
-		color: #d4af37;
-	}
-
-	.main-text {
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		height: 3rem;
-		overflow: hidden;
-	}
-
-	.fade-out {
-		opacity: 1;
-		animation: fadeOut 2s forwards;
-	}
-
-	.fade-in {
-		opacity: 0;
-		animation: fadeIn 2s forwards;
-	}
-
-	@keyframes fadeOut {
-		to {
-			opacity: 0;
-		}
-	}
-
-	@keyframes fadeIn {
-		to {
-			opacity: 1;
-		}
-	}
-
-	.start-link {
-		display: inline-block;
-		margin-top: 2rem;
-		padding: 0.75rem 1.5rem;
-		background-color: #d4af37;
-		color: white;
-		border-radius: 25px;
-		text-decoration: none;
-		font-size: 1.2rem;
-		font-family: 'Georgia', serif;
-		transition: background-color 0.3s ease;
-	}
-
-	.start-link:hover {
-		background-color: #c89b37;
-	}
-
-	.link-button {
-		display: inline-block;
-		color: white;
-		background-color: #d4af37;
-		text-decoration: none;
-		font-size: 1.2rem;
-		padding: 0.4rem 1rem;
-		border-radius: 20px;
-		transition:
-			background-color 0.3s,
-			transform 0.2s;
 		margin-top: 1rem;
-		overflow: hidden;
-		line-height: 1.2rem;
-	}
-
-	.link-button:hover {
-		background-color: #b99730;
-		transform: translateY(-2px);
+		color: #6c7889;
 	}
 </style>
