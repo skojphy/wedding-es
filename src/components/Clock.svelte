@@ -1,10 +1,5 @@
 <script>
 	import { onMount } from 'svelte';
-	import Clock from '$components/Clock.svelte';
-
-	let showIntroText = true;
-	let showStoryText = false;
-	let showClockAndDate = false;
 
 	let weddingDate = new Date('2025-09-13T00:00:00');
 	let firstMeetingDate = new Date('2017-03-20T00:00:00');
@@ -45,8 +40,8 @@
 				currentYear === 2017 &&
 				currentMonth === 7 &&
 				currentDay <= 8 &&
-				hourAngle <= -150 &&
-				minuteAngle <= -1080
+				hourAngle <= -240 &&
+				minuteAngle <= -2160
 			) {
 				clearInterval(clockInterval);
 				return;
@@ -54,7 +49,7 @@
 
 			// 시계 반대 방향으로 회전
 			minuteAngle -= 30; // 30도씩 빠르게 이동
-			hourAngle -= 3; // 시침도 빠르게 이동
+			hourAngle -= 5; // 시침도 빠르게 이동
 
 			// 스타일에 직접 각도 적용
 			document.querySelector('.minute-hand').style.transform = `rotate(${minuteAngle}deg)`;
@@ -84,32 +79,33 @@
 
 	onMount(() => {
 		setTimeout(() => {
-			showStoryText = true;
-		}, 2500);
-
-		setTimeout(() => {
-			showIntroText = false;
-		}, 5000);
-
-		setTimeout(() => {
-			showStoryText = false;
-			showClockAndDate = true;
 			animateDateChange();
-		}, 5200);
+		}, 1000);
 	});
 </script>
 
 <div class="intro-container">
-	{#if showIntroText}
-		<div class="intro-text">저희의 이야기가 궁금하신가요?</div>
-	{/if}
-	{#if showStoryText}
-		<div class="intro-text">그럼 지금부터 게임을 시작하겠습니다</div>
-	{/if}
-	{#if showClockAndDate}
-		<Clock />
-		<Date />
-	{/if}
+	<div class="clock">
+		<div class="outer-ring">
+			<div class="inner-ring">
+				<div class="clock-face">
+					<div
+						class="hour-hand"
+						style="transform: rotate(-120deg); transition: transform 0.2s linear;"
+					></div>
+					<div class="minute-hand" style="transition: transform 0.2s linear;"></div>
+					<div class="center-circle"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="date">
+		{currentYear}년 {String(currentMonth).padStart(2, '0')}월 {String(currentDay).padStart(
+			2,
+			'0'
+		)}일
+	</div>
 </div>
 
 <style>
@@ -123,29 +119,88 @@
 		font-family: 'Georgia', serif;
 	}
 
-	.intro-text {
-		font-size: 2.5rem;
-		color: #6c7889;
-		opacity: 0;
-		animation: fadeInOut 3s ease forwards;
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
+	.clock {
+		margin-bottom: 2rem;
+		position: relative;
 	}
 
-	@keyframes fadeInOut {
-		0% {
-			opacity: 0;
-		}
-		20% {
-			opacity: 1;
-		}
-		80% {
-			opacity: 1;
-		}
-		100% {
-			opacity: 0;
-		}
+	.outer-ring {
+		width: 180px;
+		height: 180px;
+		border-radius: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background: #e0e5ec;
+		box-shadow:
+			5px 5px 15px #a3b1c6,
+			-5px -5px 15px #ffffff;
+	}
+
+	.inner-ring {
+		width: 160px;
+		height: 160px;
+		border-radius: 50%;
+		background-color: #e0e5ec;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: relative;
+		box-shadow:
+			inset 5px 5px 15px #a3b1c6,
+			inset -5px -5px 15px #ffffff;
+	}
+
+	.clock-face {
+		position: relative;
+		width: 140px;
+		height: 140px;
+		border-radius: 50%;
+		background-color: #e0e5ec;
+		box-shadow:
+			inset 3px 3px 8px #a3b1c6,
+			inset -3px -3px 8px #ffffff;
+	}
+
+	.hour-hand,
+	.minute-hand {
+		position: absolute;
+		width: 4px;
+		background-color: #6c7889;
+		left: 50%;
+		transform-origin: bottom center;
+		border-radius: 2px;
+		box-shadow:
+			1px 1px 2px #a3b1c6,
+			-1px -1px 2px #ffffff;
+	}
+
+	.hour-hand {
+		height: 40px;
+		top: 30px;
+	}
+
+	.minute-hand {
+		height: 60px;
+		top: 10px;
+	}
+
+	.center-circle {
+		position: absolute;
+		width: 12px;
+		height: 12px;
+		background-color: #e0e5ec;
+		border-radius: 50%;
+		top: 64px;
+		left: 64px;
+		box-shadow:
+			inset 2px 2px 4px #a3b1c6,
+			inset -2px -2px 4px #ffffff;
+	}
+
+	.date {
+		font-size: 2.5rem;
+		margin-top: 1rem;
+		color: #6c7889;
 	}
 </style>
