@@ -1,151 +1,207 @@
 <script>
-	import { onMount } from 'svelte';
-	import Clock from '$components/Clock.svelte';
+	import { onMount, tick } from 'svelte';
+	import Clock from '../../components/Clock.svelte';
+	import { goto } from '$app/navigation';
 
-	let showIntroText = true;
-	let showStoryText = false;
-	let showClockAndDate = false;
+	const letters = ['?', ...Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i))];
+	let selectedLetters = ['?', '?', '?'];
+	let lockWheels = [null, null, null];
+	$: isCorrect = selectedLetters.join('') === 'SUN';
 
-	let weddingDate = new Date('2025-09-13T00:00:00');
-	let firstMeetingDate = new Date('2017-03-20T00:00:00');
+	const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+	let dayDisplay = 'SAT';
+	let showLock = false;
 
-	let currentYear = weddingDate.getFullYear();
-	let currentMonth = weddingDate.getMonth() + 1;
-	let currentDay = weddingDate.getDate();
-	let showFirstMeeting = false;
+	let year = 2025;
+	let dateDisplay = '09-13';
 
-	let hour = 10;
-	let minute = 0;
-
-	let minuteAngle = 0;
-	let hourAngle = -120; // 10시를 가리키도록 수정 (-120도)
-
-	const animateDateChange = () => {
-		let yearInterval = setInterval(() => {
-			if (currentYear <= 2017) {
-				clearInterval(yearInterval);
+	function animateYear() {
+		let targetYear = 2017;
+		let steps = year - targetYear;
+		let stepTime = 2500 / steps;
+		let interval = setInterval(() => {
+			if (year <= targetYear) {
+				clearInterval(interval);
 				return;
 			}
-			currentYear--;
-		}, 100); // 연도 감소 속도 증가
+			year--;
+		}, stepTime);
+	}
 
-		let monthInterval = setInterval(() => {
-			if (currentYear === 2017 && currentMonth === 7) {
-				clearInterval(monthInterval);
-				return;
+	function animateDate() {
+		let flickerCount = 0;
+		const flicker = setInterval(() => {
+			const mm = String(Math.floor(Math.random() * 12) + 1).padStart(2, '0');
+			const dd = String(Math.floor(Math.random() * 28) + 1).padStart(2, '0');
+			dateDisplay = `${mm}-${dd}`;
+			dayDisplay = days[Math.floor(Math.random() * days.length)];
+			flickerCount++;
+			if (flickerCount >= 50) {
+				clearInterval(flicker);
+				dateDisplay = '08-13';
+				dayDisplay = 'SAT';
+				showLock = true;
+				tick().then(() => {
+					[0, 1, 2].forEach((idx) => {
+						const wheel = lockWheels[idx];
+						const letter = selectedLetters[idx];
+						const pos = letters.indexOf(letter) * 50;
+						wheel.scrollTo({ top: pos, behavior: 'smooth' });
+					});
+				});
 			}
-			currentMonth--;
-			if (currentMonth < 1) {
-				currentMonth = 12;
-			}
-		}, 50); // 월 감소 속도 증가
-
-		let clockInterval = setInterval(() => {
-			if (
-				currentYear === 2017 &&
-				currentMonth === 7 &&
-				currentDay <= 8 &&
-				hourAngle <= -150 &&
-				minuteAngle <= -1080
-			) {
-				clearInterval(clockInterval);
-				return;
-			}
-
-			// 시계 반대 방향으로 회전
-			minuteAngle -= 30; // 30도씩 빠르게 이동
-			hourAngle -= 3; // 시침도 빠르게 이동
-
-			// 스타일에 직접 각도 적용
-			document.querySelector('.minute-hand').style.transform = `rotate(${minuteAngle}deg)`;
-			document.querySelector('.hour-hand').style.transform = `rotate(${hourAngle}deg)`;
-		}, 50); // 시계 애니메이션도 속도 증가
-
-		let dayInterval = setInterval(() => {
-			if (currentYear === 2017 && currentMonth === 7 && currentDay <= 8) {
-				clearInterval(dayInterval);
-				clearInterval(clockInterval);
-				setTimeout(() => {
-					showFirstMeeting = true;
-				}, 300);
-				return;
-			}
-			currentDay--;
-			if (currentDay < 1) {
-				currentDay = 31;
-				currentMonth--;
-				if (currentMonth < 1) {
-					currentMonth = 12;
-					currentYear--;
-				}
-			}
-		}, 30); // 날짜 감소 속도 증가
-	};
+		}, 50);
+	}
 
 	onMount(() => {
 		setTimeout(() => {
-			showStoryText = true;
-		}, 2500);
-
-		setTimeout(() => {
-			showIntroText = false;
-		}, 5000);
-
-		setTimeout(() => {
-			showStoryText = false;
-			showClockAndDate = true;
-			animateDateChange();
-		}, 5200);
+			animateYear();
+			animateDate();
+		}, 1500);
 	});
+
+	function handleScroll(event, idx) {
+		const wheel = event.currentTarget;
+		// determine selected letter index based on scroll position
+		const letterIndex = Math.round(wheel.scrollTop / 50);
+		selectedLetters[idx] = letters[letterIndex] || '?';
+		// visual click effect
+		wheel.classList.add('click');
+		clearTimeout(wheel._clickTimeout);
+		wheel._clickTimeout = setTimeout(() => {
+			wheel.classList.remove('click');
+		}, 100);
+	}
 </script>
 
 <div class="intro-container">
-	{#if showIntroText}
-		<div class="intro-text">저희의 이야기가 궁금하신가요?</div>
-	{/if}
-	{#if showStoryText}
-		<div class="intro-text">그럼 지금부터 게임을 시작하겠습니다</div>
-	{/if}
-	{#if showClockAndDate}
-		<Clock />
-		<Date />
-	{/if}
+	<Clock />
+	<div class="date-display">
+		<div class="year digital">{year}</div>
+		<div class="date digital">{dateDisplay}</div>
+		{#if !showLock}
+			<div class="day digital">{dayDisplay}</div>
+		{:else}
+			<div class="lock-container {isCorrect ? 'correct' : ''}">
+				{#each [0, 1, 2] as idx}
+					<div
+						class="lock-wheel"
+						bind:this={lockWheels[idx]}
+						on:scroll={(e) => handleScroll(e, idx)}
+					>
+						{#each letters as L}
+							<button
+								type="button"
+								class="lock-item {L === selectedLetters[idx] ? 'selected' : ''}"
+								on:click={() => (selectedLetters[idx] = L)}
+							>
+								{L}
+							</button>
+						{/each}
+					</div>
+				{/each}
+			</div>
+			{#if isCorrect}
+				<button class="next-button" on:click={() => goto('/sunday')}> Next </button>
+			{/if}
+		{/if}
+	</div>
 </div>
 
 <style>
 	.intro-container {
 		display: flex;
 		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+		padding: 1rem;
+		background: transparent;
+		font-family: 'Roboto', sans-serif;
+	}
+
+	.date-display {
+		margin-top: 24px;
+		text-align: center;
+		font-size: 1.8rem;
+		font-weight: bold;
+		color: #333;
+	}
+
+	.date-display .year {
+		font-size: 2rem;
+	}
+
+	.digital {
+		font-family: 'Roboto Mono', monospace;
+		background: transparent;
+		color: #006400;
+		padding: 0.2em 0;
+		border-radius: 0;
+		letter-spacing: 0.2em;
+		margin: 0.1em;
+	}
+	.lock-container {
+		display: flex;
+		gap: 0.5rem;
 		justify-content: center;
 		align-items: center;
-		height: 100vh;
-		background-color: #e0e5ec;
-		font-family: 'Georgia', serif;
+	}
+	.lock-wheel {
+		width: 40px;
+		height: 50px;
+		overflow-y: auto;
+		scroll-snap-type: y mandatory;
+		border: 1px solid #333;
+		border-radius: 4px;
+		transition: transform 0.1s ease;
 	}
 
-	.intro-text {
-		font-size: 2.5rem;
-		color: #6c7889;
-		opacity: 0;
-		animation: fadeInOut 3s ease forwards;
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
+	.lock-wheel {
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
+	}
+	.lock-wheel::-webkit-scrollbar {
+		display: none; /* Chrome, Safari, Opera */
+	}
+	.lock-item {
+		/* reset button defaults */
+		appearance: none;
+		-webkit-appearance: none;
+		background: transparent;
+		border: none;
+		padding: 0;
+		margin: 0;
+		font: inherit;
+		color: inherit;
+
+		/* existing styles */
+		width: 100%;
+		height: 50px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		scroll-snap-align: center;
+		font-family: 'Roboto Mono', monospace;
+		cursor: pointer;
+	}
+	.lock-item.selected {
+		background: transparent;
+		color: inherit;
+	}
+	.correct .lock-item {
+		background: red;
+		color: #fff;
 	}
 
-	@keyframes fadeInOut {
-		0% {
-			opacity: 0;
-		}
-		20% {
-			opacity: 1;
-		}
-		80% {
-			opacity: 1;
-		}
-		100% {
-			opacity: 0;
-		}
+	.next-button {
+		margin-top: 1rem;
+		padding: 0.5rem 1rem;
+		background: #333;
+		color: #fff;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+		font-family: inherit;
 	}
 </style>
