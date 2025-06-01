@@ -47,7 +47,16 @@
 		<img src={cyworld1} alt="cyworld 1" class="img-comp-img" />
 	</div>
 	<!-- Slider handle -->
-	<div class="img-slider" on:mousedown={startDrag} style="left: {sliderValue}%;">
+	<div
+		class="img-slider"
+		role="slider"
+		tabindex="0"
+		aria-valuenow={sliderValue}
+		aria-valuemin="0"
+		aria-valuemax="100"
+		on:mousedown={startDrag}
+		style="left: {sliderValue}%;"
+	>
 		<div class="img-slider-handle">
 			<svg
 				width="16"
