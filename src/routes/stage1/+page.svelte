@@ -8,22 +8,22 @@
 	let container;
 	let isDragging = false;
 
-	function startDrag(event) {
+	const startDrag = (event) => {
 		isDragging = true;
 		updateSlider(event);
-	}
+	};
 
-	function stopDrag() {
+	const stopDrag = () => {
 		isDragging = false;
-	}
+	};
 
-	function doDrag(event) {
+	const doDrag = (event) => {
 		if (isDragging) {
 			updateSlider(event);
 		}
-	}
+	};
 
-	function updateSlider(event) {
+	const updateSlider = (event) => {
 		const rect = container.getBoundingClientRect();
 		// calculate percentage based on mouse X within container
 		let x = event.clientX - rect.left;
@@ -31,7 +31,7 @@
 		if (pct < 0) pct = 0;
 		if (pct > 100) pct = 100;
 		sliderValue = pct;
-	}
+	};
 
 	onMount(() => {
 		window.addEventListener('mousemove', doDrag);
