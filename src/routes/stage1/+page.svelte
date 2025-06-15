@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import Input from '../../components/Input.svelte';
 
 	let sliderValue = 50;
 	let cyworld1 = '/images/cyworld1.png';
@@ -93,6 +94,13 @@
 
 <!-- Range input to control sliderValue -->
 <input type="range" min="0" max="100" bind:value={sliderValue} class="slider" />
+
+<Input
+	onSubmit={(value) => {
+		// Put logic here to handle the submitted answer value
+		console.log('Submitted answer:', value);
+	}}
+/>
 
 <style>
 	.img-comp-container {

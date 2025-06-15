@@ -21,11 +21,18 @@
 </div>
 
 <style>
+	:global(html),
+	:global(body) {
+		margin: 0;
+		padding: 0;
+		overflow-x: hidden;
+		width: 100%;
+	}
 	.layout-wrapper {
 		position: relative;
-		width: 100vw;
-		height: 100vh;
-		overflow: visible;
+		width: 100%;
+		min-height: 100vh;
+		overflow-x: hidden;
 		font-family: 'Roboto', sans-serif;
 		display: flex;
 		flex-direction: column;
@@ -64,7 +71,7 @@
 		align-items: center;
 		justify-content: center;
 		flex: 1;
-		padding: 1rem;
+		padding: 0;
 		background: transparent;
 	}
 
