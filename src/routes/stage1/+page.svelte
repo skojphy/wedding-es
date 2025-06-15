@@ -44,7 +44,9 @@
 
 <div class="img-comp-container" bind:this={container} on:mouseleave={stopDrag} role="presentation">
 	<!-- Bottom image -->
-	<img src={cyworld2} alt="cyworld 2" class="img-comp-img" />
+	<div class="img-comp-overlay" style="width: 100%">
+		<img src={cyworld2} alt="cyworld 2" class="img-comp-img" />
+	</div>
 	<!-- Overlay top image (left side) -->
 	<div class="img-comp-overlay" style="width: {sliderValue}%">
 		<img src={cyworld1} alt="cyworld 1" class="img-comp-img" />
@@ -91,16 +93,18 @@
 <style>
 	.img-comp-container {
 		position: relative;
-		width: 100%;
+		width: 100vw;
 		height: 100vh;
 		user-select: none;
 		overflow: hidden;
+		object-fit: cover;
 	}
 
 	.img-comp-img {
 		display: block;
-		width: 100%;
-		height: auto;
+		width: 100vw;
+		height: 100vh;
+		object-fit: cover;
 	}
 
 	.img-comp-overlay {
@@ -139,8 +143,9 @@
 		position: absolute;
 		top: 0;
 		left: 0;
-		height: 100%;
-		width: auto;
+		width: 100vw;
+		height: 100vh;
+		object-fit: cover;
 	}
 
 	.answer-container {
