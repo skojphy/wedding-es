@@ -26,8 +26,8 @@
 
 	const updateSlider = (event) => {
 		const rect = container.getBoundingClientRect();
-		// calculate percentage based on mouse X within container
-		let x = event.clientX - rect.left;
+		let clientX = event.touches ? event.touches[0].clientX : event.clientX;
+		let x = clientX - rect.left;
 		let pct = (x / rect.width) * 100;
 		if (pct < 0) pct = 0;
 		if (pct > 100) pct = 100;
@@ -37,6 +37,8 @@
 	onMount(() => {
 		window.addEventListener('mousemove', doDrag);
 		window.addEventListener('mouseup', stopDrag);
+		window.addEventListener('touchmove', doDrag);
+		window.addEventListener('touchend', stopDrag);
 	});
 </script>
 
@@ -48,67 +50,51 @@
 		<img src={cyworld1} alt="cyworld 1" class="img-comp-img" />
 	</div>
 	<!-- Slider handle -->
-	<div
+	<button
 		class="img-slider"
-		role="slider"
-		tabindex="0"
-		aria-valuenow={sliderValue}
-		aria-valuemin="0"
-		aria-valuemax="100"
 		on:mousedown={startDrag}
+		on:touchstart={startDrag}
 		style="left: {sliderValue}%;"
+		aria-label="Slide to compare images"
 	>
 		<div class="img-slider-handle">
-			<svg
-				width="16"
-				height="16"
-				viewBox="0 0 24 24"
-				fill="none"
-				xmlns="http://www.w3.org/2000/svg"
-			>
+			<svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+				<path d="M8 12H16" stroke="black" stroke-width="2" stroke-linecap="round" />
 				<path
-					d="M7 10L3 14L7 18"
-					stroke="currentColor"
+					d="M12 8L8 12L12 16"
+					stroke="black"
 					stroke-width="2"
 					stroke-linecap="round"
 					stroke-linejoin="round"
 				/>
 				<path
-					d="M3 14H21"
-					stroke="currentColor"
-					stroke-width="2"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-				/>
-				<path
-					d="M17 6L21 10L17 14"
-					stroke="currentColor"
+					d="M12 8L16 12L12 16"
+					stroke="black"
 					stroke-width="2"
 					stroke-linecap="round"
 					stroke-linejoin="round"
 				/>
 			</svg>
 		</div>
-	</div>
+	</button>
 </div>
 
-<!-- Range input to control sliderValue -->
-<input type="range" min="0" max="100" bind:value={sliderValue} class="slider" />
-
-<Input
-	onSubmit={(value) => {
-		// Put logic here to handle the submitted answer value
-		console.log('Submitted answer:', value);
-	}}
-/>
+<div class="answer-container">
+	<Input
+		onSubmit={(value) => {
+			// Put logic here to handle the submitted answer value
+			console.log('Submitted answer:', value);
+		}}
+	/>
+</div>
 
 <style>
 	.img-comp-container {
 		position: relative;
 		width: 100%;
-		max-width: 600px;
+		height: 100vh;
 		user-select: none;
-		overflow: visible;
+		overflow: hidden;
 	}
 
 	.img-comp-img {
@@ -129,34 +115,23 @@
 		position: absolute;
 		top: 0;
 		bottom: 0;
-		width: 2px;
-		background: #fff;
+		background: transparent;
 		cursor: ew-resize;
-		transform: translateX(-1px);
+		transform: translateX(-50%);
 		z-index: 2;
+		border: none;
+		padding: 0;
 	}
 
 	.img-slider-handle {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		width: 30px;
-		height: 30px;
+		width: 40px;
+		height: 40px;
 		background: #fff;
 		border: 2px solid #000;
 		border-radius: 50%;
-		transform: translate(-50%, -50%);
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		font-size: 10px;
-		line-height: 1;
-		z-index: 3;
-	}
-
-	.slider {
-		width: 100%;
-		margin-top: 1rem;
 	}
 
 	/* Ensure overlay image keeps full height and is clipped by parent width */
@@ -166,5 +141,16 @@
 		left: 0;
 		height: 100%;
 		width: auto;
+	}
+
+	.answer-container {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		padding: 1rem;
+		background: transparent;
+		z-index: 3;
+		box-sizing: border-box;
 	}
 </style>
