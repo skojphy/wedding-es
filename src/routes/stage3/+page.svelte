@@ -1,11 +1,14 @@
 <script>
 	const cafe1 = '/images/cafe1.png';
 	const cafe2 = '/images/cafe2.png';
+	const tapIcon = '/images/tap_icon.svg';
 	let isFlipped = false;
 
 	function toggleImage() {
 		isFlipped = !isFlipped;
 	}
+
+	import Input from '../../components/Input.svelte';
 </script>
 
 <button type="button" class="flip-container" on:click={toggleImage} aria-label="이미지 전환">
@@ -17,7 +20,16 @@
 			<img src={cafe2} alt="Cafe 2" />
 		</div>
 	</div>
+	<img src={tapIcon} alt="탭 아이콘" class="tap-icon" />
 </button>
+
+<div class="answer-container">
+	<Input
+		onSubmit={(value) => {
+			console.log('Submitted answer:', value);
+		}}
+	/>
+</div>
 
 <style>
 	button.flip-container {
@@ -62,5 +74,37 @@
 
 	.back {
 		transform: rotateY(180deg);
+	}
+
+	.answer-container {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		padding: 1rem;
+		background: transparent;
+		z-index: 3;
+		box-sizing: border-box;
+	}
+
+	.tap-icon {
+		position: absolute;
+		top: 45%;
+		left: 80%;
+		width: 20%;
+		transform: translate(-50%, -50%);
+		animation: blink 2s infinite ease-in-out;
+		z-index: 2;
+		pointer-events: none;
+	}
+
+	@keyframes blink {
+		0%,
+		100% {
+			opacity: 1;
+		}
+		50% {
+			opacity: 0;
+		}
 	}
 </style>
