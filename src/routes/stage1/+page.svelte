@@ -3,8 +3,8 @@
 	import Input from '../../components/Input.svelte';
 
 	let sliderValue = 50;
-	let cyworld1 = '/images/cyworld1.png';
-	let cyworld2 = '/images/cyworld2.png';
+	const cyworld1 = '/images/cyworld1.png';
+	const cyworld2 = '/images/cyworld2.png';
 
 	let container;
 	let isDragging = false;
