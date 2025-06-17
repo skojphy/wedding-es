@@ -1,8 +1,10 @@
 <script>
+	import Feed from '$components/Feed.svelte';
 	let posts = Array.from({ length: 9 }, (_, i) => ({
 		id: i + 1,
 		image: '/images/mock.png'
 	}));
+	let selectedPost = null;
 </script>
 
 <div class="profile-container">
@@ -185,10 +187,21 @@
 
 	<section class="gallery">
 		{#each posts as post}
-			<div class="gallery-item" style="background-image: url({post.image})"></div>
+			<div
+				class="gallery-item"
+				style="background-image: url({post.image})"
+				on:click={() => (selectedPost = post)}
+			></div>
 		{/each}
 	</section>
 </div>
+
+{#if selectedPost}
+	<div class="modal-backdrop" on:click={() => (selectedPost = null)}></div>
+	<div class="modal">
+		<Feed image={selectedPost.image} />
+	</div>
+{/if}
 
 <style>
 	.profile-container {
@@ -400,5 +413,25 @@
 		display: flex;
 		align-items: center;
 		gap: 0.25rem;
+	}
+
+	.modal-backdrop {
+		position: fixed;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.5);
+		z-index: 10;
+	}
+
+	.modal {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 100%;
+		max-width: 480px;
+		z-index: 20;
+		background: white;
+		border-radius: 8px;
+		overflow: hidden;
 	}
 </style>
