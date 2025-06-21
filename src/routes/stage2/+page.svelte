@@ -1,8 +1,12 @@
 <script>
 	import Feed from '$components/Feed.svelte';
-	let posts = Array.from({ length: 9 }, (_, i) => ({
-		id: i + 1,
-		image: '/images/mock.png'
+	import { posts as rawPosts } from '$lib/data/posts.js';
+
+	let posts = rawPosts.map((post) => ({
+		id: post.id,
+		image: `/images/insta/feed${post.id}_1.png`,
+		date: post.date,
+		caption: post.caption
 	}));
 	let selectedPost = null;
 </script>
@@ -197,9 +201,16 @@
 </div>
 
 {#if selectedPost}
-	<div class="modal-backdrop" on:click={() => (selectedPost = null)}></div>
-	<div class="modal">
-		<Feed image={selectedPost.image} />
+	<div class="post-view">
+		<header class="post-header">
+			<button class="back-button" on:click={() => (selectedPost = null)}>←</button>
+		</header>
+		<Feed
+			image={selectedPost.image}
+			username={selectedPost.username}
+			date={selectedPost.date}
+			caption={selectedPost.caption}
+		/>
 	</div>
 {/if}
 
@@ -415,23 +426,32 @@
 		gap: 0.25rem;
 	}
 
-	.modal-backdrop {
+	.post-view {
 		position: fixed;
 		inset: 0;
-		background: rgba(0, 0, 0, 0.5);
-		z-index: 10;
+		background: white;
+		z-index: 100;
+		display: flex;
+		flex-direction: column;
+		max-width: 480px;
+		width: 100%;
+		margin: 0 auto;
+		overflow-y: auto;
 	}
 
-	.modal {
-		position: fixed;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		width: 100%;
-		max-width: 480px;
-		z-index: 20;
+	.post-header {
+		height: 44px;
+		display: flex;
+		align-items: center;
+		padding: 0 1rem;
+		border-bottom: 1px solid #ddd;
 		background: white;
-		border-radius: 8px;
-		overflow: hidden;
+	}
+
+	.back-button {
+		background: none;
+		border: none;
+		font-size: 1.5rem;
+		cursor: pointer;
 	}
 </style>
