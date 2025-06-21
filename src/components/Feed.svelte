@@ -1,4 +1,6 @@
 <script>
+	import Buttons from './Buttons.svelte';
+
 	export let image = '/images/mock.png';
 	export let username = 'piccor_rica';
 	export let date = '2017년 12월 25일';
@@ -30,8 +32,10 @@
 	</div>
 
 	<div class="feed-actions">
-		<button on:click={() => likes++}>♡</button>
-		<span>{likes} likes</span>
+		<Buttons onLike={() => likes++} />
+	</div>
+	<div class="likes-count">
+		{likes}명이 좋아합니다
 	</div>
 
 	<div class="feed-caption">
@@ -103,6 +107,12 @@
 		align-items: center;
 		padding: 0.5rem;
 		gap: 0.5rem;
+	}
+
+	.likes-count {
+		padding: 0 0.5rem;
+		font-weight: bold;
+		font-size: 0.9rem;
 	}
 
 	.feed-caption {
