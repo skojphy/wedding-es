@@ -14,13 +14,12 @@
 <div class="profile-container">
 	<header class="profile-header">
 		<div class="username">piccor_rica</div>
-		<div class="menu">⋯</div>
 	</header>
 
 	<section class="profile-identity">
 		<div class="avatar"></div>
 		<div class="stats">
-			<div><strong>17</strong><span>Posts</span></div>
+			<div><strong>13</strong><span>Posts</span></div>
 			<div><strong>8</strong><span>Followers</span></div>
 			<div><strong>18</strong><span>Following</span></div>
 		</div>
@@ -233,22 +232,16 @@
 		justify-content: center;
 		align-items: center;
 		position: relative;
-		padding: 0 1rem;
 		height: 44px;
-		border-bottom: 1px solid #ccc;
 		font-weight: bold;
 		width: 100%;
+		text-align: center;
+		padding: 0;
 	}
 
 	.profile-header .username {
-		position: absolute;
-		left: 50%;
-		transform: translateX(-50%);
-	}
-
-	.profile-header .menu {
-		position: absolute;
-		right: 1rem;
+		position: relative;
+		padding: 0 1rem;
 	}
 
 	.profile-identity {
@@ -386,7 +379,7 @@
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		gap: 1px;
-		background: #ccc;
+		background: #fff;
 	}
 
 	.gallery-item {
