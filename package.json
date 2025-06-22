@@ -32,6 +32,7 @@
 		"daisyui": "^5.0.35",
 		"gsap": "^3.13.0",
 		"svelte-icons": "^2.1.0",
+		"swiper": "^10.3.1",
 		"tailwindcss": "^4.1.6"
 	}
 }

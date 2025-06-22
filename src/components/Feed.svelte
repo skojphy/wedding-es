@@ -1,10 +1,15 @@
 <script>
 	import Buttons from './Buttons.svelte';
+	import 'swiper/element/bundle';
+	import { onMount } from 'svelte';
 
-	export let image = '/images/mock.png';
-	export let username = 'piccor_rica';
-	export let date = '2017년 12월 25일';
-	export let caption = '크리스마스라 사람 제일 많은 청계천에 빠지는 사람: 박지현';
+	export let feed = {
+		images: ['/images/mock.png'],
+		date: '',
+		caption: ''
+	};
+
+	const username = 'piccor_rica';
 	let likes = 0;
 	let comments = [];
 	let newComment = '';
@@ -15,6 +20,10 @@
 			newComment = '';
 		}
 	}
+
+	onMount(() => {
+		// swiper web components will automatically register with the bundle import
+	});
 </script>
 
 <div class="feed-container">
@@ -22,14 +31,20 @@
 		<img src="/images/avatar-placeholder.png" alt="avatar" class="avatar" />
 		<div class="meta">
 			<div class="username">{username}</div>
-			<div class="date">{date}</div>
+			<div class="date">{feed.date}</div>
 		</div>
 		<div class="menu">⋯</div>
 	</div>
 
-	<div class="feed-image">
-		<img src={image} alt="post" />
-	</div>
+	<swiper-container class="feed-image" pagination="true">
+		{#if feed.images && feed.images.length}
+			{#each feed.images as img}
+				<swiper-slide>
+					<img src={img} alt="post" />
+				</swiper-slide>
+			{/each}
+		{/if}
+	</swiper-container>
 
 	<div class="feed-actions">
 		<Buttons onLike={() => likes++} />
@@ -40,7 +55,7 @@
 
 	<div class="feed-caption">
 		<strong>{username}</strong>
-		{caption}
+		{feed.caption}
 	</div>
 
 	<div class="feed-comments">
@@ -99,7 +114,9 @@
 
 	.feed-image img {
 		width: 100%;
+		height: auto;
 		display: block;
+		object-fit: cover;
 	}
 
 	.feed-actions {
