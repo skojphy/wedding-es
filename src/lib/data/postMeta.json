@@ -1,0 +1,65 @@
+[
+    {
+        "likes": 12,
+        "comments": [
+            {
+                "nickname": "ㄱㄱㄱ",
+                "text": "너무 귀여워요",
+                "created_at": "2025-06-21T12:01:00Z"
+            },
+            {
+                "nickname": "ㄴㄴㄴㄴㄴ",
+                "text": "축하해요!!",
+                "created_at": "2025-06-21T13:15:00Z"
+            }
+        ]
+    },
+    {
+        "likes": 5,
+        "comments": []
+    },
+    {
+        "likes": 8,
+        "comments": []
+    },
+    {
+        "likes": 3,
+        "comments": []
+    },
+    {
+        "likes": 11,
+        "comments": []
+    },
+    {
+        "likes": 4,
+        "comments": []
+    },
+    {
+        "likes": 6,
+        "comments": []
+    },
+    {
+        "likes": 9,
+        "comments": []
+    },
+    {
+        "likes": 2,
+        "comments": []
+    },
+    {
+        "likes": 10,
+        "comments": []
+    },
+    {
+        "likes": 1,
+        "comments": []
+    },
+    {
+        "likes": 7,
+        "comments": []
+    },
+    {
+        "likes": 13,
+        "comments": []
+    }
+]

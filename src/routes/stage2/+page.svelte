@@ -4,15 +4,23 @@
 	import TabMenu from '$components/TabMenu.svelte';
 	import Highlights from '$components/Highlights.svelte';
 	import { posts as rawPosts } from '$lib/data/posts.js';
+	import postMeta from '$lib/data/postMeta.json';
 	import { disableScroll, enableScroll } from '$lib/utils/scroll.js';
 
-	let posts = rawPosts.map((post) => ({
+	let posts = rawPosts.map((post, index) => ({
 		id: post.id,
-		images: [`/images/insta/feed${post.id}_1.png`],
+		images: Array.from(
+			{ length: post.imagesCount },
+			(_, i) => `/images/insta/feed${post.id}_${i + 1}.png`
+		),
 		date: post.date,
-		caption: post.caption
+		caption: post.caption,
+		likes: postMeta[index]?.likes ?? 0,
+		comments: postMeta[index]?.comments ?? []
 	}));
 	let selectedPost = null;
+
+	console.log('posts', rawPosts);
 
 	$: {
 		if (typeof window !== 'undefined') {

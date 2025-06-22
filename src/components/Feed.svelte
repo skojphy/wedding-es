@@ -2,27 +2,34 @@
 	import Buttons from './Buttons.svelte';
 	import 'swiper/element/bundle';
 	import { onMount } from 'svelte';
+	import { register } from 'swiper/element/bundle';
 
 	export let feed = {
 		images: ['/images/mock.png'],
 		date: '',
-		caption: ''
+		caption: '',
+		likes: 0,
+		comments: []
 	};
 
 	const username = 'piccor_rica';
-	let likes = 0;
-	let comments = [];
+	let liked = false;
+	let bookmarked = false;
 	let newComment = '';
 
 	function addComment() {
 		if (newComment.trim()) {
-			comments.push(newComment);
+			feed.comments.push({
+				nickname: username,
+				text: newComment,
+				created_at: new Date().toISOString()
+			});
 			newComment = '';
 		}
 	}
 
 	onMount(() => {
-		// swiper web components will automatically register with the bundle import
+		register();
 	});
 </script>
 
@@ -36,7 +43,13 @@
 		<div class="menu">⋯</div>
 	</div>
 
-	<swiper-container class="feed-image" pagination="true">
+	<swiper-container
+		class="feed-image"
+		pagination="true"
+		space-between="10"
+		slides-per-view="1"
+		init="true"
+	>
 		{#if feed.images && feed.images.length}
 			{#each feed.images as img}
 				<swiper-slide>
@@ -47,10 +60,15 @@
 	</swiper-container>
 
 	<div class="feed-actions">
-		<Buttons onLike={() => likes++} />
+		<Buttons
+			{liked}
+			{bookmarked}
+			onLike={() => (liked = !liked)}
+			onBookmark={() => (bookmarked = !bookmarked)}
+		/>
 	</div>
 	<div class="likes-count">
-		{likes}명이 좋아합니다
+		{feed.likes}명이 좋아합니다
 	</div>
 
 	<div class="feed-caption">
@@ -59,8 +77,19 @@
 	</div>
 
 	<div class="feed-comments">
-		{#each comments as comment}
-			<div class="comment">{comment}</div>
+		{#each feed.comments as comment}
+			<div class="comment">
+				<div class="comment-header">
+					<strong>{comment.nickname}</strong>
+					<span class="comment-date"
+						>{new Date(comment.created_at).toLocaleDateString('ko-KR', {
+							month: 'short',
+							day: 'numeric'
+						})}</span
+					>
+				</div>
+				<div class="comment-text">{comment.text}</div>
+			</div>
 		{/each}
 	</div>
 
@@ -140,6 +169,9 @@
 	.feed-comments {
 		padding: 0 0.5rem;
 		font-size: 0.85rem;
+		border-top: 1px solid #eee;
+		margin-top: 0.5rem;
+		padding-top: 0.7rem;
 	}
 
 	.comment-form {
@@ -162,5 +194,56 @@
 		color: #0095f6;
 		font-weight: bold;
 		margin-left: 0.5rem;
+	}
+
+	swiper-container {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+
+	swiper-slide {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	swiper-slide img {
+		width: 100%;
+		height: auto;
+		display: block;
+		object-fit: cover;
+	}
+
+	swiper-container::part(pagination) {
+		position: static;
+		margin-top: 8px;
+		text-align: center;
+		transform: scale(0.9);
+	}
+
+	.comment {
+		margin-bottom: 0.8rem;
+	}
+
+	.comment-header {
+		display: flex;
+		gap: 0.5rem;
+		font-size: 0.85rem;
+		color: #888;
+	}
+
+	.comment-header strong {
+		color: #000;
+		font-size: 0.95rem;
+		font-weight: 700;
+	}
+
+	.comment-text {
+		font-size: 0.9rem;
+		margin-left: 0.1rem;
+		color: #000;
 	}
 </style>
