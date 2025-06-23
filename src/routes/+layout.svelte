@@ -36,7 +36,7 @@
 		font-family: 'Roboto', sans-serif;
 		display: flex;
 		flex-direction: column;
-		background: #f7f9fc;
+		background: #e0e0e0;
 	}
 
 	.app-header {
@@ -70,9 +70,11 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		flex: 1;
-		padding: 0;
-		background: transparent;
+		width: 100%;
+		max-width: 480px;
+		margin: auto;
+		background: white;
+		box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 	}
 
 	/* Clock styling */
@@ -134,14 +136,6 @@
 		.layout-wrapper {
 			background: #e0e0e0;
 			align-items: center;
-		}
-
-		.intro-container {
-			background: white;
-			max-width: 480px;
-			width: 100%;
-			margin: auto;
-			box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 		}
 	}
 </style>

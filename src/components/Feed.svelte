@@ -18,11 +18,12 @@
 	let liked = false;
 	let bookmarked = false;
 	let newComment = '';
+	let newNickname = '';
 
 	function addComment() {
-		if (newComment.trim()) {
+		if (newComment.trim() && newNickname.trim()) {
 			feed.comments.push({
-				nickname: username,
+				nickname: newNickname,
 				text: newComment,
 				created_at: new Date().toISOString()
 			});
@@ -114,8 +115,20 @@
 	</div>
 
 	<form class="comment-form" on:submit|preventDefault={addComment}>
-		<input bind:value={newComment} placeholder="댓글 달기..." />
-		<button type="submit">게시</button>
+		<input class="comment-input nickname" bind:value={newNickname} placeholder="닉네임" />
+		<input class="comment-input" bind:value={newComment} placeholder="댓글 달기" />
+		<button type="submit" aria-label="댓글 작성">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+				<path
+					fill="none"
+					stroke="currentColor"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M18 6v6a3 3 0 0 1-3 3H5l4-4m0 8l-4-4"
+				/>
+			</svg>
+		</button>
 	</form>
 </div>
 
@@ -195,23 +208,36 @@
 
 	.comment-form {
 		display: flex;
+		align-items: center;
 		padding: 0.5rem;
+		gap: 0.5rem;
 	}
 
-	.comment-form input {
-		flex: 1;
+	.comment-input {
 		padding: 0.4rem;
 		font-size: 0.9rem;
 		border: 1px solid #ccc;
 		border-radius: 6px;
 	}
 
+	.comment-input.nickname {
+		width: 25%;
+		min-width: 60px;
+	}
+
+	.comment-input:not(.nickname) {
+		flex: 1;
+	}
+
 	.comment-form button {
 		background: none;
 		border: none;
 		color: #0095f6;
-		font-weight: bold;
-		margin-left: 0.5rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding-left: 0;
+		padding-right: 0;
 	}
 
 	swiper-container {

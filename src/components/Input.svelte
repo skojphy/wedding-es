@@ -46,7 +46,7 @@
 	.answer-container {
 		display: flex;
 		align-items: center;
-		max-width: 600px;
+		max-width: 440px;
 		margin: 1.5rem auto 0 auto;
 		background: #333;
 		padding: 0.5rem 0.75rem;
