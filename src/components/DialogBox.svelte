@@ -6,12 +6,17 @@
 
 <div class="dialog-container">
 	<div class="dialog-box">
-		<img class="avatar" src={avatar} alt="avatar" />
-		<div class="dialog-content">
-			<p class="dialog-text">{text}</p>
+		<div class="left-block">
+			<img class="avatar" src={avatar} alt="avatar" />
+			<div class="name-label">{name}</div>
+		</div>
+		<div class="right-block">
+			<div class="dialog-content">
+				<p class="dialog-text">{text}</p>
+			</div>
+			<div class="triangle-button">▼</div>
 		</div>
 	</div>
-	<div class="name-label">{name}</div>
 </div>
 
 <style>
@@ -21,19 +26,30 @@
 		background-color: rgba(0, 0, 0, 0.6);
 		padding: 0.75rem;
 		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-		justify-content: flex-end;
-		gap: 0.3rem;
+		justify-content: center;
 		font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-		margin: 0 auto;
 	}
 
 	.dialog-box {
 		display: flex;
-		align-items: flex-start;
-		gap: 0.75rem;
+		justify-content: space-between;
 		width: 100%;
+		height: 100%;
+	}
+
+	.left-block {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.right-block {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		flex: 1;
+		padding-left: 1rem;
 	}
 
 	.avatar {
@@ -45,7 +61,6 @@
 	.dialog-content {
 		color: white;
 		line-height: 1.5;
-		flex: 1;
 	}
 
 	.dialog-text {
@@ -59,6 +74,11 @@
 		font-size: 0.9rem;
 		padding: 0.2rem 0.6rem;
 		border-radius: 4px;
-		margin-left: 2.4rem;
+	}
+
+	.triangle-button {
+		color: yellow;
+		font-size: 1.2rem;
+		text-align: right;
 	}
 </style>
