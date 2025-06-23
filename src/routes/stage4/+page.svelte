@@ -1,13 +1,25 @@
+<script>
+	import DialogBox from '$components/DialogBox.svelte';
+</script>
+
 <div class="stage4-background">
 	<div class="lottery-numbers">
+		<span class="lotto-number">14</span>
+		<span class="lotto-number">1</span>
+		<span class="lotto-number">18</span>
+		<span class="lotto-number">18</span>
+		<span class="lotto-number">25</span>
+		<span class="lotto-number">14</span>
 		<span class="lotto-number">5</span>
-		<span class="lotto-number">12</span>
-		<span class="lotto-number">23</span>
-		<span class="lotto-number">32</span>
-		<span class="lotto-number">41</span>
-		<span class="lotto-number">7</span>
-		<span class="lotto-number">7</span>
 	</div>
+</div>
+
+<div class="dialog-wrapper">
+	<DialogBox
+		name="박지현"
+		text="(아.. 로또도 안 됐겠다.. 사업 시작하기 좋은 날이네...)"
+		avatar="/images/avatar/parkjihyun.png"
+	/>
 </div>
 
 <style>
@@ -46,5 +58,19 @@
 		font-weight: bold;
 		font-size: calc(100vw / 25);
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	}
+
+	.dialog-wrapper {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		z-index: 10;
+		display: flex;
+		justify-content: center;
+	}
+
+	.dialog-container {
+		margin: 0 auto;
 	}
 </style>
