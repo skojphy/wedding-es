@@ -51,7 +51,7 @@
 	<TabMenu />
 
 	<section class="gallery">
-		{#each posts as post}
+		{#each [...posts].reverse() as post}
 			<button
 				type="button"
 				class="gallery-item"
