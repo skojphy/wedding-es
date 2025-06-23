@@ -31,7 +31,9 @@
 		width: 80px;
 		height: 80px;
 		border-radius: 50%;
-		background: #ccc;
+		background-image: url('/images/insta/insta_profile.png');
+		background-size: cover;
+		background-position: center;
 		border: 2px solid #eee;
 	}
 

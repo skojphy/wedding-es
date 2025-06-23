@@ -12,6 +12,8 @@
 		comments: []
 	};
 
+	export let onBack = () => {};
+
 	const username = 'piccor_rica';
 	let liked = false;
 	let bookmarked = false;
@@ -34,8 +36,26 @@
 </script>
 
 <div class="feed-container">
+	<div class="feed-topbar">
+		<button class="back-icon" aria-label="Back" on:click={() => onBack()}>
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+				<path
+					fill="none"
+					stroke="#000"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="m15 6l-6 6l6 6"
+				/>
+			</svg>
+		</button>
+		<div class="feed-topbar-text">
+			<div class="title">게시물</div>
+			<div class="username">piccor_rica</div>
+		</div>
+	</div>
 	<div class="feed-header">
-		<img src="/images/avatar-placeholder.png" alt="avatar" class="avatar" />
+		<img src="/images/insta/insta_profile.png" alt="avatar" class="avatar" />
 		<div class="meta">
 			<div class="username">{username}</div>
 			<div class="date">{feed.date}</div>
@@ -106,7 +126,6 @@
 		margin: 0 auto;
 		font-family: sans-serif;
 		background: white;
-		border: 1px solid #ccc;
 	}
 
 	.feed-header {
@@ -176,7 +195,6 @@
 
 	.comment-form {
 		display: flex;
-		border-top: 1px solid #eee;
 		padding: 0.5rem;
 	}
 
@@ -245,5 +263,38 @@
 		font-size: 0.9rem;
 		margin-left: 0.1rem;
 		color: #000;
+	}
+
+	.feed-topbar {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		height: 44px;
+		border-bottom: 1px solid #ddd;
+		background: white;
+		font-weight: bold;
+	}
+
+	.feed-topbar .title {
+		text-align: center;
+	}
+
+	.feed-topbar .username {
+		font-size: 0.75rem;
+		color: #666;
+		font-weight: normal;
+		text-align: center;
+	}
+
+	.back-icon {
+		position: absolute;
+		left: 1rem;
+		background: none;
+		border: none;
+		padding: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 </style>

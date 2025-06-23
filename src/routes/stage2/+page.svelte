@@ -20,8 +20,6 @@
 	}));
 	let selectedPost = null;
 
-	console.log('posts', rawPosts);
-
 	$: {
 		if (typeof window !== 'undefined') {
 			if (selectedPost !== null) {
@@ -68,10 +66,7 @@
 {#if selectedPost}
 	<div class="dimmed"></div>
 	<div class="post-view">
-		<header class="post-header">
-			<button class="back-button" on:click={() => (selectedPost = null)}>←</button>
-		</header>
-		<Feed feed={selectedPost} />
+		<Feed feed={selectedPost} onBack={() => (selectedPost = null)} />
 	</div>
 {/if}
 
@@ -179,22 +174,6 @@
 		width: 100%;
 		margin: 0 auto;
 		overflow-y: auto;
-	}
-
-	.post-header {
-		height: 44px;
-		display: flex;
-		align-items: center;
-		padding: 0 1rem;
-		border-bottom: 1px solid #ddd;
-		background: white;
-	}
-
-	.back-button {
-		background: none;
-		border: none;
-		font-size: 1.5rem;
-		cursor: pointer;
 	}
 
 	.dimmed {
