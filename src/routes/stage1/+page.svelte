@@ -76,7 +76,8 @@
 
 <div class="answer-container">
 	<Input
-		onSubmit={(value) => {
+		on:submit={(event) => {
+			const value = event.detail;
 			// Put logic here to handle the submitted answer value
 			console.log('Submitted answer:', value);
 		}}
