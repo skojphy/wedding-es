@@ -75,6 +75,8 @@
 		margin: auto;
 		background: white;
 		box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+		position: relative;
+		z-index: 1;
 	}
 
 	/* Clock styling */
