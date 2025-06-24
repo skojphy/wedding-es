@@ -51,6 +51,8 @@
 		background: #333;
 		padding: 0.5rem 0.75rem;
 		border-radius: 9999px;
+		z-index: 20;
+		position: relative;
 	}
 
 	.answer-input {

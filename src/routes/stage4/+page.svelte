@@ -1,26 +1,49 @@
 <script>
 	import DialogBox from '$components/DialogBox.svelte';
+	import Input from '$components/Input.svelte';
+
+	const dialogTexts = [
+		'(아... 로또도 안 됐겠다... 사업 시작하기 좋은 날이네...)',
+		'(해 보지도 않은 걸로 사업을 할 순 없는데... 그럼 아무래도...)',
+		'오빠, 저 로또 번호 좀 읽어 봐.'
+	];
+
+	let currentStep = 0;
+
+	const nextDialog = () => {
+		if (currentStep < dialogTexts.length) {
+			currentStep += 1;
+		}
+	};
+
+	const visibleLottoCounts = [0, 1, 3, 7];
+
+	const lottoNumbers = ['14', '1', '18', '18', '25', '14', '5'];
 </script>
 
 <div class="stage4-background">
 	<div class="lottery-numbers">
-		<span class="lotto-number">14</span>
-		<span class="lotto-number">1</span>
-		<span class="lotto-number">18</span>
-		<span class="lotto-number">18</span>
-		<span class="lotto-number">25</span>
-		<span class="lotto-number">14</span>
-		<span class="lotto-number">5</span>
+		{#each lottoNumbers.map( (num, idx) => (currentStep > 0 && idx < visibleLottoCounts[currentStep] ? num : '') ) as displayNum}
+			<span class="lotto-number">{displayNum}</span>
+		{/each}
 	</div>
 </div>
 
-<div class="dialog-wrapper">
-	<DialogBox
-		name="박지현"
-		text="(아.. 로또도 안 됐겠다.. 사업 시작하기 좋은 날이네...)"
-		avatar="/images/avatar/parkjihyun.png"
-	/>
-</div>
+<button class="dialog-wrapper" on:click={nextDialog} type="button" aria-label="다음 대사 보기">
+	{#if currentStep < dialogTexts.length}
+		<DialogBox
+			name="박지현"
+			text={dialogTexts[currentStep]}
+			avatar="/images/avatar/parkjihyun.png"
+		/>
+	{/if}
+</button>
+
+{#if currentStep === 3}
+	<div class="answer-container">
+		<Input />
+	</div>
+{/if}
 
 <style>
 	.stage4-background {
@@ -60,7 +83,7 @@
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	}
 
-	.dialog-wrapper {
+	button.dialog-wrapper {
 		position: fixed;
 		bottom: 0;
 		left: 0;
@@ -68,9 +91,19 @@
 		z-index: 10;
 		display: flex;
 		justify-content: center;
+		background: none;
+		border: none;
+		padding: 0;
+		cursor: pointer;
 	}
-
-	.dialog-container {
-		margin: 0 auto;
+	.answer-container {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		padding: 1rem;
+		background: transparent;
+		z-index: 3;
+		box-sizing: border-box;
 	}
 </style>

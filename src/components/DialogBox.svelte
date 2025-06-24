@@ -65,15 +65,15 @@
 
 	.dialog-text {
 		margin: 0;
+		text-align: left;
 	}
 
 	.name-label {
-		background-color: #0095f6;
+		background-color: #54b2d9;
 		color: white;
-		font-weight: bold;
 		font-size: 0.9rem;
 		padding: 0.2rem 0.6rem;
-		border-radius: 4px;
+		border-radius: 0;
 	}
 
 	.triangle-button {
