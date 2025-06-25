@@ -1,87 +1,42 @@
 <script>
-	import { onMount } from 'svelte';
+	import NextButton from '$components/NextButton.svelte';
+	import { goto } from '$app/navigation';
 
-	let weddingDate = new Date('2025-09-13T00:00:00');
-	let weddingPlace = '대한민국 어디어디 예식장';
-
-	let daysLeft = 0;
-	onMount(() => {
-		const today = new Date();
-		daysLeft = Math.ceil((weddingDate - today) / (1000 * 60 * 60 * 24));
-	});
-
-	const canEnter = daysLeft <= 20;
+	function handleNext() {
+		goto('/stage1');
+	}
 </script>
 
-<div class="main-container">
-	<h1 style="font-family: 'Georgia', serif; color: #d4af37; margin-bottom: 1.5rem;">
-		청첩장 방탈출 제목
-	</h1>
-
-	<div class="info-section">
-		<div class="info-item">💒 날짜: {weddingDate.toLocaleDateString()}</div>
-		<div class="info-item">📍 장소: {weddingPlace}</div>
+<div class="entry-page">
+	<p class="question">저희의 이야기가<br />궁금하셨나요?</p>
+	<div class="next-wrapper">
+		<NextButton href="/intro1" />
 	</div>
-
-	<div class="countdown">
-		{daysLeft > 0 ? `D-${daysLeft}` : 'TODAY'}
-	</div>
-
-	<a href="/intro" class={`enter-link ${canEnter ? '' : 'disabled'}`}>
-		{canEnter ? '축하하러 가기' : 'comming soon'}
-	</a>
 </div>
 
 <style>
-	.main-container {
+	.entry-page {
 		display: flex;
 		flex-direction: column;
+		justify-content: center;
 		align-items: center;
+		width: 100%;
+		height: 100vh;
 		text-align: center;
-		margin-top: 5rem;
-		background-color: #fffaf0;
-		padding: 2rem;
-		border-radius: 10px;
-		/* box-shadow 제거 */
+		position: relative;
 	}
 
-	.info-section {
-		margin-bottom: 2rem;
-		font-family: 'Georgia', serif;
-		font-size: 1.2rem;
-		color: #555;
+	.question {
+		font-family: 'UhBeeSe_hyun', cursive;
+		font-size: 1.8rem;
+		line-height: 1.6;
+		margin-bottom: 3rem;
 	}
 
-	.info-item {
-		margin-bottom: 0.5rem;
-	}
-
-	.countdown {
-		font-size: 1.5rem;
-		color: #d4af37;
-		margin-bottom: 1.5rem;
-	}
-
-	.enter-link {
-		background-color: #d4af37;
-		color: white;
-		padding: 0.75rem 1.5rem;
-		border-radius: 25px;
-		text-decoration: none;
-		display: inline-block;
-		text-align: center;
-		margin-top: 1rem;
-		font-size: 1.1rem;
-		font-family: 'Georgia', serif;
-		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-	}
-
-	.enter-link.disabled {
-		background-color: #ccc;
-		pointer-events: none;
-	}
-
-	.enter-link:hover {
-		background-color: #c89b37;
+	.next-wrapper {
+		position: absolute;
+		bottom: 0.7rem;
+		right: 0.7rem;
+		z-index: 10;
 	}
 </style>
