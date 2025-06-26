@@ -29,8 +29,12 @@
 </script>
 
 <div class="clock" style="background: #F7F2EE;">
-	<div bind:this={hoursEl} class="hand hours"></div>
-	<div bind:this={minutesEl} class="hand minutes"></div>
+	<div bind:this={hoursEl} class="hand hours">
+		<div class="hand-inner"></div>
+	</div>
+	<div bind:this={minutesEl} class="hand minutes">
+		<div class="hand-inner"></div>
+	</div>
 	<div class="marker">
 		<span class="marker__1"></span>
 		<span class="marker__2"></span>
@@ -63,16 +67,27 @@
 		z-index: 200;
 	}
 
+	.hand-inner {
+		position: absolute;
+		bottom: 1rem; /* offset from the pivot */
+		left: 50%;
+		transform: translateX(-50%);
+		width: 100%;
+		height: calc(100% - 1rem); /* slightly shorter than the base hand */
+		background: #ff6446;
+		border-radius: 0.2rem;
+	}
+
 	.hours {
 		width: 0.4rem;
 		height: 25%;
-		background: #ff6446;
+		animation: spin-counter 2.3s linear infinite;
 	}
 
 	.minutes {
 		width: 0.4rem;
 		height: 35%;
-		background: #ff6446;
+		animation: spin-counter 0.6s linear infinite;
 	}
 
 	.marker {
@@ -112,30 +127,39 @@
 
 	.marker__1,
 	.marker__2 {
-		width: 0.2rem;
-		height: 0.6rem;
-		left: 5.6rem;
+		width: 0.6vw;
+		height: 1.5vw;
+		left: 50%;
+		transform: translateX(-50%);
 	}
 
 	.marker__3,
 	.marker__4 {
-		width: 0.6rem;
-		height: 0.2rem;
-		top: 5.6rem;
+		width: 1.5vw;
+		height: 0.6vw;
+		top: 50%;
+		transform: translateY(-50%);
 	}
 
 	.marker__1 {
 		top: 2%;
 	}
 	.marker__2 {
-		top: 98%;
-		transform: translateY(-0.6rem);
+		bottom: 2%;
 	}
 	.marker__3 {
 		left: 2%;
 	}
 	.marker__4 {
-		left: 98%;
-		transform: translateX(-0.6rem);
+		right: 2%;
+	}
+
+	@keyframes spin-counter {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(-360deg);
+		}
 	}
 </style>

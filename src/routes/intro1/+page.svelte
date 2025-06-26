@@ -49,7 +49,7 @@
 		<p class="text">그럼 지금부터<br />게임을 시작하겠습니다.</p>
 	</div>
 	<div class="next-wrapper">
-		<NextButton href="/" color="#0b9444" />
+		<NextButton href="/intro2" color="#0b9444" />
 	</div>
 </div>
 
