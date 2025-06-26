@@ -162,4 +162,11 @@
 		right: 0.7rem;
 		z-index: 10;
 	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.face {
+			animation: none;
+			text-shadow: none;
+		}
+	}
 </style>

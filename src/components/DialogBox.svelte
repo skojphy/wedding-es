@@ -53,8 +53,8 @@
 	}
 
 	.avatar {
-		width: 40px;
-		height: 40px;
+		width: 60px;
+		height: 60px;
 		flex-shrink: 0;
 	}
 
@@ -66,6 +66,7 @@
 	.dialog-text {
 		margin: 0;
 		text-align: left;
+		font-size: 1.2rem;
 	}
 
 	.name-label {

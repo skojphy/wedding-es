@@ -31,11 +31,7 @@
 
 <button class="dialog-wrapper" on:click={nextDialog} type="button" aria-label="다음 대사 보기">
 	{#if currentStep < dialogTexts.length}
-		<DialogBox
-			name="박지현"
-			text={dialogTexts[currentStep]}
-			avatar="/images/avatar/parkjihyun.png"
-		/>
+		<DialogBox name="박지현" text={dialogTexts[currentStep]} avatar="/images/lotto_profile.png" />
 	{/if}
 </button>
 
