@@ -28,22 +28,26 @@
 	});
 </script>
 
-<div class="clock">
+<div class="clock neumorphism">
 	<div bind:this={hoursEl} class="hand hours">
 		<div class="hand-inner"></div>
 	</div>
 	<div bind:this={minutesEl} class="hand minutes">
 		<div class="hand-inner"></div>
 	</div>
-	<!-- <div class="marker">
-		<span class="marker__1"></span>
-		<span class="marker__2"></span>
-		<span class="marker__3"></span>
-		<span class="marker__4"></span>
-	</div> -->
 </div>
 
+<div class="year neumorphism"></div>
+<div class="date neumorphism"></div>
+
 <style>
+	.neumorphism {
+		background: #f7f2ee;
+		box-shadow:
+			-16px -16px 20px rgb(220, 215, 212, 0.4),
+			16px 16px 20px rgb(255, 255, 255, 0.4);
+	}
+
 	.clock {
 		width: 70%;
 		aspect-ratio: 1 / 1;
@@ -53,10 +57,7 @@
 		align-items: center;
 		position: relative;
 		border-radius: 50%;
-		background: linear-gradient(145deg, #f2f2f2, #ffffff);
-		box-shadow:
-			50px 50px 100px #dcdcdc,
-			-50px -50px 100px #ffffff;
+		margin: 1.4rem;
 	}
 
 	.hand {
@@ -88,6 +89,20 @@
 		width: 0.6rem;
 		height: 35%;
 		animation: spin-counter 0.6s linear infinite;
+	}
+	.year {
+		width: 50%;
+	}
+
+	.date {
+		width: 80%;
+	}
+
+	.year,
+	.date {
+		height: 10vh;
+		border-radius: 15px;
+		margin: 1.4rem 0;
 	}
 
 	@keyframes spin-counter {
