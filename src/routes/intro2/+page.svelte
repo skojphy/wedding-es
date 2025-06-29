@@ -37,8 +37,8 @@
 	</div>
 </div>
 
-<div class="year neumorphism"></div>
-<div class="date neumorphism"></div>
+<div class="year neumorphism"><span class="text">2025</span></div>
+<div class="date neumorphism"><span class="text">09-13 SAT</span></div>
 
 <style>
 	.neumorphism {
@@ -46,6 +46,8 @@
 		box-shadow:
 			-16px -16px 20px rgb(220, 215, 212, 0.4),
 			16px 16px 20px rgb(255, 255, 255, 0.4);
+
+		color: #ff6446;
 	}
 
 	.clock {
@@ -103,8 +105,17 @@
 		height: 10vh;
 		border-radius: 15px;
 		margin: 1.4rem 0;
+		display: flex;
+		justify-content: center;
+		align-content: center;
 	}
 
+	.text {
+		font-size: 3.5rem;
+		text-align: center;
+		height: 10vh;
+		line-height: 8vh;
+	}
 	@keyframes spin-counter {
 		from {
 			transform: rotate(0deg);
