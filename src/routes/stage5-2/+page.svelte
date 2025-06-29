@@ -1,22 +1,58 @@
 <script>
 	const gridSize = 5;
-	const grid = Array.from({ length: gridSize * gridSize }, () => '/images/mock.png');
+	const correctIndex = [1, 3, 5, 7, 9, 10, 14, 16, 18, 22];
+	// const trueImages = Array.from({ length: 10 }, (_, i) => `/images/true${imagesMap[(i, 1)]}.png`);
+	// const falseImages = Array.from({ length: 15 }, (_, i) => `/images/false${i}.png`);
+	// random sort
+
+	const imagesMap = [
+		[0, 0],
+		[1, 0],
+		[0, 1],
+		[1, 1],
+		[0, 2],
+		[1, 2],
+		[0, 3],
+		[1, 3],
+		[0, 4],
+		[1, 4],
+		[1, 5],
+		[0, 5],
+		[0, 6],
+		[0, 7],
+		[1, 6],
+		[0, 8],
+		[1, 7],
+		[0, 9],
+		[1, 8],
+		[0, 10],
+		[0, 11],
+		[0, 12],
+		[1, 9],
+		[0, 13],
+		[0, 14]
+	];
+
+	const grid = Array(25)
+		.fill()
+		.map((_, i) => `/images/captcha/${imagesMap[i][0] ? 'true' : 'false'}${imagesMap[i][1]}.png`);
+
+	console.log('...', grid);
 
 	let selectedIndices = [];
 
-	function toggleSelect(index) {
+	const toggleSelect = (index) => {
 		if (selectedIndices.includes(index)) {
 			selectedIndices = selectedIndices.filter((i) => i !== index);
 		} else {
 			selectedIndices = [...selectedIndices, index];
 		}
-	}
+	};
 
 	$: {
-		const correctSet = [1, 3, 5, 7, 9, 10, 14, 16, 18, 22];
 		const isMatch =
-			correctSet.every((i) => selectedIndices.includes(i)) &&
-			selectedIndices.length === correctSet.length;
+			correctIndex.every((i) => selectedIndices.includes(i)) &&
+			selectedIndices.length === correctIndex.length;
 		if (isMatch) {
 			alert('정답입니다!');
 		}
@@ -36,7 +72,7 @@
 					class="grid-cell {selectedIndices.includes(index) ? 'selected' : ''}"
 					on:click={() => toggleSelect(index)}
 				>
-					<img src={image} alt="mock tile" />
+					<img src={image} alt={`${index}번째 이미지`} />
 				</button>
 			{/each}
 		</div>
