@@ -6,6 +6,7 @@
 	import { posts as rawPosts } from '$lib/data/posts.js';
 	import postMeta from '$lib/data/postMeta.json';
 	import { disableScroll, enableScroll } from '$lib/utils/scroll.js';
+	import NextButton from '$components/NextButton.svelte';
 
 	let posts = rawPosts.map((post, index) => ({
 		id: post.id,
@@ -69,6 +70,10 @@
 		<Feed feed={selectedPost} onBack={() => (selectedPost = null)} />
 	</div>
 {/if}
+
+<div class="next-wrapper">
+	<NextButton href="/Xn8Rf6Th" color="#0b9444" />
+</div>
 
 <style>
 	.profile-container {
@@ -188,5 +193,12 @@
 		overscroll-behavior: contain;
 		overflow: hidden;
 		pointer-events: auto;
+	}
+
+	.next-wrapper {
+		position: absolute;
+		bottom: 0.7rem;
+		right: 0.7rem;
+		z-index: 10;
 	}
 </style>

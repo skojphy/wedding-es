@@ -1,6 +1,7 @@
 <script>
 	import DialogBox from '$components/DialogBox.svelte';
 	import Input from '$components/Input.svelte';
+	import NextButton from '$components/NextButton.svelte';
 
 	const dialogTexts = [
 		'(아... 로또도 안 됐겠다... 사업 시작하기 좋은 날이네...)',
@@ -40,6 +41,10 @@
 		<Input />
 	</div>
 {/if}
+
+<div class="next-wrapper">
+	<NextButton href="/Hj5Kq1Np" color="#0b9444" />
+</div>
 
 <style>
 	.stage4-background {
@@ -101,5 +106,12 @@
 		background: transparent;
 		z-index: 3;
 		box-sizing: border-box;
+	}
+
+	.next-wrapper {
+		position: absolute;
+		bottom: 0.7rem;
+		right: 0.7rem;
+		z-index: 10;
 	}
 </style>

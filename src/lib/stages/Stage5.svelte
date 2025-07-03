@@ -1,3 +1,7 @@
+<script>
+	import NextButton from '$components/NextButton.svelte';
+</script>
+
 <div class="stage5">
 	<div class="icon">
 		<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24">
@@ -13,6 +17,10 @@
 	<p>시작하시겠습니까?</p>
 
 	<a href="/stage5-1" class="start-btn">Start</a>
+</div>
+
+<div class="next-wrapper">
+	<NextButton href="/Zy2Bo9Ld" color="#0b9444" />
 </div>
 
 <style>
@@ -52,5 +60,12 @@
 		border-radius: 9999px;
 		font-size: 1.25rem;
 		text-decoration: none;
+	}
+
+	.next-wrapper {
+		position: absolute;
+		bottom: 0.7rem;
+		right: 0.7rem;
+		z-index: 10;
 	}
 </style>

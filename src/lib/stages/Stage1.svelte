@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Input from '../../components/Input.svelte';
+	import NextButton from '$components/NextButton.svelte';
 
 	let sliderValue = 50;
 	const cyworld1 = '/images/cyworld1.png';
@@ -84,6 +85,10 @@
 	/>
 </div>
 
+<div class="next-wrapper">
+	<NextButton href="/Qw4Dj2Zm" color="#0b9444" />
+</div>
+
 <style>
 	.img-comp-container {
 		position: relative;
@@ -151,5 +156,12 @@
 		background: transparent;
 		z-index: 3;
 		box-sizing: border-box;
+	}
+
+	.next-wrapper {
+		position: absolute;
+		bottom: 0.7rem;
+		right: 0.7rem;
+		z-index: 10;
 	}
 </style>

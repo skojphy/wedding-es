@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+	import NextButton from '$components/NextButton.svelte';
 
 	let hoursEl, minutesEl;
 
@@ -39,6 +40,10 @@
 
 <div class="year neumorphism"><span class="text">2025</span></div>
 <div class="date neumorphism"><span class="text">09-13 SAT</span></div>
+
+<div class="next-wrapper">
+	<NextButton href="/mz9Yv3Rt" color="#0b9444" />
+</div>
 
 <style>
 	.neumorphism {
@@ -108,6 +113,13 @@
 		display: flex;
 		justify-content: center;
 		align-content: center;
+	}
+
+	.next-wrapper {
+		position: absolute;
+		bottom: 0.7rem;
+		right: 0.7rem;
+		z-index: 10;
 	}
 
 	.text {

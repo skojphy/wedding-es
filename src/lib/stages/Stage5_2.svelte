@@ -1,8 +1,9 @@
 <script>
+	import NextButton from '$components/NextButton.svelte';
+
 	const gridSize = 5;
 	const correctIndex = [1, 3, 5, 7, 9, 10, 14, 16, 18, 22];
-	// const trueImages = Array.from({ length: 10 }, (_, i) => `/images/true${imagesMap[(i, 1)]}.png`);
-	// const falseImages = Array.from({ length: 15 }, (_, i) => `/images/false${i}.png`);
+	const incorrectIndex = [0, 2, 4, 6, 8, 11, 12, 13, 15, 17, 19, 20, 21, 23, 24];
 	// random sort
 
 	const imagesMap = [
@@ -36,8 +37,6 @@
 	const grid = Array(25)
 		.fill()
 		.map((_, i) => `/images/captcha/${imagesMap[i][0] ? 'true' : 'false'}${imagesMap[i][1]}.png`);
-
-	console.log('...', grid);
 
 	let selectedIndices = [];
 
@@ -175,5 +174,12 @@
 		font-size: 1rem;
 		border-radius: 4px;
 		cursor: pointer;
+	}
+
+	.next-wrapper {
+		position: absolute;
+		bottom: 0.7rem;
+		right: 0.7rem;
+		z-index: 10;
 	}
 </style>

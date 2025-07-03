@@ -1,6 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 	import MessageBubble from '$components/MessageBubble.svelte';
+	import NextButton from '$components/NextButton.svelte';
 
 	let messages = [
 		{ sender: '신부', text: '안녕! 이제 결혼식 준비 시작했어?', time: '오전 10:30' },
@@ -64,6 +65,10 @@
 	<button on:click={sendMessage}>전송</button>
 </div>
 
+<div class="next-wrapper">
+	<NextButton href="/Qw4Dj2Zm" color="#0b9444" />
+</div>
+
 <style>
 	.chat-container {
 		display: flex;
@@ -113,5 +118,12 @@
 
 	button:hover {
 		background-color: #c89b37;
+	}
+
+	.next-wrapper {
+		position: absolute;
+		bottom: 0.7rem;
+		right: 0.7rem;
+		z-index: 10;
 	}
 </style>

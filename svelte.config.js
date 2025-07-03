@@ -9,7 +9,8 @@ const config = {
 			$data: 'src/data/*',
 			$routes: 'src/routes/*',
 			$utils: 'src/utils/*',
-			$styles: 'src/styles/*'
+			$styles: 'src/styles/*',
+			$lib: 'src/lib/*'
 		}
 	}
 };

@@ -1,4 +1,7 @@
 <script>
+	import NextButton from '$components/NextButton.svelte';
+	import Input from '../../components/Input.svelte';
+
 	const cafe1 = '/images/cafe1.png';
 	const cafe2 = '/images/cafe2.png';
 	const tapIcon = '/images/tap_icon.svg';
@@ -7,8 +10,6 @@
 	function toggleImage() {
 		isFlipped = !isFlipped;
 	}
-
-	import Input from '../../components/Input.svelte';
 </script>
 
 <button type="button" class="flip-container" on:click={toggleImage} aria-label="이미지 전환">
@@ -29,6 +30,10 @@
 			console.log('Submitted answer:', value);
 		}}
 	/>
+</div>
+
+<div class="next-wrapper">
+	<NextButton href="/Lp3Az7Uc" color="#0b9444" />
 </div>
 
 <style>
@@ -106,5 +111,12 @@
 		50% {
 			opacity: 0;
 		}
+	}
+
+	.next-wrapper {
+		position: absolute;
+		bottom: 0.7rem;
+		right: 0.7rem;
+		z-index: 10;
 	}
 </style>

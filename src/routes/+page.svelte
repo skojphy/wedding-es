@@ -10,7 +10,7 @@
 <div class="entry-page">
 	<p class="question">저희의 이야기가<br />궁금하셨나요?</p>
 	<div class="next-wrapper">
-		<NextButton href="/intro1" />
+		<NextButton href="/g4Pz8Kq2" />
 	</div>
 </div>
 
