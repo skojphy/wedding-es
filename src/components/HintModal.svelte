@@ -1,14 +1,19 @@
 <script>
-	export let hintText = '';
+	import { createEventDispatcher } from 'svelte';
+
+	const dispatch = createEventDispatcher();
+
+	function closeModal() {
+		dispatch('close');
+	}
 </script>
 
 <div class="modal-backdrop">
 	<div class="hint-modal">
+		<button class="close-button" on:click={closeModal}>×</button>
 		<div class="hint-title">HINT</div>
 		<div class="hint-content">
-			{#each hintText.split('\n') as line}
-				<p>{line}</p>
-			{/each}
+			<slot />
 		</div>
 	</div>
 </div>
@@ -24,7 +29,6 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		z-index: 999;
 	}
 
 	.hint-modal {
@@ -34,6 +38,8 @@
 		width: 80%;
 		max-width: 400px;
 		box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+		z-index: 999999;
+		position: relative;
 	}
 
 	.hint-title {
@@ -53,8 +59,14 @@
 		color: #333;
 	}
 
-	.hint-content p {
-		margin: 0.5rem 0;
-		text-align: center;
+	.close-button {
+		position: absolute;
+		top: 0.5rem;
+		right: 0.5rem;
+		background: transparent;
+		border: none;
+		font-size: 2rem;
+		cursor: pointer;
+		color: #333;
 	}
 </style>

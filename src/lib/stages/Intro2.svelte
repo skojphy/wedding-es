@@ -1,14 +1,16 @@
 <script>
 	import { onMount } from 'svelte';
 	import NextButton from '$components/NextButton.svelte';
+	import HintButton from '$components/HintButton.svelte';
+	import Input from '$components/Input.svelte';
 
 	let hoursEl, minutesEl;
 
-	function rotation(target, val) {
+	const rotation = (target, val) => {
 		target.style.transform = `rotate(${val}deg)`;
-	}
+	};
 
-	function updateClock() {
+	const updateClock = () => {
 		const now = new Date();
 		let h = (now.getHours() % 12) + now.getMinutes() / 59;
 		let m = now.getMinutes();
@@ -20,7 +22,7 @@
 
 		rotation(hoursEl, h);
 		rotation(minutesEl, m);
-	}
+	};
 
 	onMount(() => {
 		updateClock();
@@ -41,7 +43,8 @@
 <div class="year neumorphism"><span class="text">2025</span></div>
 <div class="date neumorphism"><span class="text">09-13 SAT</span></div>
 
-<div class="next-wrapper">
+<div class="button-bar">
+	<HintButton hintCode="B7xL1sHz" />
 	<NextButton href="/mz9Yv3Rt" color="#0b9444" />
 </div>
 
@@ -65,6 +68,7 @@
 		position: relative;
 		border-radius: 50%;
 		margin: 1.4rem;
+		z-index: 0;
 	}
 
 	.hand {
@@ -72,16 +76,16 @@
 		bottom: 50%;
 		transform-origin: bottom;
 		border-radius: 1000px;
-		z-index: 200;
+		z-index: 20;
 	}
 
 	.hand-inner {
 		position: absolute;
-		bottom: 1rem; /* offset from the pivot */
+		bottom: 1rem;
 		left: 50%;
 		transform: translateX(-50%);
 		width: 100%;
-		height: calc(100% - 1rem); /* slightly shorter than the base hand */
+		height: calc(100% - 1rem);
 		background: #ff6446;
 		border-radius: 1000px;
 	}
@@ -115,19 +119,13 @@
 		align-content: center;
 	}
 
-	.next-wrapper {
-		position: absolute;
-		bottom: 0.7rem;
-		right: 0.7rem;
-		z-index: 10;
-	}
-
 	.text {
 		font-size: 3.5rem;
 		text-align: center;
 		height: 10vh;
 		line-height: 8vh;
 	}
+
 	@keyframes spin-counter {
 		from {
 			transform: rotate(0deg);
@@ -135,5 +133,18 @@
 		to {
 			transform: rotate(-360deg);
 		}
+	}
+
+	.button-bar {
+		position: absolute;
+		bottom: 1.7rem;
+		padding: 0 1.7rem;
+		left: 0;
+		right: 0;
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		box-sizing: border-box;
+		z-index: 10;
 	}
 </style>

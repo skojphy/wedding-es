@@ -30,9 +30,9 @@
 
 <style>
 	.next-button-container {
-		position: absolute;
-		bottom: 1rem;
-		right: 1rem;
+		height: 60px;
+		display: flex;
+		align-items: center;
 	}
 	.next-button {
 		display: flex;
