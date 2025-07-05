@@ -175,11 +175,4 @@
 		border-radius: 4px;
 		cursor: pointer;
 	}
-
-	.next-wrapper {
-		position: absolute;
-		bottom: 0.7rem;
-		right: 0.7rem;
-		z-index: 10;
-	}
 </style>

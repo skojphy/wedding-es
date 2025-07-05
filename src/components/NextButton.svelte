@@ -1,31 +1,49 @@
 <script>
 	export let color = '#666666';
 	export let textColor = '#ffffff';
-	export let href = '#';
+	export let href = '';
 </script>
 
 <div class="next-button-container">
-	<a
-		class="next-button"
-		{href}
-		role="button"
-		tabindex="0"
-		style="--bg-color: {color}; --text-color: {textColor};"
-	>
-		<div class="pill">NEXT</div>
-		<div class="circle right">
-			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-				<path
-					fill="none"
-					stroke="currentColor"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					stroke-width="2"
-					d="M5 12h14m-4 4l4-4m-4-4l4 4"
-				/>
-			</svg>
-		</div>
-	</a>
+	{#if href}
+		<a
+			class="next-button"
+			{href}
+			role="button"
+			tabindex="0"
+			style="--bg-color: {color}; --text-color: {textColor};"
+		>
+			<div class="pill">NEXT</div>
+			<div class="circle right">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+					<path
+						fill="none"
+						stroke="currentColor"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M5 12h14m-4 4l4-4m-4-4l4 4"
+					/>
+				</svg>
+			</div>
+		</a>
+	{:else}
+		<button class="next-button" on:click style="--bg-color: {color}; --text-color: {textColor};">
+			<div class="pill">NEXT</div>
+			<div class="circle right">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+					<path
+						fill="none"
+						stroke="currentColor"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M5 12h14m-4 4l4-4m-4-4l4 4"
+					/>
+				</svg>
+			</div>
+		</button>
+	{/if}
 </div>
 
 <style>
