@@ -11,8 +11,8 @@
 			loading = true;
 			await tick();
 			setTimeout(() => {
-				goto('/stage5-2');
-			}, 1500);
+				goto('/Rf6Kt4Gj');
+			}, 1800);
 		}
 	}
 </script>
@@ -32,10 +32,6 @@
 			<div class="spinner"></div>
 		{/if}
 	</div>
-</div>
-
-<div class="next-wrapper">
-	<NextButton href="/Rf6Kt4Gj" color="#0b9444" />
 </div>
 
 <style>
@@ -117,12 +113,5 @@
 		100% {
 			transform: rotate(360deg);
 		}
-	}
-
-	.next-wrapper {
-		position: absolute;
-		bottom: 0.7rem;
-		right: 0.7rem;
-		z-index: 10;
 	}
 </style>
