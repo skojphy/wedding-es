@@ -1,5 +1,6 @@
 <script>
 	import NextButton from '$components/NextButton.svelte';
+	import { goto } from '$app/navigation';
 
 	const gridSize = 5;
 	const correctIndex = [1, 3, 5, 7, 9, 10, 14, 16, 18, 22];
@@ -40,6 +41,9 @@
 
 	let selectedIndices = [];
 
+	let isLoading = false;
+	let showMessage = false;
+
 	const toggleSelect = (index) => {
 		if (selectedIndices.includes(index)) {
 			selectedIndices = selectedIndices.filter((i) => i !== index);
@@ -52,8 +56,12 @@
 		const isMatch =
 			correctIndex.every((i) => selectedIndices.includes(i)) &&
 			selectedIndices.length === correctIndex.length;
-		if (isMatch) {
-			alert('정답입니다!');
+		if (isMatch && !isLoading) {
+			isLoading = true;
+			showMessage = true;
+			setTimeout(() => {
+				goto('/Wk7Mn3Xp');
+			}, 2000);
 		}
 	}
 </script>
@@ -79,6 +87,14 @@
 			<button class="skip-button">건너뛰기</button>
 		</div>
 	</div>
+	{#if isLoading}
+		<div class="overlay">
+			<div class="spinner"></div>
+			{#if showMessage}
+				<p class="message">정답입니다!</p>
+			{/if}
+		</div>
+	{/if}
 </div>
 
 <style>
@@ -174,5 +190,40 @@
 		font-size: 1rem;
 		border-radius: 4px;
 		cursor: pointer;
+	}
+
+	.overlay {
+		position: fixed;
+		inset: 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		background-color: rgba(0, 0, 0, 0.4);
+		z-index: 999;
+	}
+
+	.spinner {
+		width: 48px;
+		height: 48px;
+		border: 6px solid #f3f3f3;
+		border-top: 6px solid #3498db;
+		border-radius: 50%;
+		animation: spin 1s linear infinite;
+	}
+
+	@keyframes spin {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+
+	.message {
+		margin-top: 1rem;
+		color: white;
+		font-size: 1.25rem;
 	}
 </style>
