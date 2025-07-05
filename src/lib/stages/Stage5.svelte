@@ -16,11 +16,7 @@
 	<h1><span>준비가 필요합니다.</span></h1>
 	<p>시작하시겠습니까?</p>
 
-	<a href="/stage5-1" class="start-btn">Start</a>
-</div>
-
-<div class="next-wrapper">
-	<NextButton href="/Zy2Bo9Ld" color="#0b9444" />
+	<a href="/Zy2Bo9Ld" class="start-btn">Start</a>
 </div>
 
 <style>
@@ -60,12 +56,5 @@
 		border-radius: 9999px;
 		font-size: 1.25rem;
 		text-decoration: none;
-	}
-
-	.next-wrapper {
-		position: absolute;
-		bottom: 0.7rem;
-		right: 0.7rem;
-		z-index: 10;
 	}
 </style>
