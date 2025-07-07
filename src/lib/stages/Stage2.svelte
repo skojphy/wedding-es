@@ -6,7 +6,8 @@
 	import { posts as rawPosts } from '$lib/data/posts.js';
 	import postMeta from '$lib/data/postMeta.json';
 	import { disableScroll, enableScroll } from '$lib/utils/scroll.js';
-	import NextButton from '$components/NextButton.svelte';
+	import Input from '$components/Input.svelte';
+	import HintButton from '$components/HintButton.svelte';
 
 	let posts = rawPosts.map((post, index) => ({
 		id: post.id,
@@ -62,6 +63,11 @@
 			></button>
 		{/each}
 	</section>
+
+	<div class="button-bar">
+		<HintButton hintCode="B7xL1sHz" />
+		<Input correctAnswer="0818" successPath="/Xn8Rf6Th" />
+	</div>
 </div>
 
 {#if selectedPost}
@@ -70,10 +76,6 @@
 		<Feed feed={selectedPost} onBack={() => (selectedPost = null)} />
 	</div>
 {/if}
-
-<div class="next-wrapper">
-	<NextButton href="/Xn8Rf6Th" color="#0b9444" />
-</div>
 
 <style>
 	.profile-container {
@@ -195,10 +197,12 @@
 		pointer-events: auto;
 	}
 
-	.next-wrapper {
-		position: absolute;
-		bottom: 0.7rem;
-		right: 0.7rem;
-		z-index: 10;
+	.button-bar {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 1.7rem;
+		gap: 1rem;
+		margin-top: 1rem;
 	}
 </style>
