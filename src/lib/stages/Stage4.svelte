@@ -38,7 +38,7 @@
 
 {#if currentStep === 3}
 	<div class="button-bar">
-		<HintButton hintCode="Hj5Kq1Np" />
+		<HintButton hintCode="Lp3Az7Uc" />
 		<Input correctAnswer="marryme" successPath="/Hj5Kq1Np" />
 	</div>
 {/if}

@@ -3,9 +3,9 @@
 
 	const dispatch = createEventDispatcher();
 
-	function closeModal() {
+	const closeModal = () => {
 		dispatch('close');
-	}
+	};
 </script>
 
 <div class="modal-backdrop">

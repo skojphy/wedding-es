@@ -50,15 +50,14 @@
 		on:mouseleave={stopDrag}
 		role="presentation"
 	>
-		<!-- Bottom image -->
 		<div class="img-comp-overlay" style="width: 100%">
 			<img src={cyworld2} alt="cyworld 2" class="img-comp-img" />
 		</div>
-		<!-- Overlay top image (left side) -->
+
 		<div class="img-comp-overlay" style="width: {sliderValue}%">
 			<img src={cyworld1} alt="cyworld 1" class="img-comp-img" />
 		</div>
-		<!-- Slider handle -->
+
 		<button
 			class="img-slider"
 			on:mousedown={startDrag}
@@ -83,7 +82,7 @@
 </div>
 
 <div class="button-bar">
-	<HintButton hintCode="B7xL1sHz" />
+	<HintButton hintCode="mz9Yv3Rt" />
 	<Input correctAnswer="합정" successPath="/Qw4Dj2Zm" />
 </div>
 

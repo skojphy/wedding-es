@@ -44,7 +44,7 @@
 <div class="date neumorphism"><span class="text">09-13 SAT</span></div>
 
 <div class="button-bar">
-	<HintButton hintCode="mz9Yv3Rt" />
+	<HintButton hintCode="B7xL1sHz" />
 	<Input correctAnswer="SUN" successPath="/mz9Yv3Rt" />
 </div>
 

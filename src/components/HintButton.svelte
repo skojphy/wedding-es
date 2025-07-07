@@ -1,23 +1,32 @@
 <script>
-	import Hint1 from '$lib/hints/hint1.svelte';
+	import Hint1 from '$lib/hints/Hint1.svelte';
+	import Hint2 from '$lib/hints/Hint2.svelte';
+	import Hint3 from '$lib/hints/Hint3.svelte';
+	import Hint4 from '$lib/hints/Hint4.svelte';
+	import Hint5 from '$lib/hints/Hint5.svelte';
+	import Hint6 from '$lib/hints/Hint6.svelte';
 	import HintModal from '$components/HintModal.svelte';
 
 	export let hintCode;
 
-	let HintComponent;
-	if (hintCode === 'B7xL1sHz') {
-		HintComponent = Hint1;
-	}
+	const hintMap = {
+		B7xL1sHz: Hint1,
+		mz9Yv3Rt: Hint2,
+		Qw4Dj2Zm: Hint3,
+		Xn8Rf6Th: Hint4,
+		Lp3Az7Uc: Hint5
+	};
+
+	$: HintComponent = hintMap[hintCode];
 
 	let isModalOpen = false;
 
-	const handleClick = () => {
+	const toggleModal = () => {
 		isModalOpen = !isModalOpen;
-		console.log('wefewsfws', isModalOpen);
 	};
 </script>
 
-<button class="hint-button" on:click={handleClick}>HINT</button>
+<button class="hint-button" on:click={toggleModal}>HINT</button>
 
 {#if isModalOpen}
 	<HintModal on:close={() => (isModalOpen = false)}>

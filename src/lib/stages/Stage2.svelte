@@ -83,7 +83,7 @@
 	</section>
 
 	<div class="button-bar">
-		<HintButton hintCode="B7xL1sHz" />
+		<HintButton hintCode="Qw4Dj2Zm" />
 		<Input correctAnswer="0818" successPath="/Xn8Rf6Th" />
 	</div>
 </div>
