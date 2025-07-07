@@ -1,6 +1,6 @@
 <script>
-	import NextButton from '$components/NextButton.svelte';
 	import Input from '../../components/Input.svelte';
+	import HintButton from '$components/HintButton.svelte';
 
 	const cafe1 = '/images/cafe1.png';
 	const cafe2 = '/images/cafe2.png';
@@ -12,37 +12,39 @@
 	}
 </script>
 
-<button type="button" class="flip-container" on:click={toggleImage} aria-label="이미지 전환">
-	<div class="flipper {isFlipped ? 'flipped' : ''}">
-		<div class="front">
-			<img src={cafe1} alt="Cafe 1" />
+<div class="stage-wrapper">
+	<button type="button" class="flip-container" on:click={toggleImage} aria-label="이미지 전환">
+		<div class="flipper {isFlipped ? 'flipped' : ''}">
+			<div class="front">
+				<img src={cafe1} alt="Cafe 1" />
+			</div>
+			<div class="back">
+				<img src={cafe2} alt="Cafe 2" />
+			</div>
 		</div>
-		<div class="back">
-			<img src={cafe2} alt="Cafe 2" />
-		</div>
-	</div>
-	<img src={tapIcon} alt="탭 아이콘" class="tap-icon" />
-</button>
-
-<div class="answer-container">
-	<Input
-		onSubmit={(value) => {
-			console.log('Submitted answer:', value);
-		}}
-	/>
+		<img src={tapIcon} alt="탭 아이콘" class="tap-icon" />
+	</button>
 </div>
 
-<div class="next-wrapper">
-	<NextButton href="/Lp3Az7Uc" color="#0b9444" />
+<div class="button-bar">
+	<HintButton hintCode="B7xL1sHz" />
+	<Input correctAnswer="LIKE" successPath="/Lp3Az7Uc" />
 </div>
 
 <style>
+	.stage-wrapper {
+		max-width: 480px;
+		width: 100%;
+		margin: auto;
+		position: relative;
+	}
+
 	button.flip-container {
 		all: unset;
 		cursor: pointer;
 		display: block;
-		width: 100vw;
-		height: 100vh;
+		width: 100%;
+		height: auto;
 		perspective: 1000px;
 	}
 
@@ -68,7 +70,7 @@
 
 	.front img,
 	.back img {
-		width: 100vw;
+		width: 100%;
 		height: auto;
 		object-fit: contain;
 		position: absolute;
@@ -113,10 +115,17 @@
 		}
 	}
 
-	.next-wrapper {
+	.button-bar {
 		position: absolute;
-		bottom: 0.7rem;
-		right: 0.7rem;
+		bottom: 1.7rem;
+		left: 0;
+		right: 0;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 1.7rem;
+		box-sizing: border-box;
 		z-index: 10;
+		gap: 1rem;
 	}
 </style>
