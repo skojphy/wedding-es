@@ -43,36 +43,43 @@
 	});
 </script>
 
-<div class="img-comp-container" bind:this={container} on:mouseleave={stopDrag} role="presentation">
-	<!-- Bottom image -->
-	<div class="img-comp-overlay" style="width: 100%">
-		<img src={cyworld2} alt="cyworld 2" class="img-comp-img" />
-	</div>
-	<!-- Overlay top image (left side) -->
-	<div class="img-comp-overlay" style="width: {sliderValue}%">
-		<img src={cyworld1} alt="cyworld 1" class="img-comp-img" />
-	</div>
-	<!-- Slider handle -->
-	<button
-		class="img-slider"
-		on:mousedown={startDrag}
-		on:touchstart={startDrag}
-		style="left: {sliderValue}%;"
-		aria-label="Slide to compare images"
+<div class="stage-wrapper">
+	<div
+		class="img-comp-container"
+		bind:this={container}
+		on:mouseleave={stopDrag}
+		role="presentation"
 	>
-		<div class="img-slider-handle">
-			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-				<path
-					fill="none"
-					stroke="currentColor"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					stroke-width="2"
-					d="m18 9l3 3l-3 3m-3-3h6M6 9l-3 3l3 3m-3-3h6"
-				/>
-			</svg>
+		<!-- Bottom image -->
+		<div class="img-comp-overlay" style="width: 100%">
+			<img src={cyworld2} alt="cyworld 2" class="img-comp-img" />
 		</div>
-	</button>
+		<!-- Overlay top image (left side) -->
+		<div class="img-comp-overlay" style="width: {sliderValue}%">
+			<img src={cyworld1} alt="cyworld 1" class="img-comp-img" />
+		</div>
+		<!-- Slider handle -->
+		<button
+			class="img-slider"
+			on:mousedown={startDrag}
+			on:touchstart={startDrag}
+			style="left: {sliderValue}%;"
+			aria-label="Slide to compare images"
+		>
+			<div class="img-slider-handle">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+					<path
+						fill="none"
+						stroke="currentColor"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="m18 9l3 3l-3 3m-3-3h6M6 9l-3 3l3 3m-3-3h6"
+					/>
+				</svg>
+			</div>
+		</button>
+	</div>
 </div>
 
 <div class="answer-container">
@@ -90,28 +97,50 @@
 </div>
 
 <style>
-	.img-comp-container {
+	.img-comp-container > .img-comp-overlay:first-of-type {
 		position: relative;
-		width: 100vw;
-		height: 100vh;
-		user-select: none;
-		overflow: hidden;
-		object-fit: cover;
 	}
 
-	.img-comp-img {
+	.stage-wrapper {
+		max-width: 480px;
+		width: 100%;
+		margin: auto;
+		position: relative;
+	}
+
+	.img-comp-container {
+		position: relative;
+		width: 100%;
+		height: auto;
+		user-select: none;
+		overflow: hidden;
+	}
+
+	.img-comp-overlay:first-of-type .img-comp-img {
 		display: block;
-		width: 100vw;
-		height: 100vh;
-		object-fit: cover;
+		width: 100%;
+		height: auto;
 	}
 
 	.img-comp-overlay {
+		height: 100%;
+		overflow: hidden;
+	}
+
+	.img-comp-overlay:not(:first-of-type) {
 		position: absolute;
 		top: 0;
 		left: 0;
-		height: 100%;
 		overflow: hidden;
+		/* width is set inline via style attribute */
+	}
+
+	.img-comp-overlay:not(:first-of-type) .img-comp-img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: auto;
+		height: 100%;
 	}
 
 	.img-slider {
@@ -135,16 +164,6 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-	}
-
-	/* Ensure overlay image keeps full height and is clipped by parent width */
-	.img-comp-overlay .img-comp-img {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100vw;
-		height: 100vh;
-		object-fit: cover;
 	}
 
 	.answer-container {

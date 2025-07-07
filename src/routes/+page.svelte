@@ -17,7 +17,7 @@
 		}
 		userNickname.set(nickname);
 		localStorage.setItem('nickname', nickname);
-		goto('/mz9Yv3Rt');
+		goto('/g4Pz8Kq2');
 	};
 </script>
 
@@ -33,7 +33,7 @@
 				<input
 					class="nickname-input"
 					bind:value={nickname}
-					placeholder="이름 또는 닉네임을 입력해 주세요."
+					placeholder="이름/닉네임을 입력해 주세요."
 					bind:this={nicknameInput}
 				/>
 				<span class="suffix">님께</span>
@@ -117,14 +117,14 @@
 		color: #666666;
 		width: 14rem;
 		text-align: center;
-		padding: 1rem 1.6rem;
+		padding: 0.8rem;
 		border-radius: 2rem;
 		margin-right: 0.5rem;
 	}
 
 	.nickname-input::placeholder {
 		color: #f25a44;
-		opacity: 0.6;
+		opacity: 0.4;
 		font-size: 1.2rem;
 	}
 
