@@ -1,68 +1,124 @@
 <script>
+	import { goto } from '$app/navigation';
 	export let placeholder = '정답을 입력해 주세요.';
-	export let onSubmit = () => {};
+	export let correctAnswer = '';
+	export let successPath = '';
 	let answer = '';
 
-	function handleKeyPress(event) {
-		if (event.key === 'Enter') {
-			onSubmit(answer);
+	const processSubmit = () => {
+		if (!answer || !answer.trim()) {
+			alert('정답을 입력해 주세요');
+			return;
 		}
-	}
+		if (answer.trim() === correctAnswer) {
+			goto(successPath);
+		} else {
+			alert('다시 생각해 보세요');
+		}
+	};
 
-	function handleClick() {
-		onSubmit(answer);
-	}
+	const handleKeyPress = (event) => {
+		if (event.key === 'Enter') {
+			processSubmit();
+		}
+	};
+
+	const handleClick = () => {
+		processSubmit();
+	};
 </script>
 
 <div class="answer-container">
-	<input
-		type="text"
-		class="answer-input"
-		bind:value={answer}
-		{placeholder}
-		on:keypress={handleKeyPress}
-	/>
-	<button class="answer-submit" aria-label="제출" on:click={handleClick}>
-		<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<path
-				d="M12 4L20 12L12 20"
-				stroke="currentColor"
-				stroke-width="2"
-				stroke-linecap="round"
-				stroke-linejoin="round"
+	<div class="input-container">
+		<div class="pill">
+			<input
+				type="text"
+				class="answer-input"
+				bind:value={answer}
+				{placeholder}
+				on:keypress={handleKeyPress}
 			/>
-			<path
-				d="M4 12H20"
-				stroke="currentColor"
-				stroke-width="2"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-			/>
-		</svg>
-	</button>
+		</div>
+		<div class="circle right">
+			<button class="answer-submit" aria-label="제출" on:click={handleClick}>
+				<svg
+					width="20"
+					height="20"
+					viewBox="0 0 24 24"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<path
+						d="M12 4L20 12L12 20"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					/>
+					<path
+						d="M4 12H20"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					/>
+				</svg>
+			</button>
+		</div>
+	</div>
 </div>
 
 <style>
 	.answer-container {
+		height: 60px;
 		display: flex;
 		align-items: center;
-		max-width: 440px;
-		margin: 1.5rem auto 0 auto;
-		background: #333;
-		padding: 0.5rem 0.75rem;
+		flex: 1;
+	}
+
+	.input-container {
+		display: flex;
+		align-items: center;
+		flex: 1;
+		border: none;
+		cursor: pointer;
+		padding: 0;
+		background: transparent;
+		gap: 0;
+		text-decoration: none;
+	}
+
+	.circle {
+		width: 60px;
+		height: 60px;
 		border-radius: 9999px;
-		z-index: 20;
-		position: relative;
+		background: #333;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.pill {
+		flex: 3;
+		height: 60px;
+		width: 100%;
+		padding: 0 1rem;
+		border-radius: 9999px;
+		background: #333;
+		display: flex;
+		align-items: center;
+		margin-right: -20px;
 	}
 
 	.answer-input {
 		flex: 1;
+		width: 100%;
 		border: none;
 		background: transparent;
 		color: #fff;
 		font-size: 1rem;
 		outline: none;
-		padding-left: 0.5rem;
+		padding: 0;
 	}
 
 	.answer-input::placeholder {
@@ -76,7 +132,8 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: 0.25rem;
+		width: 100%;
+		height: 100%;
 		cursor: pointer;
 	}
 

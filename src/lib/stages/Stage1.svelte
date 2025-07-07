@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Input from '../../components/Input.svelte';
-	import NextButton from '$components/NextButton.svelte';
+	import HintButton from '$components/HintButton.svelte';
 
 	let sliderValue = 50;
 	const cyworld1 = '/images/cyworld1.png';
@@ -82,18 +82,9 @@
 	</div>
 </div>
 
-<div class="answer-container">
-	<Input
-		on:submit={(event) => {
-			const value = event.detail;
-			// Put logic here to handle the submitted answer value
-			console.log('Submitted answer:', value);
-		}}
-	/>
-</div>
-
-<div class="next-wrapper">
-	<NextButton href="/Qw4Dj2Zm" color="#0b9444" />
+<div class="button-bar">
+	<HintButton hintCode="B7xL1sHz" />
+	<Input correctAnswer="합정" successPath="/Qw4Dj2Zm" />
 </div>
 
 <style>
@@ -166,21 +157,17 @@
 		justify-content: center;
 	}
 
-	.answer-container {
-		position: fixed;
-		bottom: 0;
-		left: 0;
-		width: 100%;
-		padding: 1rem;
-		background: transparent;
-		z-index: 3;
-		box-sizing: border-box;
-	}
-
-	.next-wrapper {
+	.button-bar {
 		position: absolute;
-		bottom: 0.7rem;
-		right: 0.7rem;
+		bottom: 1.7rem;
+		left: 0;
+		right: 0;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 1.7rem;
+		box-sizing: border-box;
 		z-index: 10;
+		gap: 1rem;
 	}
 </style>
