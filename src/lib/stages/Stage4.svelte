@@ -1,7 +1,7 @@
 <script>
 	import DialogBox from '$components/DialogBox.svelte';
 	import Input from '$components/Input.svelte';
-	import NextButton from '$components/NextButton.svelte';
+	import HintButton from '$components/HintButton.svelte';
 
 	const dialogTexts = [
 		'(아... 로또도 안 됐겠다... 사업 시작하기 좋은 날이네...)',
@@ -37,14 +37,11 @@
 </button>
 
 {#if currentStep === 3}
-	<div class="answer-container">
-		<Input />
+	<div class="button-bar">
+		<HintButton hintCode="Hj5Kq1Np" />
+		<Input correctAnswer="merryme" successPath="/Hj5Kq1Np" />
 	</div>
 {/if}
-
-<div class="next-wrapper">
-	<NextButton href="/Hj5Kq1Np" color="#0b9444" />
-</div>
 
 <style>
 	.stage4-background {
@@ -97,21 +94,18 @@
 		padding: 0;
 		cursor: pointer;
 	}
-	.answer-container {
-		position: fixed;
-		bottom: 0;
-		left: 0;
-		width: 100%;
-		padding: 1rem;
-		background: transparent;
-		z-index: 3;
-		box-sizing: border-box;
-	}
 
-	.next-wrapper {
+	.button-bar {
 		position: absolute;
-		bottom: 0.7rem;
-		right: 0.7rem;
+		bottom: 1.7rem;
+		left: 0;
+		right: 0;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 1.7rem;
+		box-sizing: border-box;
 		z-index: 10;
+		gap: 1rem;
 	}
 </style>

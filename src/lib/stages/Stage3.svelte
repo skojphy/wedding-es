@@ -83,17 +83,6 @@
 		transform: rotateY(180deg);
 	}
 
-	.answer-container {
-		position: fixed;
-		bottom: 0;
-		left: 0;
-		width: 100%;
-		padding: 1rem;
-		background: transparent;
-		z-index: 3;
-		box-sizing: border-box;
-	}
-
 	.tap-icon {
 		position: absolute;
 		top: 45%;

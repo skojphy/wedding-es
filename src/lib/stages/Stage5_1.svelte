@@ -27,7 +27,6 @@
 			<input type="checkbox" class="checkbox" bind:checked on:change={handleCheck} />
 			<span class="label">당신은 휴먼입니까?</span>
 		</label>
-		<span class="captcha-logo">로고</span>
 		{#if loading}
 			<div class="spinner"></div>
 		{/if}

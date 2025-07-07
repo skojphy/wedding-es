@@ -10,7 +10,11 @@
 			alert('정답을 입력해 주세요');
 			return;
 		}
-		if (answer.trim() === correctAnswer) {
+		const userInput = answer.trim().toLowerCase();
+		const expected = correctAnswer.toLowerCase();
+
+		console.log('userInput', userInput, 'expected', expected);
+		if (userInput === expected) {
 			goto(successPath);
 		} else {
 			alert('다시 생각해 보세요');

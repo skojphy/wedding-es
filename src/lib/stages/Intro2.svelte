@@ -44,8 +44,8 @@
 <div class="date neumorphism"><span class="text">09-13 SAT</span></div>
 
 <div class="button-bar">
-	<HintButton hintCode="B7xL1sHz" />
-	<NextButton href="/mz9Yv3Rt" color="#0b9444" />
+	<HintButton hintCode="mz9Yv3Rt" />
+	<Input correctAnswer="SUN" successPath="/mz9Yv3Rt" />
 </div>
 
 <style>
@@ -138,13 +138,14 @@
 	.button-bar {
 		position: absolute;
 		bottom: 1.7rem;
-		padding: 0 1.7rem;
 		left: 0;
 		right: 0;
-		width: 100%;
 		display: flex;
 		justify-content: space-between;
+		align-items: center;
+		padding: 0 1.7rem;
 		box-sizing: border-box;
 		z-index: 10;
+		gap: 1rem;
 	}
 </style>
