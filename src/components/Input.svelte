@@ -10,8 +10,8 @@
 			alert('정답을 입력해 주세요');
 			return;
 		}
-		const userInput = answer.trim().toLowerCase();
-		const expected = correctAnswer.toLowerCase();
+		const userInput = answer.trim().toLowerCase().replace(/\s+/g, '');
+		const expected = correctAnswer.toLowerCase().replace(/\s+/g, '');
 
 		console.log('userInput', userInput, 'expected', expected);
 		if (userInput === expected) {
