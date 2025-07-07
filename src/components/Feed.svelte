@@ -15,18 +15,22 @@
 	export let onBack = () => {};
 
 	const username = 'piccor_rica';
+	const userNickname = localStorage.getItem('nickname') || '익명';
 	let liked = false;
 	let bookmarked = false;
 	let newComment = '';
-	let newNickname = '';
 
 	function addComment() {
-		if (newComment.trim() && newNickname.trim()) {
-			feed.comments.push({
-				nickname: newNickname,
+		if (newComment.trim()) {
+			const comment = {
+				nickname: userNickname,
 				text: newComment,
 				created_at: new Date().toISOString()
-			});
+			};
+			feed = {
+				...feed,
+				comments: [...feed.comments, comment]
+			};
 			newComment = '';
 		}
 	}
@@ -115,7 +119,6 @@
 	</div>
 
 	<form class="comment-form" on:submit|preventDefault={addComment}>
-		<input class="comment-input nickname" bind:value={newNickname} placeholder="닉네임" />
 		<input class="comment-input" bind:value={newComment} placeholder="댓글 달기" />
 		<button type="submit" aria-label="댓글 작성">
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">

@@ -8,6 +8,7 @@
 	import { disableScroll, enableScroll } from '$lib/utils/scroll.js';
 	import Input from '$components/Input.svelte';
 	import HintButton from '$components/HintButton.svelte';
+	import { onMount, onDestroy } from 'svelte';
 
 	let posts = rawPosts.map((post, index) => ({
 		id: post.id,
@@ -21,6 +22,20 @@
 		comments: postMeta[index]?.comments ?? []
 	}));
 	let selectedPost = null;
+
+	const handlePopState = () => {
+		if (selectedPost !== null) {
+			selectedPost = null;
+		}
+	};
+
+	onMount(() => {
+		window.addEventListener('popstate', handlePopState);
+	});
+
+	onDestroy(() => {
+		window.removeEventListener('popstate', handlePopState);
+	});
 
 	$: {
 		if (typeof window !== 'undefined') {
@@ -58,7 +73,10 @@
 				type="button"
 				class="gallery-item"
 				style="background-image: url({post.images[0]})"
-				on:click={() => (selectedPost = { ...post })}
+				on:click={() => {
+					history.pushState(null, '', window.location.href);
+					selectedPost = { ...post };
+				}}
 				aria-label="Open post"
 			></button>
 		{/each}
@@ -203,6 +221,6 @@
 		align-items: center;
 		padding: 0 1.7rem;
 		gap: 1rem;
-		margin-top: 1rem;
+		margin: 1rem 0;
 	}
 </style>
