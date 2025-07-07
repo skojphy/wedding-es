@@ -99,7 +99,6 @@
 	.profile-container {
 		width: 100%;
 		margin: 0 auto;
-		font-family: sans-serif;
 		background: white;
 		color: #000;
 	}
