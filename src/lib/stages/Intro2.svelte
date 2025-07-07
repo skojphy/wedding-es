@@ -41,7 +41,7 @@
 </div>
 
 <div class="year neumorphism"><span class="text">2025</span></div>
-<div class="date neumorphism"><span class="text">09-13 SAT</span></div>
+<div class="date neumorphism"><span class="text">09 -13 SAT</span></div>
 
 <div class="button-bar">
 	<HintButton hintCode="B7xL1sHz" />
@@ -49,6 +49,7 @@
 </div>
 
 <style>
+	@import url('https://fonts.cdnfonts.com/css/digital-numbers');
 	.neumorphism {
 		background: #f7f2ee;
 		box-shadow:
@@ -120,10 +121,11 @@
 	}
 
 	.text {
-		font-size: 3.5rem;
+		font-size: 2.3rem;
 		text-align: center;
-		height: 10vh;
+		height: 8vh;
 		line-height: 8vh;
+		font-family: 'Digital Numbers', sans-serif;
 	}
 
 	@keyframes spin-counter {

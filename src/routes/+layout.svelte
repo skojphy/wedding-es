@@ -9,19 +9,26 @@
 </div>
 
 <style>
+	@font-face {
+		font-family: 'Pretendard-Regular';
+		src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
+			format('woff');
+		font-weight: 400;
+		font-style: normal;
+	}
 	:global(html),
 	:global(body) {
 		margin: 0;
 		padding: 0;
 		overflow-x: hidden;
 		width: 100%;
+		font-family: 'Pretendard-Regular', sans-serif;
 	}
 	.layout-wrapper {
 		position: relative;
 		width: 100%;
 		min-height: 100vh;
 		overflow-x: hidden;
-		font-family: 'Roboto', sans-serif;
 		display: flex;
 		flex-direction: column;
 		background: #e0e0e0;

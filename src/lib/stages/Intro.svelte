@@ -151,7 +151,6 @@
 
 	.text {
 		font-size: 1.4rem;
-		font-family: 'UhBeeSe_hyun', cursive;
 		line-height: 1.6;
 		margin: 1rem;
 	}

@@ -94,13 +94,12 @@
 
 	.date {
 		color: #f25a44;
-		font-size: 1.6rem;
+		font-size: 1.3rem;
 		font-weight: 400;
 	}
 
 	.question {
-		font-family: 'UhBeeSe_hyun', cursive;
-		font-size: 1.8rem;
+		font-size: 1.3rem;
 		line-height: 1.6;
 	}
 
@@ -113,19 +112,24 @@
 	.nickname-input {
 		border: none;
 		background: #f7f2ee;
-		font-size: 1.6rem;
+		font-size: 1.4rem;
+		height: 3rem;
+		line-height: 3rem;
 		color: #666666;
 		width: 14rem;
 		text-align: center;
-		padding: 0.8rem;
+		padding: 0 1rem;
 		border-radius: 2rem;
 		margin-right: 0.5rem;
+		box-sizing: border-box;
 	}
 
 	.nickname-input::placeholder {
 		color: #f25a44;
 		opacity: 0.4;
-		font-size: 1.2rem;
+		font-size: 1rem;
+		height: 3rem;
+		line-height: 3rem;
 	}
 
 	.nickname-input:focus {
@@ -133,13 +137,8 @@
 	}
 
 	.suffix {
-		font-size: 1.6rem;
-	}
-
-	.error {
-		color: #f25a44;
-		margin-top: 0.5rem;
-		font-size: 1.2rem;
+		font-size: 1.3rem;
+		line-height: 3rem;
 	}
 
 	.button-bar {
