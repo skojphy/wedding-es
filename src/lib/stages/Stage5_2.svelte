@@ -5,7 +5,7 @@
 	const gridSize = 5;
 	const correctIndex = [1, 3, 5, 7, 9, 10, 14, 16, 18, 22];
 	const incorrectIndex = [0, 2, 4, 6, 8, 11, 12, 13, 15, 17, 19, 20, 21, 23, 24];
-	// random sort
+	// TODO: random sort
 
 	const imagesMap = [
 		[0, 0],
@@ -52,18 +52,24 @@
 		}
 	};
 
-	$: {
-		const isMatch =
-			correctIndex.every((i) => selectedIndices.includes(i)) &&
-			selectedIndices.length === correctIndex.length;
-		if (isMatch && !isLoading) {
-			isLoading = true;
-			showMessage = true;
-			setTimeout(() => {
-				goto('/Wk7Mn3Xp');
-			}, 2000);
+	const handleSubmit = () => {
+		if (selectedIndices.length === 0) {
+			goto('/Wk7Mn3Xp');
+		} else {
+			const isMatch =
+				correctIndex.every((i) => selectedIndices.includes(i)) &&
+				selectedIndices.length === correctIndex.length;
+			if (isMatch) {
+				isLoading = true;
+				showMessage = true;
+				setTimeout(() => {
+					goto('/Wk7Mn3Xp');
+				}, 2000);
+			} else {
+				alert('당신은 휴먼이 아닙니까?');
+			}
 		}
-	}
+	};
 </script>
 
 <div class="stage5-2">
@@ -84,7 +90,9 @@
 			{/each}
 		</div>
 		<div class="skip-button-container">
-			<button class="skip-button">건너뛰기</button>
+			<button class="skip-button" on:click={handleSubmit}>
+				{selectedIndices.length > 0 ? '완료' : '건너뛰기'}
+			</button>
 		</div>
 	</div>
 	{#if isLoading}
