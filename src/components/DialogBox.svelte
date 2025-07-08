@@ -20,6 +20,14 @@
 </div>
 
 <style>
+	@font-face {
+		font-family: 'DOSMyungjo';
+		src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/DOSMyungjo.woff')
+			format('woff');
+		font-weight: normal;
+		font-style: normal;
+	}
+
 	.dialog-container {
 		width: 100%;
 		aspect-ratio: 375 / 140;
@@ -28,6 +36,7 @@
 		display: flex;
 		justify-content: center;
 		font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+		font-family: 'DOSMyungjo', sans-serif;
 	}
 
 	.dialog-box {

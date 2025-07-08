@@ -45,11 +45,11 @@
 
 <style>
 	.stage4-background {
-		position: fixed;
+		position: absolute;
 		top: 0;
 		left: 0;
-		right: 0;
-		bottom: 0;
+		width: 100%;
+		height: 100%;
 		background-image: url('/images/lottery.png');
 		background-size: cover;
 		background-repeat: no-repeat;
@@ -59,30 +59,31 @@
 
 	.lottery-numbers {
 		position: absolute;
-		bottom: calc(973 / 982 * 100vw);
+		bottom: 40.7%;
 		width: 100%;
 		display: flex;
 		justify-content: center;
-		gap: calc(100vw / (982 / 5));
-		transform: translateX(1.8%);
+		gap: 0.9%;
+		transform: translateX(1.93%);
 		z-index: 1;
 	}
 
 	.lotto-number {
-		width: min(calc(72 / 982 * 100vw));
-		height: min(calc(72 / 982 * 100vw));
+		width: min(calc(77 / 982 * 100%), 72px);
+		height: auto;
+		aspect-ratio: 1;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		background: white;
 		border-radius: 50%;
 		font-weight: bold;
-		font-size: calc(100vw / 25);
+		font-size: calc(100% / 25);
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	}
 
 	button.dialog-wrapper {
-		position: fixed;
+		position: absolute;
 		bottom: 0;
 		left: 0;
 		width: 100%;
