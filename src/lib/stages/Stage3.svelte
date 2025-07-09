@@ -1,120 +1,225 @@
 <script>
-	import Input from '../../components/Input.svelte';
+	import Feed from '$components/Feed.svelte';
+	import ProfileSummary from '$components/ProfileSummary.svelte';
+	import TabMenu from '$components/TabMenu.svelte';
+	import Highlights from '$components/Highlights.svelte';
+	import { posts as rawPosts } from '$lib/data/posts.js';
+	import postMeta from '$lib/data/postMeta.json';
+	import { disableScroll, enableScroll } from '$lib/utils/scroll.js';
+	import Input from '$components/Input.svelte';
 	import HintButton from '$components/HintButton.svelte';
+	import { onMount, onDestroy } from 'svelte';
 
-	const cafe1 = '/images/cafe1.png';
-	const cafe2 = '/images/cafe2.png';
-	const tapIcon = '/images/tap_icon.svg';
-	let isFlipped = false;
+	let posts = rawPosts.map((post, index) => ({
+		id: post.id,
+		images: Array.from(
+			{ length: post.imagesCount },
+			(_, i) => `/images/insta/feed${post.id}_${i + 1}.png`
+		),
+		date: post.date,
+		caption: post.caption,
+		likes: postMeta[index]?.likes ?? 0,
+		comments: postMeta[index]?.comments ?? []
+	}));
+	let selectedPost = null;
 
-	function toggleImage() {
-		isFlipped = !isFlipped;
+	const handlePopState = () => {
+		if (selectedPost !== null) {
+			selectedPost = null;
+		}
+	};
+
+	onMount(() => {
+		window.addEventListener('popstate', handlePopState);
+	});
+
+	onDestroy(() => {
+		window.removeEventListener('popstate', handlePopState);
+	});
+
+	$: {
+		if (typeof window !== 'undefined') {
+			if (selectedPost !== null) {
+				disableScroll();
+			} else {
+				enableScroll();
+			}
+		}
 	}
 </script>
 
-<div class="stage-wrapper">
-	<button type="button" class="flip-container" on:click={toggleImage} aria-label="이미지 전환">
-		<div class="flipper {isFlipped ? 'flipped' : ''}">
-			<div class="front">
-				<img src={cafe1} alt="Cafe 1" />
-			</div>
-			<div class="back">
-				<img src={cafe2} alt="Cafe 2" />
-			</div>
-		</div>
-		<img src={tapIcon} alt="탭 아이콘" class="tap-icon" />
-	</button>
+<svelte:body />
+
+<div class="profile-container">
+	<header class="profile-header">
+		<div class="username">piccor_rica</div>
+	</header>
+
+	<ProfileSummary />
+
+	<section class="profile-actions">
+		<button class="gray wide blue">Follow</button>
+		<button class="gray wide">Message</button>
+		<button class="gray square">+👤</button>
+	</section>
+
+	<Highlights />
+
+	<TabMenu />
+
+	<section class="gallery">
+		{#each [...posts].reverse() as post}
+			<button
+				type="button"
+				class="gallery-item"
+				style="background-image: url({post.images[0]})"
+				on:click={() => {
+					history.pushState(null, '', window.location.href);
+					selectedPost = { ...post };
+				}}
+				aria-label="Open post"
+			></button>
+		{/each}
+	</section>
+
+	<div class="button-bar">
+		<HintButton hintCode="Xn8Rf6Th" />
+		<Input correctAnswer="0818" successPath="/Lp3Az7Uc" />
+	</div>
 </div>
 
-<div class="button-bar">
-	<HintButton hintCode="Xn8Rf6Th" />
-	<Input correctAnswer="LIKE" successPath="/Lp3Az7Uc" />
-</div>
+{#if selectedPost}
+	<div class="dimmed"></div>
+	<div class="post-view">
+		<Feed feed={selectedPost} onBack={() => (selectedPost = null)} />
+	</div>
+{/if}
 
 <style>
-	.stage-wrapper {
+	.profile-container {
+		width: 100%;
+		margin: 0 auto;
+		background: white;
+		color: #000;
+	}
+	:global(body.modal-open) .profile-container {
+		touch-action: none;
+		overscroll-behavior: contain;
+	}
+	@media (min-width: 768px) {
+		.profile-container {
+			max-width: 480px;
+		}
+	}
+
+	.profile-header {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: relative;
+		height: 44px;
+		font-weight: bold;
+		width: 100%;
+		text-align: center;
+		padding: 0;
+	}
+
+	.profile-header .username {
+		position: relative;
+		padding: 0 1rem;
+	}
+
+	.profile-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		padding-left: 1rem;
+		padding-right: 1rem;
+		padding-top: 0.5rem;
+		padding-bottom: 0.5rem;
+		width: 100%;
+		box-sizing: border-box;
+	}
+
+	.profile-actions .gray {
+		min-width: 0;
+		padding: 0.4rem;
+		border: 1px solid #ccc;
+		border-radius: 6px;
+		background: #fafafa;
+		font-size: 0.85rem;
+		color: inherit;
+	}
+
+	.profile-actions .blue {
+		background: #0095f6;
+		color: white;
+		border: none;
+	}
+
+	.profile-actions .gray.wide {
+		flex: 1;
+	}
+
+	.profile-actions .gray.square {
+		width: 44px;
+		padding: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.gallery {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1px;
+		background: #ffff;
+	}
+
+	.gallery-item {
+		all: unset;
+		display: block;
+		aspect-ratio: 1 / 1;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		width: 100%;
+		cursor: pointer;
+	}
+
+	.post-view {
+		position: fixed;
+		inset: 0;
+		background: white;
+		z-index: 100;
+		display: flex;
+		flex-direction: column;
 		max-width: 480px;
 		width: 100%;
-		margin: auto;
-		position: relative;
+		margin: 0 auto;
+		overflow-y: auto;
 	}
 
-	button.flip-container {
-		all: unset;
-		cursor: pointer;
-		display: block;
-		width: 100%;
-		height: auto;
-		perspective: 1000px;
-	}
-
-	.flipper {
-		position: relative;
-		width: 100%;
-		height: 100%;
-		transition: transform 1s;
-		transform-style: preserve-3d;
-	}
-
-	.flipped {
-		transform: rotateY(180deg);
-	}
-
-	.front,
-	.back {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		backface-visibility: hidden;
-	}
-
-	.front img,
-	.back img {
-		width: 100%;
-		height: auto;
-		object-fit: contain;
-		position: absolute;
-		top: 50%;
+	.dimmed {
+		position: fixed;
+		top: 0;
 		left: 0;
-		transform: translateY(-50%);
-	}
-
-	.back {
-		transform: rotateY(180deg);
-	}
-
-	.tap-icon {
-		position: absolute;
-		top: 45%;
-		left: 80%;
-		width: 20%;
-		transform: translate(-50%, -50%);
-		animation: blink 2s infinite ease-in-out;
-		z-index: 2;
-		pointer-events: none;
-	}
-
-	@keyframes blink {
-		0%,
-		100% {
-			opacity: 1;
-		}
-		50% {
-			opacity: 0;
-		}
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.5);
+		z-index: 99;
+		touch-action: none;
+		overscroll-behavior: contain;
+		overflow: hidden;
+		pointer-events: auto;
 	}
 
 	.button-bar {
-		position: absolute;
-		bottom: 1.7rem;
-		left: 0;
-		right: 0;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		padding: 0 1.7rem;
-		box-sizing: border-box;
-		z-index: 10;
 		gap: 1rem;
+		margin: 1rem 0;
 	}
 </style>
