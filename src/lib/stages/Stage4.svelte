@@ -27,13 +27,17 @@
 	let circleSize = 0;
 	let gapSize = 0;
 	let bottomOffset = 0;
+	let fontSize = 0;
 
-	function updateSizes() {
+	console.log('fontSize', fontSize);
+
+	const updateSizes = () => {
 		mainWidth = Math.max(container.offsetWidth, 320);
 		circleSize = mainWidth * 0.075;
 		gapSize = mainWidth * 0.003;
 		bottomOffset = container.offsetWidth * 0.99;
-	}
+		fontSize = circleSize * 0.48;
+	};
 
 	onMount(() => {
 		updateSizes();
@@ -48,7 +52,10 @@
 <div class="stage4-background" bind:this={container}>
 	<div class="lottery-numbers" style="bottom: {bottomOffset}px; gap: {gapSize}px;">
 		{#each lottoNumbers.map( (num, idx) => (currentStep > 0 && idx < visibleLottoCounts[currentStep] ? num : '') ) as displayNum}
-			<span class="lotto-number" style="width: {circleSize}px; height: {circleSize}px;">
+			<span
+				class="lotto-number"
+				style="width: {circleSize}px; height: {circleSize}px; font-size: {fontSize}px;"
+			>
 				{displayNum}
 			</span>
 		{/each}
