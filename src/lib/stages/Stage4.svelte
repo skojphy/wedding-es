@@ -3,6 +3,7 @@
 	import Input from '$components/Input.svelte';
 	import HintButton from '$components/HintButton.svelte';
 	import { onMount, onDestroy } from 'svelte';
+	import { browser } from '$app/environment';
 
 	const dialogTexts = [
 		'(아... 로또도 안 됐겠다... 사업 시작하기 좋은 날이네...)',
@@ -29,34 +30,39 @@
 	let bottomOffset = 0;
 	let fontSize = 0;
 
-	console.log('fontSize', fontSize);
-
-	const updateSizes = () => {
+	function updateSizes() {
+		if (!container) return;
 		mainWidth = Math.max(container.offsetWidth, 320);
 		circleSize = mainWidth * 0.075;
 		gapSize = mainWidth * 0.003;
 		bottomOffset = container.offsetWidth * 0.99;
 		fontSize = circleSize * 0.48;
-	};
+	}
 
-	onMount(() => {
-		updateSizes();
-		window.addEventListener('resize', updateSizes);
-	});
+	if (browser) {
+		onMount(() => {
+			updateSizes();
+			window.addEventListener('resize', updateSizes);
+		});
 
-	onDestroy(() => {
-		window.removeEventListener('resize', updateSizes);
-	});
+		onDestroy(() => {
+			window.removeEventListener('resize', updateSizes);
+		});
+	}
 </script>
 
 <div class="stage4-background" bind:this={container}>
 	<div class="lottery-numbers" style="bottom: {bottomOffset}px; gap: {gapSize}px;">
-		{#each lottoNumbers.map( (num, idx) => (currentStep > 0 && idx < visibleLottoCounts[currentStep] ? num : '') ) as displayNum}
+		{#each lottoNumbers as num, idx}
 			<span
-				class="lotto-number"
+				class="lotto-number {currentStep > 0 && idx < visibleLottoCounts[currentStep]
+					? 'filled'
+					: ''}"
 				style="width: {circleSize}px; height: {circleSize}px; font-size: {fontSize}px;"
 			>
-				{displayNum}
+				{#if currentStep > 0 && idx < visibleLottoCounts[currentStep]}
+					{num}
+				{/if}
 			</span>
 		{/each}
 	</div>
@@ -104,10 +110,30 @@
 		align-items: center;
 		justify-content: center;
 		background: white;
+		color: inherit;
 		border-radius: 50%;
 		font-weight: bold;
 		font-size: calc(100% / 25);
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	}
+
+	.lottery-numbers .lotto-number.filled:nth-child(2),
+	.lottery-numbers .lotto-number.filled:nth-child(7) {
+		background-color: rgb(255, 255, 146);
+		color: black;
+	}
+
+	.lottery-numbers .lotto-number.filled:nth-child(1),
+	.lottery-numbers .lotto-number.filled:nth-child(3),
+	.lottery-numbers .lotto-number.filled:nth-child(4),
+	.lottery-numbers .lotto-number.filled:nth-child(6) {
+		background-color: rgb(89, 180, 255);
+		color: white;
+	}
+
+	.lottery-numbers .lotto-number.filled:nth-child(5) {
+		background-color: rgb(248, 84, 106);
+		color: white;
 	}
 
 	button.dialog-wrapper {
