@@ -2,6 +2,7 @@
 	import DialogBox from '$components/DialogBox.svelte';
 	import Input from '$components/Input.svelte';
 	import HintButton from '$components/HintButton.svelte';
+	import { onMount, onDestroy } from 'svelte';
 
 	const dialogTexts = [
 		'(아... 로또도 안 됐겠다... 사업 시작하기 좋은 날이네...)',
@@ -20,12 +21,36 @@
 	const visibleLottoCounts = [0, 1, 3, 7];
 
 	const lottoNumbers = ['14', '1', '18', '18', '25', '14', '5'];
+
+	let container;
+	let mainWidth = 0;
+	let circleSize = 0;
+	let gapSize = 0;
+	let bottomOffset = 0;
+
+	function updateSizes() {
+		mainWidth = Math.max(container.offsetWidth, 320);
+		circleSize = mainWidth * 0.075;
+		gapSize = mainWidth * 0.003;
+		bottomOffset = container.offsetWidth * 0.99;
+	}
+
+	onMount(() => {
+		updateSizes();
+		window.addEventListener('resize', updateSizes);
+	});
+
+	onDestroy(() => {
+		window.removeEventListener('resize', updateSizes);
+	});
 </script>
 
-<div class="stage4-background">
-	<div class="lottery-numbers">
+<div class="stage4-background" bind:this={container}>
+	<div class="lottery-numbers" style="bottom: {bottomOffset}px; gap: {gapSize}px;">
 		{#each lottoNumbers.map( (num, idx) => (currentStep > 0 && idx < visibleLottoCounts[currentStep] ? num : '') ) as displayNum}
-			<span class="lotto-number">{displayNum}</span>
+			<span class="lotto-number" style="width: {circleSize}px; height: {circleSize}px;">
+				{displayNum}
+			</span>
 		{/each}
 	</div>
 </div>
@@ -59,18 +84,14 @@
 
 	.lottery-numbers {
 		position: absolute;
-		bottom: 40.7%;
 		width: 100%;
 		display: flex;
 		justify-content: center;
-		gap: 0.9%;
-		transform: translateX(1.93%);
+		transform: translateX(1.88%);
 		z-index: 1;
 	}
 
 	.lotto-number {
-		width: min(calc(77 / 982 * 100%), 72px);
-		height: auto;
 		aspect-ratio: 1;
 		display: flex;
 		align-items: center;
