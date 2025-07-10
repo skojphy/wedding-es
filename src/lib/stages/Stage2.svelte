@@ -28,7 +28,7 @@
 
 <div class="button-bar">
 	<HintButton hintCode="Qw4Dj2Zm" />
-	<Input correctAnswer="LIKE" successPath="/Xn8Rf6Th" />
+	<Input correctAnswer="LIKE" successPath="/Xz5Hd1Pn" />
 </div>
 
 <style>

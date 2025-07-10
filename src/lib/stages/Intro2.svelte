@@ -45,7 +45,7 @@
 
 <div class="button-bar">
 	<HintButton hintCode="B7xL1sHz" />
-	<Input correctAnswer="SUN" successPath="/mz9Yv3Rt" />
+	<Input correctAnswer="SUN" successPath="/Gj7Yk3Ln" />
 </div>
 
 <style>

@@ -12,7 +12,7 @@
 
 <div class="stage6">
 	{#if isLoading}
-		<p class="loading-text">결혼 준비가 완료되었습니다! 잠시만 기다려주세요...</p>
+		<p class="loading-text">결혼 준비가 완료되었습니다!<br />잠시만 기다려주세요...</p>
 		<div class="spinner"></div>
 	{:else}
 		<h1 class="greeting">
