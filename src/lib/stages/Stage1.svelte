@@ -9,6 +9,7 @@
 
 	let container;
 	let isDragging = false;
+	let initialWidth: number;
 
 	const startDrag = (event) => {
 		isDragging = true;
@@ -40,6 +41,9 @@
 		window.addEventListener('mouseup', stopDrag);
 		window.addEventListener('touchmove', doDrag);
 		window.addEventListener('touchend', stopDrag);
+
+		// Capture container width once on load
+		initialWidth = container.clientWidth;
 	});
 </script>
 
@@ -55,7 +59,12 @@
 		</div>
 
 		<div class="img-comp-overlay" style="width: {sliderValue}%">
-			<img src={cyworld1} alt="cyworld 1" class="img-comp-img" />
+			<img
+				src={cyworld1}
+				alt="cyworld 1"
+				class="img-comp-img"
+				style="width: {initialWidth}px; height: auto;"
+			/>
 		</div>
 
 		<button
@@ -102,6 +111,7 @@
 		position: relative;
 		width: 100%;
 		height: auto;
+		max-height: 100vh;
 		user-select: none;
 		overflow: hidden;
 	}
@@ -129,8 +139,6 @@
 		position: absolute;
 		top: 0;
 		left: 0;
-		width: auto;
-		height: 100%;
 	}
 
 	.img-slider {
@@ -157,7 +165,7 @@
 	}
 
 	.button-bar {
-		position: absolute;
+		position: fixed;
 		bottom: 1.7rem;
 		left: 0;
 		right: 0;
