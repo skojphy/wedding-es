@@ -53,21 +53,18 @@
 	};
 
 	const handleSubmit = () => {
-		if (selectedIndices.length === 0) {
-			goto('/Wk7Mn3Xp');
+		const isMatch =
+			correctIndex.every((i) => selectedIndices.includes(i)) &&
+			selectedIndices.length === correctIndex.length;
+
+		if (isMatch) {
+			isLoading = true;
+			showMessage = true;
+			setTimeout(() => {
+				goto('/Wk7Mn3Xp');
+			}, 2000);
 		} else {
-			const isMatch =
-				correctIndex.every((i) => selectedIndices.includes(i)) &&
-				selectedIndices.length === correctIndex.length;
-			if (isMatch) {
-				isLoading = true;
-				showMessage = true;
-				setTimeout(() => {
-					goto('/Wk7Mn3Xp');
-				}, 2000);
-			} else {
-				alert('당신은 휴먼이 아닙니까?');
-			}
+			alert('당신은 휴먼이 아닙니까?');
 		}
 	};
 </script>

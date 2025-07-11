@@ -106,7 +106,7 @@
 	.checkbox {
 		width: 24px;
 		height: 24px;
-		margin-right: 1rem;
+		margin: 0 1rem;
 	}
 
 	.label {
