@@ -23,7 +23,8 @@
 		date: post.date,
 		caption: post.caption,
 		likes: safePostMeta[index]?.likes ?? 0,
-		comments: safePostMeta[index]?.comments ?? []
+		comments: safePostMeta[index]?.comments ?? [],
+		borders: post.borders
 	}));
 
 	let isFollowing = false;
@@ -104,7 +105,6 @@
 {/if}
 
 <style>
-	/* existing CSS from before */
 	.profile-container {
 		width: 100%;
 		margin: 0 auto;

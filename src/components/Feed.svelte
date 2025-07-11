@@ -20,6 +20,7 @@
 	let liked = false;
 	let bookmarked = false;
 	let newComment = '';
+	let borderStyleString = `box-sizing: border-box; border: 10px solid ${feed?.borders?.join(' ')};`;
 
 	const addComment = () => {
 		if (newComment.trim()) {
@@ -79,11 +80,7 @@
 		{#if feed.images && feed.images.length}
 			{#each feed.images as img}
 				<swiper-slide>
-					<img
-						src={img}
-						alt="post"
-						style="box-sizing: border-box; border: 10px solid; border-color: blue gray red green;"
-					/>
+					<img src={img} alt="post" style={borderStyleString} />
 				</swiper-slide>
 			{/each}
 		{/if}
