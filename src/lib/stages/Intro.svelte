@@ -156,8 +156,9 @@
 
 	.next-wrapper {
 		position: absolute;
-		bottom: 0.7rem;
-		right: 0.7rem;
+		bottom: 1.7rem;
+		right: 0;
+		padding: 0 1.7rem;
 		z-index: 10;
 	}
 

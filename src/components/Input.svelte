@@ -106,7 +106,7 @@
 		flex: 3;
 		height: 60px;
 		width: 100%;
-		padding: 0 1rem;
+		padding: 0 2rem;
 		border-radius: 9999px;
 		background: #333;
 		display: flex;

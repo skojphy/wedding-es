@@ -184,7 +184,7 @@
 	}
 	.pill {
 		height: 60px;
-		padding: 0 40px;
+		padding: 0 2rem;
 		border-radius: 9999px;
 		display: flex;
 		align-items: center;
