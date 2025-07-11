@@ -37,7 +37,7 @@
 
 	const grid = Array(25)
 		.fill()
-		.map((_, i) => `/images/captcha/${imagesMap[i][0] ? 'true' : 'false'}${imagesMap[i][1]}.png`);
+		.map((_, i) => `/images/captcha/${imagesMap[i][0] ? 'true' : 'false'}${imagesMap[i][1]}.webp`);
 
 	let selectedIndices = [];
 
@@ -85,7 +85,14 @@
 					class="grid-cell {selectedIndices.includes(index) ? 'selected' : ''}"
 					on:click={() => toggleSelect(index)}
 				>
-					<img src={image} alt={`${index}번째 이미지`} />
+					<img
+						src={image}
+						alt={`${index}번째 이미지`}
+						loading="lazy"
+						decoding="async"
+						width="100"
+						height="100"
+					/>
 				</button>
 			{/each}
 		</div>

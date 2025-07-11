@@ -5,7 +5,7 @@
 	import { register } from 'swiper/element/bundle';
 
 	export let feed = {
-		images: ['/images/mock.png'],
+		images: [''],
 		date: '',
 		caption: '',
 		likes: 0,
@@ -63,7 +63,7 @@
 		</div>
 	</div>
 	<div class="feed-header">
-		<img src="/images/insta/insta_profile.png" alt="avatar" class="avatar" />
+		<img src="/images/insta/insta_profile.webp" alt="avatar" class="avatar" />
 		<div class="meta">
 			<div class="username">{username}</div>
 			<div class="date">{feed.date}</div>

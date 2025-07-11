@@ -18,7 +18,7 @@
 		id: post.id,
 		images: Array.from(
 			{ length: post.imagesCount },
-			(_, i) => `/images/insta/feed${post.id}_${i + 1}.png`
+			(_, i) => `/images/insta/feed${post.id}_${i + 1}.webp`
 		),
 		date: post.date,
 		caption: post.caption,

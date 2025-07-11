@@ -1,7 +1,7 @@
 <script>
 	export let isFollowing = false;
 	let showAvatarModal = false;
-	const avatarUrl = '/images/insta/insta_profile.png';
+	const avatarUrl = '/images/insta/insta_profile.webp';
 	const openAvatar = () => {
 		showAvatarModal = true;
 		history.pushState({ avatar: true }, '');
@@ -72,7 +72,7 @@
 		width: 80px;
 		height: 80px;
 		border-radius: 50%;
-		background-image: url('/images/insta/insta_profile.png');
+		background-image: url('/images/insta/insta_profile.webp');
 		background-size: cover;
 		background-position: center;
 		border: 2px solid #eee;
