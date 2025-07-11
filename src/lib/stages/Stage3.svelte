@@ -93,7 +93,7 @@
 
 	<div class="button-bar">
 		<HintButton hintCode="Xn8Rf6Th" />
-		<Input correctAnswer="0818" successPath="/Lp3Az7Uc" />
+		<Input correctAnswer="2949" successPath="/Lp3Az7Uc" />
 	</div>
 </div>
 

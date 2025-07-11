@@ -4,100 +4,85 @@ export const posts = [
         date: '2017년 11월 25일',
         caption: '100일 귀여워',
         imagesCount: 3,
-        borders: ['#fff', '#fff', '#fff', '#fff']
-
+        borders: ['transparent', '#ff6446', '#ff6446', 'transparent']
     },
     {
         id: 2,
         date: '2018년 8월 18일',
         caption: '1주년이 며칠인지 기억 못 하는 애들의 알찬 일 년',
         imagesCount: 3,
-        borders: ['#2d9e65', '#fff', '#fff', '#d1d175']
-
     },
     {
         id: 3,
         date: '2018년 9월 13일',
         caption: '절거웠던 놋네눨느',
         imagesCount: 1,
-        borders: ['#2d9e65', '#fff', '#fff', '#d1d175']
-
+        borders: ['#ff6446', '#ff6446', '#ff6446', '#ff6446']
     },
     {
         id: 4,
         date: '2018년 10월 14일',
         caption: '두 번째 광주',
         imagesCount: 2,
-        borders: ['#2d9e65', '#fff', '#fff', '#d1d175']
-
+        borders: ['transparent', '#5653e9', '#5653e9', '#5653e9']
     },
     {
         id: 5,
         date: '2018년 12월 25일',
         caption: '크리스마스라 사람 제일 많은 청계천에 빠지는 사람: 박지현',
         imagesCount: 3,
-        borders: ['#2d9e65', '#fff', '#fff', '#d1d175']
-
+        borders: ['transparent', '#5653e9', 'transparent', 'transparent']
     },
     {
         id: 6,
         date: '2018년 4월 12일',
         caption: '오늘부터 라이온즈랑 1일💙',
         imagesCount: 1,
-        borders: ['#2d9e65', '#fff', '#fff', '#d1d175']
-
+        borders: ['#d1d175', '#d1d175', '#d1d175', '#d1d175']
     },
     {
         id: 7,
         date: '2020년 2월 8일',
         caption: '쫄보인 나를 중급자 코스에 버려두고 간 임석환과 함께',
         imagesCount: 1,
-        borders: ['#2d9e65', '#fff', '#fff', '#d1d175']
-
     },
     {
         id: 8,
         date: '2020년 12월 19일',
         caption: '우리의 첫 번째 제주🍊',
         imagesCount: 1,
-        borders: ['#2d9e65', '#fff', '#fff', '#d1d175']
+        borders: ['#2d9e65', 'transparent', '#2d9e65', '#2d9e65']
     },
     {
         id: 9,
         date: '2021년 6월 12일',
         caption: '약간 어촌계 홍보 사진 같지만 n년 만에 만난 진웅이가 찍어 줌',
         imagesCount: 3,
-        borders: ['#2d9e65', '#fff', '#fff', '#d1d175']
-
     },
     {
         id: 10,
         date: '2022년 6월 9일',
         caption: '포항 청년과 명예 포항 시민',
         imagesCount: 1,
-        borders: ['#2d9e65', '#fff', '#fff', '#d1d175']
-
+        borders: ['transparent', '#d1d175', '#d1d175', 'transparent']
     },
     {
         id: 11,
         date: '2023년 6월 9일',
         caption: '제용이랑 보고 온 은하수💫',
         imagesCount: 1,
-        borders: ['#2d9e65', '#fff', '#fff', '#d1d175']
+        borders: ['#2d9e65', '#2d9e65', '#2d9e65', 'transparent']
     },
     {
         id: 12,
         date: '2023년 8월 18일',
         caption: '기념일도 보겜 사람들과 함께인 삶... 그리고 게임과 술로 채운 23년🤦‍♀️',
         imagesCount: 4,
-        borders: ['#2d9e65', '#fff', '#fff', '#d1d175']
     },
     {
         id: 13,
         date: '2024년 2월 16일',
         caption: '백만 년 만의 데이트',
         imagesCount: 2,
-        borders: ['#2d9e65', '#fff', '#fff', '#d1d175']
-
     },
 ];

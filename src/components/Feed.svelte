@@ -8,7 +8,6 @@
 		images: ['/images/mock.png'],
 		date: '',
 		caption: '',
-		borders: ['red', 'blue', '#fff', '#fff'],
 		likes: 0,
 		comments: []
 	};
@@ -20,7 +19,9 @@
 	let liked = false;
 	let bookmarked = false;
 	let newComment = '';
-	let borderStyleString = `box-sizing: border-box; border: 10px solid ${feed?.borders?.join(' ')};`;
+	let borderStyleString = feed?.borders?.length
+		? `border: 10px solid; border-color: ${feed.borders.join(' ')};`
+		: '';
 
 	const addComment = () => {
 		if (newComment.trim()) {
@@ -182,6 +183,7 @@
 		height: auto;
 		display: block;
 		object-fit: cover;
+		box-sizing: border-box;
 	}
 
 	.feed-actions {
@@ -222,11 +224,6 @@
 		font-size: 0.9rem;
 		border: 1px solid #ccc;
 		border-radius: 6px;
-	}
-
-	.comment-input.nickname {
-		width: 25%;
-		min-width: 60px;
 	}
 
 	.comment-input:not(.nickname) {
