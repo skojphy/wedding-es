@@ -1,5 +1,9 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	export let data: { config: import('$lib/stages').StageConfig };
+	export const ssr = false;
 </script>
 
-<svelte:component this={data.config.component} />
+{#if browser}
+	<svelte:component this={data.config.component} />
+{/if}

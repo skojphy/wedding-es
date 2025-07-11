@@ -1,18 +1,7 @@
 [
     {
         "likes": 12,
-        "comments": [
-            {
-                "nickname": "ㄱㄱㄱ",
-                "text": "너무 귀여워요",
-                "created_at": "2025-06-21T12:01:00Z"
-            },
-            {
-                "nickname": "ㄴㄴㄴㄴㄴ",
-                "text": "축하해요!!",
-                "created_at": "2025-06-21T13:15:00Z"
-            }
-        ]
+        "comments": []
     },
     {
         "likes": 5,
