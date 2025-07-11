@@ -71,14 +71,11 @@
 	}
 
 	.text-container {
-		position: absolute;
-		top: calc(50% - 110px);
-		left: 50%;
-		transform: translateX(-50%);
-		width: 90%;
+		width: 100%;
 		max-width: 400px;
 		text-align: left;
 		font-size: 1.05rem;
+		margin-bottom: 1rem;
 	}
 
 	p {
@@ -91,10 +88,13 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		width: 400px;
-		max-width: 90%;
+		width: 100%;
+		max-width: 400px;
+		margin: 0 auto;
 		background: white;
 		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+		box-sizing: border-box;
+		padding-left: 0;
 	}
 
 	.checkbox-label {
