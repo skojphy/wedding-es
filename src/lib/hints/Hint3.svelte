@@ -3,6 +3,6 @@
 </script>
 
 <div class={`hint-wrapper ${className}`}>
-	<p>이건 세 번째 힌트</p>
-	<p>일희일비 않기</p>
+	<p>⭐️ ⭐️⭐️ ⭐️⭐️⭐️ ⭐️⭐️⭐️⭐️</p>
+	<p>포스터의 빈칸을 채워 보자.</p>
 </div>

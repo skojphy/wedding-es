@@ -3,10 +3,6 @@
 </script>
 
 <div class={`hint-wrapper ${className}`}>
-	<p>이건 네 번째 힌트</p>
-	<img
-		src="/images/insta/feed6_1.webp"
-		alt="1번 힌트 이미지"
-		style="width: 100%; border-radius: 8px; margin-top: 1rem;"
-	/>
+	<p>하이라이트에 적힌 문구<br />어디서 본 것 같은데...</p>
+	<p>피드의 이 테두리 색깔은 뭐지?</p>
 </div>
