@@ -8,6 +8,7 @@
 		images: ['/images/mock.png'],
 		date: '',
 		caption: '',
+		borders: ['red', 'blue', '#fff', '#fff'],
 		likes: 0,
 		comments: []
 	};
@@ -20,7 +21,7 @@
 	let bookmarked = false;
 	let newComment = '';
 
-	function addComment() {
+	const addComment = () => {
 		if (newComment.trim()) {
 			const comment = {
 				nickname: userNickname,
@@ -33,7 +34,7 @@
 			};
 			newComment = '';
 		}
-	}
+	};
 
 	onMount(() => {
 		register();
@@ -78,7 +79,11 @@
 		{#if feed.images && feed.images.length}
 			{#each feed.images as img}
 				<swiper-slide>
-					<img src={img} alt="post" />
+					<img
+						src={img}
+						alt="post"
+						style="box-sizing: border-box; border: 10px solid; border-color: blue gray red green;"
+					/>
 				</swiper-slide>
 			{/each}
 		{/if}
