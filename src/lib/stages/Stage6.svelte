@@ -106,7 +106,7 @@
 		text-decoration: none;
 	}
 	.loading-text {
-		font-size: 2rem;
+		font-size: 1.5rem;
 		line-height: 4rem;
 		text-align: center;
 		min-width: 85vw;
