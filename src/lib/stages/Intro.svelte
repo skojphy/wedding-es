@@ -65,7 +65,6 @@
 		position: relative;
 		background: black;
 		color: #00ff66;
-		font-family: 'Courier New', Courier, monospace;
 	}
 
 	.content {

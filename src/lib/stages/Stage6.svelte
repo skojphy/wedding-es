@@ -12,8 +12,10 @@
 
 <div class="stage6">
 	{#if isLoading}
-		<p class="loading-text">결혼 준비가 완료되었습니다!<br />잠시만 기다려주세요...</p>
-		<div class="spinner"></div>
+		<div class="loading-container">
+			<p class="loading-text">결혼 준비가 완료되었습니다!<br />잠시만 기다려주세요.</p>
+			<div class="spinner"></div>
+		</div>
 	{:else}
 		<h1 class="greeting">
 			{nickname}님께<br />
@@ -28,9 +30,7 @@
 			</div>
 		</div>
 		<p class="desc">
-			미션 수행 후 결혼식 당일<br />
-			카톡으로 인증해 주시면 추첨을 통해<br />
-			소정의 선물을 드립니다!
+			미션 수행 후<br />결혼식 당일 카톡으로 인증해 주시면<br /> 추첨을 통해 소정의 선물을 드립니다!
 		</p>
 		<p class="desc">
 			지금까지 플레이해 주셔서 감사합니다.<br />
@@ -53,6 +53,7 @@
 		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 		text-align: center;
 		box-sizing: border-box;
+		position: relative;
 	}
 	.greeting {
 		text-align: left;
@@ -103,5 +104,37 @@
 		border-radius: 9999px;
 		cursor: pointer;
 		text-decoration: none;
+	}
+	.loading-text {
+		font-size: 2rem;
+		line-height: 4rem;
+		text-align: center;
+		min-width: 85vw;
+	}
+	.spinner {
+		width: 5rem;
+		height: 5rem;
+		border: 6px solid rgba(0, 0, 0, 0.1);
+		border-top-color: #ff6446;
+		border-radius: 50%;
+		animation: spin 1s linear infinite;
+		margin-top: 1rem;
+	}
+
+	@keyframes spin {
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	.loading-container {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
 	}
 </style>

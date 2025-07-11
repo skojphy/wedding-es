@@ -19,7 +19,7 @@
 		}
 	};
 
-	const visibleLottoCounts = [0, 1, 3, 7];
+	const visibleLottoCounts = [0, 2, 5, 7];
 
 	const lottoNumbers = ['14', '1', '18', '18', '25', '14', '5'];
 
@@ -30,14 +30,14 @@
 	let bottomOffset = 0;
 	let fontSize = 0;
 
-	function updateSizes() {
+	const updateSizes = () => {
 		if (!container) return;
 		mainWidth = Math.max(container.offsetWidth, 320);
 		circleSize = mainWidth * 0.075;
 		gapSize = mainWidth * 0.003;
 		bottomOffset = container.offsetWidth * 0.99;
 		fontSize = circleSize * 0.48;
-	}
+	};
 
 	if (browser) {
 		onMount(() => {
@@ -119,7 +119,7 @@
 
 	.lottery-numbers .lotto-number.filled:nth-child(2),
 	.lottery-numbers .lotto-number.filled:nth-child(7) {
-		background-color: rgb(255, 255, 146);
+		background-color: #fcfc6a;
 		color: black;
 	}
 
@@ -127,12 +127,12 @@
 	.lottery-numbers .lotto-number.filled:nth-child(3),
 	.lottery-numbers .lotto-number.filled:nth-child(4),
 	.lottery-numbers .lotto-number.filled:nth-child(6) {
-		background-color: rgb(89, 180, 255);
+		background-color: #5653e9;
 		color: white;
 	}
 
 	.lottery-numbers .lotto-number.filled:nth-child(5) {
-		background-color: rgb(248, 84, 106);
+		background-color: #ff6446;
 		color: white;
 	}
 

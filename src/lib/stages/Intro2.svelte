@@ -154,7 +154,12 @@
 </div>
 
 <style>
-	@import url('https://db.onlinewebfonts.com/c/ca940c70b4102c14db56ebde1b19f325?family=Segmental');
+	@font-face {
+		font-family: 'Segmental';
+		src: url('https://db.onlinewebfonts.com/t/ca940c70b4102c14db56ebde1b19f325.woff2')
+			format('woff2');
+		font-display: swap;
+	}
 
 	.stage-wrapper {
 		max-width: 480px;
