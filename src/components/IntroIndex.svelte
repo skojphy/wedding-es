@@ -59,8 +59,8 @@
 
 	.image-container {
 		position: relative;
-		max-width: 480px;
-		width: 80%;
+		max-width: 400px;
+		width: 60%;
 		margin: 0 auto;
 		top: 15vh;
 		text-align: center;
