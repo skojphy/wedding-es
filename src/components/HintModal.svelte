@@ -40,6 +40,7 @@
 		box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
 		z-index: 999999;
 		position: relative;
+		margin-top: -2rem;
 	}
 
 	.hint-title {

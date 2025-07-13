@@ -55,4 +55,14 @@
 			align-items: center;
 		}
 	}
+
+	@supports (-webkit-touch-callout: none) {
+		html,
+		body {
+			height: -webkit-fill-available;
+		}
+		.layout-wrapper {
+			min-height: -webkit-fill-available;
+		}
+	}
 </style>

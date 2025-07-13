@@ -89,7 +89,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: 2rem;
+		gap: 1rem;
 	}
 
 	.date {
@@ -101,6 +101,7 @@
 	.question {
 		font-size: 1.3rem;
 		line-height: 1.6;
+		margin: 0;
 	}
 
 	.nickname-line {
