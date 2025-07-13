@@ -4,8 +4,6 @@
 	import HintButton from '$components/HintButton.svelte';
 
 	let sliderValue = 50;
-	const cyworld1 = '/images/cyworld1.png';
-	const cyworld2 = '/images/cyworld2.png';
 
 	let container;
 	let isDragging = false;
@@ -54,18 +52,11 @@
 		on:mouseleave={stopDrag}
 		role="presentation"
 	>
-		<div class="img-comp-overlay" style="width: 100%">
-			<img src={cyworld2} alt="cyworld 2" class="img-comp-img" />
-		</div>
-
-		<div class="img-comp-overlay" style="width: {sliderValue}%">
-			<img
-				src={cyworld1}
-				alt="cyworld 1"
-				class="img-comp-img"
-				style="width: {initialWidth}px; height: auto;"
-			/>
-		</div>
+		<div class="img-layer img-right"></div>
+		<div
+			class="img-layer img-left"
+			style="clip-path: inset(0 calc({100 - sliderValue}%) 0 0);"
+		></div>
 
 		<button
 			class="img-slider"
@@ -96,49 +87,42 @@
 </div>
 
 <style>
-	.img-comp-container > .img-comp-overlay:first-of-type {
-		position: relative;
-	}
-
 	.stage-wrapper {
 		max-width: 480px;
 		width: 100%;
-		margin: auto;
 		position: relative;
+		min-height: 100vh;
 	}
 
 	.img-comp-container {
 		position: relative;
 		width: 100%;
-		height: auto;
-		max-height: 100vh;
+		height: 100vh;
 		user-select: none;
 		overflow: hidden;
+		display: flex;
+		align-items: flex-end;
 	}
 
-	.img-comp-overlay:first-of-type .img-comp-img {
-		display: block;
+	.img-layer {
+		position: absolute;
+		top: 0;
+		left: 0;
 		width: 100%;
-		height: auto;
-	}
-
-	.img-comp-overlay {
 		height: 100%;
-		overflow: hidden;
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: top center;
 	}
 
-	.img-comp-overlay:not(:first-of-type) {
-		position: absolute;
-		top: 0;
-		left: 0;
-		overflow: hidden;
-		/* width is set inline via style attribute */
+	.img-left {
+		background-image: url('/images/cyworld1.png');
+		z-index: 1;
 	}
 
-	.img-comp-overlay:not(:first-of-type) .img-comp-img {
-		position: absolute;
-		top: 0;
-		left: 0;
+	.img-right {
+		background-image: url('/images/cyworld2.png');
+		z-index: 0;
 	}
 
 	.img-slider {
@@ -176,5 +160,8 @@
 		box-sizing: border-box;
 		z-index: 10;
 		gap: 1rem;
+		max-width: 480px;
+		width: 100%;
+		margin: 0 auto;
 	}
 </style>
