@@ -12,6 +12,7 @@ import Stage6 from '$lib/stages/Stage6.svelte';
 import Stage1_intro from '$lib/stages/Stage1_intro.svelte';
 import Stage2_intro from '$lib/stages/Stage2_intro.svelte';
 import Stage3_intro from '$lib/stages/Stage3_intro.svelte';
+import Temp from './stages/Temp.svelte';
 
 export interface StageConfig {
     component: Component;
@@ -31,4 +32,5 @@ export const stages: Record<string, StageConfig> = {
     'Zy2Bo9Ld': { component: Stage5_1, title: 'Stage5-1' },
     'Rf6Kt4Gj': { component: Stage5_2, title: 'Stage5-2' },
     'Wk7Mn3Xp': { component: Stage6, title: 'Stage6' },
+    'hello': { component: Temp, title: 'Start' },
 };
