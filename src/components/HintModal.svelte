@@ -1,6 +1,8 @@
 <script>
 	import { createEventDispatcher } from 'svelte';
 
+	export let guide = '';
+
 	const dispatch = createEventDispatcher();
 
 	const closeModal = () => {
@@ -14,6 +16,9 @@
 		<div class="hint-title">HINT</div>
 		<div class="hint-content">
 			<slot />
+			{#if guide}
+				<div class="hint-guide">{guide}</div>
+			{/if}
 		</div>
 	</div>
 </div>
@@ -58,6 +63,7 @@
 		font-size: 1.1rem;
 		line-height: 1.6;
 		color: #333;
+		position: relative;
 	}
 
 	.close-button {
@@ -69,5 +75,14 @@
 		font-size: 2rem;
 		cursor: pointer;
 		color: #333;
+	}
+
+	.hint-guide {
+		position: absolute;
+		bottom: 0.5rem;
+		right: 1rem;
+		font-size: 1rem;
+		color: #555;
+		opacity: 0.7;
 	}
 </style>
