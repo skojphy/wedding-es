@@ -27,7 +27,7 @@
 </div>
 
 <div class="button-bar">
-	<HintButton hintCode="Qw4Dj2Zm" />
+	<HintButton hintCode="Qw4Dj2Zm" guide="[영어 4글자]" />
 	<Input correctAnswer="LIKE" successPath="/Xz5Hd1Pn" />
 </div>
 

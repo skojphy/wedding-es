@@ -8,6 +8,7 @@
 	import HintModal from '$components/HintModal.svelte';
 
 	export let hintCode;
+	export let guide = '';
 
 	const hintMap = {
 		B7xL1sHz: Hint1,
@@ -29,7 +30,7 @@
 <button class="hint-button" on:click={toggleModal}>HINT</button>
 
 {#if isModalOpen}
-	<HintModal on:close={() => (isModalOpen = false)}>
+	<HintModal on:close={() => (isModalOpen = false)} {guide}>
 		<svelte:component this={HintComponent} />
 	</HintModal>
 {/if}

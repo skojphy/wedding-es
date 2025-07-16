@@ -76,7 +76,7 @@
 
 {#if currentStep === 3}
 	<div class="button-bar">
-		<HintButton hintCode="Lp3Az7Uc" />
+		<HintButton hintCode="Lp3Az7Uc" guide="[영어 7글자]" />
 		<Input correctAnswer="marryme" successPath="/Hj5Kq1Np" />
 	</div>
 {/if}

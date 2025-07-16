@@ -148,7 +148,7 @@
 	</div>
 
 	<div class="button-bar">
-		<HintButton hintCode="B7xL1sHz" />
+		<HintButton hintCode="B7xL1sHz" guide="[영어 3글자]" />
 		<Input correctAnswer="SUN" successPath="/Gj7Yk3Ln" />
 	</div>
 </div>

@@ -82,7 +82,7 @@
 </div>
 
 <div class="button-bar">
-	<HintButton hintCode="mz9Yv3Rt" />
+	<HintButton hintCode="mz9Yv3Rt" guide="[한글 2글자]" />
 	<Input correctAnswer="합정" successPath="/Qw9Rt2Vm" />
 </div>
 
