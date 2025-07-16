@@ -92,7 +92,7 @@
 	</section>
 
 	<div class="button-bar">
-		<HintButton hintCode="Xn8Rf6Th" />
+		<HintButton hintCode="Xn8Rf6Th" guide="[숫자 4글자]" />
 		<Input correctAnswer="2949" successPath="/Lp3Az7Uc" />
 	</div>
 </div>
