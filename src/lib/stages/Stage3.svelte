@@ -66,10 +66,7 @@
 				Follow
 			{/if}
 		</button>
-		<button
-			class="gray wide"
-			on:click={() => window.open('https://open.kakao.com/o/s5sjNUwf', '_blank')}>Message</button
-		>
+		<button class="gray wide" on:click={() => {}}>Message</button>
 		<button class="gray square">+👤</button>
 	</section>
 
@@ -175,7 +172,9 @@
 		grid-template-columns: repeat(3, 1fr);
 		gap: 1px;
 		background: #fff;
+		margin-bottom: calc(2rem + 80px);
 	}
+
 	.gallery-item {
 		all: unset;
 		display: block;
@@ -214,11 +213,18 @@
 	}
 
 	.button-bar {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		padding: 0 1.7rem;
 		gap: 1rem;
-		margin: 1rem 0;
+		background: transparent;
+		z-index: 10;
+		max-width: 480px;
+		margin: 0 auto 1.7rem;
 	}
 </style>
