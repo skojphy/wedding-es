@@ -20,7 +20,7 @@
 	let bookmarked = false;
 	let newComment = '';
 	let borderStyleString = feed?.borders?.length
-		? `border: 10px solid; border-color: ${feed.borders.join(' ')};`
+		? `border: 15px solid; border-color: ${feed.borders.join(' ')};`
 		: '';
 
 	const addComment = () => {
