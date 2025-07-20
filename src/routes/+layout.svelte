@@ -1,5 +1,9 @@
 <script>
-	import { onMount } from 'svelte';
+	import { afterNavigate } from '$app/navigation';
+
+	afterNavigate(() => {
+		localStorage.setItem('lastPage', window.location.pathname);
+	});
 </script>
 
 <div class="layout-wrapper">
