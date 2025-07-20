@@ -89,6 +89,7 @@
 		align-items: center;
 		justify-content: space-between;
 		width: 100%;
+		height: 5rem;
 		max-width: 400px;
 		margin: 0 auto;
 		background: white;
