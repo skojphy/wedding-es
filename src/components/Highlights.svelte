@@ -48,13 +48,12 @@
 <style>
 	.highlights {
 		display: flex;
-		gap: 0.75rem;
-		padding-left: 1rem;
-		padding-right: 1rem;
-		padding-top: 0.5rem;
-		padding-bottom: 0.5rem;
+		justify-content: flex-start;
+		gap: 1rem;
+		padding: 0.5rem;
 		overflow-x: auto;
 		width: 100%;
+		box-sizing: border-box;
 	}
 
 	.highlight {
