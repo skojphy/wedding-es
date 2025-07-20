@@ -3,7 +3,12 @@
 
 	let selectedIndex = null;
 	const labels = ['1st', '2nd', '3rd', '4th'];
-	const texts = ['은하수 + 제주', '놋네눨느 + 100일', '광주 + 크리스마스', '라이온즈 + 포항'];
+	const texts = [
+		['은하수', '제주'],
+		['놋네눨느', '100일'],
+		['광주', '크리스마스'],
+		['라이온즈', '포항']
+	];
 
 	const colors = ['#2d9e65', '#ff6446', '#5653e9', '#d1d175'];
 
@@ -40,7 +45,9 @@
 			style="background: {colors[selectedIndex]};"
 		>
 			<button class="modal-close" on:click={closeModal} aria-label="Close modal">×</button>
-			<span class="modal-text">{texts[selectedIndex]}</span>
+			<span class="modal-text"
+				>{texts[selectedIndex][0]} <br />+<br /> {texts[selectedIndex][1]}</span
+			>
 		</div>
 	</div>
 {/if}
