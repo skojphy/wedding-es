@@ -91,13 +91,13 @@
 		max-width: 480px;
 		width: 100%;
 		position: relative;
-		min-height: 100vh;
+		min-height: 100svh;
 	}
 
 	.img-comp-container {
 		position: relative;
 		width: 100%;
-		height: 100vh;
+		height: 100svh;
 		user-select: none;
 		overflow: hidden;
 		display: flex;

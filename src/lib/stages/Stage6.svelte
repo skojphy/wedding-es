@@ -45,7 +45,7 @@
 <style>
 	.stage6 {
 		width: 100%;
-		height: 100vh;
+		height: 100svh;
 		margin: 0;
 		padding: 3rem;
 		background: #fff;

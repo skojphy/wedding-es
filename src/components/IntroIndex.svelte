@@ -45,7 +45,7 @@
 	.stage-wrapper {
 		position: relative;
 		width: 100%;
-		height: 100vh;
+		height: 100svh;
 		overflow: hidden;
 	}
 
@@ -62,7 +62,7 @@
 		max-width: 400px;
 		width: 60%;
 		margin: 0 auto;
-		top: 15vh;
+		top: 15svh;
 		text-align: center;
 	}
 

@@ -27,7 +27,7 @@
 		justify-content: center;
 		text-align: center;
 		width: 100%;
-		height: 100vh;
+		height: 100svh;
 		box-sizing: border-box;
 		background: #f7f2ed;
 		padding: 2rem;

@@ -164,7 +164,7 @@
 	.stage-wrapper {
 		max-width: 480px;
 		width: 100%;
-		height: 100vh;
+		height: 100svh;
 		margin: auto;
 		position: relative;
 		background-color: #f7f2ee;

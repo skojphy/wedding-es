@@ -114,7 +114,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		height: 100dvh;
+		height: 100svh;
 		padding: 1rem;
 		background: #f8f3ef;
 	}
