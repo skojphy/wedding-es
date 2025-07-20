@@ -192,7 +192,7 @@
 		align-items: center;
 		position: relative;
 		border-radius: 50%;
-		margin: 1.4rem;
+		margin: 1.2rem;
 		z-index: 0;
 	}
 
@@ -244,7 +244,7 @@
 		position: relative;
 		height: 4rem;
 		border-radius: 15px;
-		margin: 1.4rem 0;
+		margin: 1.2rem 0;
 		display: flex;
 		justify-content: center;
 		align-content: center;
