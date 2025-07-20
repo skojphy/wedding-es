@@ -3,6 +3,7 @@
 
 <div class="coming-soon-page">
 	<p class="coming-soon-text">Coming Soon</p>
+	<p class="text">7월 27일 공개 예정</p>
 </div>
 
 <style>
@@ -16,11 +17,17 @@
 		text-align: center;
 		position: relative;
 		background: #f7f2ee;
+		color: #666666;
 	}
 
 	.coming-soon-text {
 		font-size: 2rem;
-		color: #666666;
 		font-weight: bold;
+		margin: 1.5rem;
+	}
+
+	.text {
+		font-size: 1.4rem;
+		margin: 0;
 	}
 </style>
