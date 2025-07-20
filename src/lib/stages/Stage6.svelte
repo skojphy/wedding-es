@@ -36,7 +36,12 @@
 			지금까지 플레이해 주셔서 감사합니다.<br />
 			그럼 우리 결혼식장에서 만나요:)
 		</p>
-		<a href="https://example.com/청첩장" target="_blank" rel="noopener noreferrer" class="invite">
+		<a
+			href="https://makedear.com/mcard/view/6bGZLyZ"
+			target="_blank"
+			rel="noopener noreferrer"
+			class="invite"
+		>
 			모바일 청첩장 보러 가기
 		</a>
 	{/if}
