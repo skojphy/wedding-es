@@ -243,5 +243,6 @@
 		z-index: 10;
 		max-width: 480px;
 		margin: 0 auto 1.7rem;
+		box-sizing: border-box;
 	}
 </style>
