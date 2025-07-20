@@ -3,11 +3,32 @@
 	import { goto } from '$app/navigation';
 	import { userNickname } from '$lib/stores';
 	import NextButton from '$components/NextButton.svelte';
+	import { onMount } from 'svelte';
 
 	let nickname = '';
 	let error = '';
 	let showNicknameInput = false;
 	let nicknameInput;
+
+	let lastPage = null;
+	let showResumePrompt = false;
+
+	onMount(() => {
+		lastPage = localStorage.getItem('lastPage');
+		nickname = localStorage.getItem('nickname') || '';
+		if (lastPage) {
+			showResumePrompt = true;
+		}
+	});
+
+	const handleResume = () => {
+		if (nickname.trim()) {
+			goto(lastPage);
+		} else {
+			alert('이름 또는 닉네임을 입력해 주세요.');
+			nicknameInput?.focus();
+		}
+	};
 
 	const handleNext = () => {
 		if (!nickname.trim().length) {
@@ -23,10 +44,23 @@
 
 <div class="entry-page">
 	{#if !showNicknameInput}
-		<div class="content">
-			<p class="date">2025년 9월 13일</p>
-			<p class="question">결혼을 앞둔 저희의 이야기,<br />들어보시겠어요?</p>
-		</div>
+		{#if showResumePrompt && nickname}
+			<p class="resume-message text">
+				{nickname}님,<br />이전에 플레이한 기록이 존재합니다.<br />
+				<button class="resume-button" on:click={handleResume}>이어하기</button>
+				<button
+					class="resume-button"
+					on:click={() => {
+						showResumePrompt = false;
+					}}>처음으로</button
+				>
+			</p>
+		{:else}
+			<div class="content">
+				<p class="date">2025년 9월 13일</p>
+				<p class="question">결혼을 앞둔 저희의 이야기,<br />들어보시겠어요?</p>
+			</div>
+		{/if}
 	{:else}
 		<div class="content">
 			<div class="nickname-line">
@@ -35,6 +69,7 @@
 					bind:value={nickname}
 					placeholder="이름/닉네임을 입력해 주세요."
 					bind:this={nicknameInput}
+					maxlength="10"
 				/>
 				<span class="suffix">님께</span>
 			</div>
@@ -195,5 +230,26 @@
 		margin-right: -20px;
 		z-index: 1;
 		background-color: #666666;
+	}
+	.resume-message {
+		font-size: 1.3rem;
+		color: #333;
+		margin-bottom: 1rem;
+		line-height: 1.6;
+	}
+	.resume-button {
+		display: inline-block;
+		height: 60px;
+		padding: 0 2rem;
+		border-radius: 9999px;
+		color: var(--text-color);
+		background-color: var(--bg-color);
+		background-color: #666666;
+		color: #ffffff;
+		margin: 1rem;
+		border: none;
+		cursor: pointer;
+		font-size: 1.1rem;
+		line-height: 1.5;
 	}
 </style>
