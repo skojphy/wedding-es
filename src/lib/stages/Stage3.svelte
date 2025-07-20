@@ -34,6 +34,11 @@
 
 	let selectedPost = null;
 
+	let activeTab = 'posts';
+	const handleTabChange = (tab) => {
+		activeTab = tab;
+	};
+
 	const handlePopState = () => {
 		if (selectedPost !== null) selectedPost = null;
 	};
@@ -71,22 +76,26 @@
 	</section>
 
 	<Highlights />
-	<TabMenu />
+	<TabMenu {activeTab} on:change={(e) => handleTabChange(e.detail)} />
 
-	<section class="gallery">
-		{#each [...posts].reverse() as post}
-			<button
-				type="button"
-				class="gallery-item"
-				style="background-image: url({post.images[0]})"
-				on:click={() => {
-					history.pushState(null, '', window.location.href);
-					selectedPost = { ...post };
-				}}
-				aria-label="Open post"
-			></button>
-		{/each}
-	</section>
+	{#if activeTab === 'posts'}
+		<section class="gallery">
+			{#each [...posts].reverse() as post}
+				<button
+					type="button"
+					class="gallery-item"
+					style="background-image: url({post.images[0]})"
+					on:click={() => {
+						history.pushState(null, '', window.location.href);
+						selectedPost = { ...post };
+					}}
+					aria-label="Open post"
+				></button>
+			{/each}
+		</section>
+	{:else}
+		<section class="no-posts"></section>
+	{/if}
 
 	<div class="button-bar">
 		<HintButton hintCode="Xn8Rf6Th" guide="[숫자 4글자]" />
@@ -210,6 +219,14 @@
 		overscroll-behavior: contain;
 		overflow: hidden;
 		pointer-events: auto;
+	}
+
+	.no-posts {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 150vw;
 	}
 
 	.button-bar {

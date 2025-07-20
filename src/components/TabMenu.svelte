@@ -1,5 +1,16 @@
+<script>
+	import { createEventDispatcher } from 'svelte';
+	export let activeTab = 'posts';
+	const dispatch = createEventDispatcher();
+	const selectTab = (tab) => dispatch('change', tab);
+</script>
+
 <nav class="tab-menu">
-	<button class="active" aria-label="게시물">
+	<button
+		class:active={activeTab === 'posts'}
+		aria-label="게시물"
+		on:click={() => selectTab('posts')}
+	>
 		<svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
 			<title>게시물</title>
 			<rect
@@ -59,7 +70,11 @@
 			/>
 		</svg>
 	</button>
-	<button aria-label="릴스">
+	<button
+		class:active={activeTab === 'reels'}
+		aria-label="릴스"
+		on:click={() => selectTab('reels')}
+	>
 		<svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" style="color: #999999;">
 			<title>릴스</title>
 			<line
@@ -108,7 +123,11 @@
 			/>
 		</svg>
 	</button>
-	<button aria-label="태그됨">
+	<button
+		class:active={activeTab === 'tags'}
+		aria-label="태그됨"
+		on:click={() => selectTab('tags')}
+	>
 		<svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" style="color: #999999;">
 			<title>태그됨</title>
 			<path
@@ -168,6 +187,7 @@
 
 	.tab-menu .active {
 		color: black;
-		border-bottom: 1.5px solid #222;
+		border-bottom: 2px solid #222;
+		transition: border-color 0.3s ease;
 	}
 </style>
