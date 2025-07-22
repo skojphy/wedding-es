@@ -13,7 +13,8 @@
 <div class="stage6">
 	{#if isLoading}
 		<div class="loading-container">
-			<p class="loading-text">결혼 준비가 완료되었습니다!<br />잠시만 기다려주세요.</p>
+			<p class="loading-text">결혼 준비가 완료되었습니다!</p>
+			<p class="loading-text">잠시만 기다려주세요.</p>
 			<div class="spinner"></div>
 		</div>
 	{:else}
@@ -40,9 +41,17 @@
 			href="https://makedear.com/mcard/view/6bGZLyZ"
 			target="_blank"
 			rel="noopener noreferrer"
-			class="invite"
+			class="invite link"
 		>
 			모바일 청첩장 보러 가기
+		</a>
+		<a
+			href="https://open.kakao.com/o/s0dSPiIh"
+			target="_blank"
+			rel="noopener noreferrer"
+			class="talk link"
+		>
+			오픈 카톡 보내러 가기
 		</a>
 	{/if}
 </div>
@@ -81,7 +90,7 @@
 	}
 	.letter {
 		width: 100%;
-		max-width: 360px;
+		max-width: 330px;
 		display: block;
 	}
 	.letter-text {
@@ -95,35 +104,44 @@
 		color: #333;
 		text-align: center;
 		white-space: pre-wrap;
+		line-height: 1.4;
 	}
-	.invite {
+	.link {
 		display: inline-block;
 		margin-top: 1.5rem;
 		padding: 0.75rem 1rem;
 		margin: 1rem;
 		box-sizing: border-box;
 		border: none;
-		background: rgba(255, 100, 70, 0.8);
 		color: #fff;
 		font-size: 1rem;
 		border-radius: 9999px;
 		cursor: pointer;
 		text-decoration: none;
 	}
+	.invite {
+		background: rgba(255, 100, 70, 0.8);
+		margin-bottom: 0;
+	}
+	.talk {
+		background: rgba(86, 83, 233, 0.8);
+		margin: 1rem;
+	}
 	.loading-text {
 		font-size: 1.5rem;
-		line-height: 4rem;
+		line-height: 3rem;
 		text-align: center;
 		min-width: 85vw;
+		margin: 0;
 	}
 	.spinner {
-		width: 5rem;
-		height: 5rem;
-		border: 6px solid rgba(0, 0, 0, 0.1);
-		border-top-color: #ff6446;
+		width: 48px;
+		height: 48px;
+		border: 6px solid #f3f3f3;
+		border-top: 6px solid #3498db;
 		border-radius: 50%;
 		animation: spin 1s linear infinite;
-		margin-top: 1rem;
+		margin: 1rem;
 	}
 
 	@keyframes spin {

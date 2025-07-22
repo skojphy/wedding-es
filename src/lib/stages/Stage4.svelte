@@ -21,7 +21,7 @@
 
 	const visibleLottoCounts = [0, 2, 5, 7];
 
-	const lottoNumbers = ['14', '1', '18', '18', '25', '14', '5'];
+	const lottoNumbers = ['13', '1', '18', '18', '25', '13', '5'];
 
 	let container;
 	let mainWidth = 0;

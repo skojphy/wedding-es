@@ -323,6 +323,6 @@
 	}
 
 	.quiz {
-		color: rgba(255, 100, 70, 0.5);
+		color: rgba(255, 100, 70, 0.3);
 	}
 </style>

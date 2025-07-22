@@ -146,19 +146,19 @@
 	}
 
 	.green-border {
-		border-color: #24d56d;
+		border: 5px solid #24d56d;
 	}
 
 	.red-border {
-		border-color: #ff6446;
+		border: 5px solid #ff6446;
 	}
 
 	.blue-border {
-		border-color: #5553e9;
+		border: 5px solid #5553e9;
 	}
 
 	.purple-border {
-		border-color: #ff3797;
+		border: 5px solid #ff3797;
 	}
 
 	.modal-item {
