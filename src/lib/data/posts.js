@@ -38,7 +38,7 @@ export const posts = [
         date: '2018년 4월 12일',
         caption: '오늘부터 라이온즈랑 1일💙',
         imagesCount: 1,
-        borders: ['#d1d175', '#d1d175', '#d1d175', '#d1d175']
+        borders: ['#ff3797', '#ff3797', '#ff3797', '#ff3797']
     },
     {
         id: 7,
@@ -51,7 +51,7 @@ export const posts = [
         date: '2020년 12월 19일',
         caption: '우리의 첫 번째 제주🍊',
         imagesCount: 1,
-        borders: ['#2d9e65', 'transparent', '#2d9e65', '#2d9e65']
+        borders: ['#24d56d', 'transparent', '#24d56d', '#24d56d']
     },
     {
         id: 9,
@@ -64,14 +64,14 @@ export const posts = [
         date: '2022년 6월 9일',
         caption: '포항 청년과 명예 포항 시민',
         imagesCount: 1,
-        borders: ['transparent', '#d1d175', '#d1d175', 'transparent']
+        borders: ['transparent', '#ff3797', '#ff3797', 'transparent']
     },
     {
         id: 11,
         date: '2023년 6월 9일',
         caption: '제용이랑 보고 온 은하수💫',
         imagesCount: 1,
-        borders: ['#2d9e65', '#2d9e65', '#2d9e65', 'transparent']
+        borders: ['#24d56d', '#24d56d', '#24d56d', 'transparent']
     },
     {
         id: 12,
