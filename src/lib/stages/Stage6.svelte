@@ -50,9 +50,9 @@
 <style>
 	.stage6 {
 		width: 100%;
-		height: 100svh;
+		min-height: 100vh;
 		margin: 0;
-		padding: 3rem;
+		padding: 3rem 3rem 5rem;
 		background: #fff;
 		border-radius: 12px;
 		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
