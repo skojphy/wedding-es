@@ -172,7 +172,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		justify-content: center;
+		justify-content: flex-start;
 	}
 
 	.neumorphism {
@@ -194,6 +194,7 @@
 		border-radius: 50%;
 		margin: 1.2rem;
 		z-index: 0;
+		margin-top: 5rem;
 	}
 
 	.hand {

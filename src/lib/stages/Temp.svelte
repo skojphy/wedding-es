@@ -22,7 +22,7 @@
 	});
 
 	const handleResume = () => {
-		if (nickname.trim()) {
+		if (nickname.trim() && lastPage !== '/' && lastPage !== '/hello' && lastPage !== '/g4Pz8Kq2') {
 			goto(lastPage);
 		} else {
 			alert('이름 또는 닉네임을 입력해 주세요.');
