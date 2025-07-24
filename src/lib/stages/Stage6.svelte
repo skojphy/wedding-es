@@ -22,7 +22,10 @@
 			{nickname}님께<br />
 			미션이 도착했습니다!
 		</h1>
-		<p class="desc1">미션을 확인하고 화면을 캡쳐해 주세요.</p>
+		<p class="desc1">
+			미션을 수행하실 거라면!<br />
+			현재 화면을 캡처해<br />아래 오픈 카톡으로 전달해 주세요.
+		</p>
 		<div class="letter-container">
 			<img src="/images/letter.svg" alt="편지 이미지" class="letter" />
 			<div class="letter-text">
