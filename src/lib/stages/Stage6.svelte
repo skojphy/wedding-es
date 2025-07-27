@@ -1,13 +1,37 @@
 <script>
 	import { onMount } from 'svelte';
 	let isLoading = true;
-	const nickname = localStorage.getItem('nickname') || '귀빈';
+	const nickname = localStorage.getItem('nickname') || '하객';
 	onMount(() => {
 		const timer = setTimeout(() => {
 			isLoading = false;
 		}, 2000);
 		return () => clearTimeout(timer);
 	});
+
+	let mission = '';
+
+	onMount(async () => {
+		const res = await fetch('/api/missions');
+		({ mission } = await res.json());
+	});
+	let isSubmitting = false;
+
+	const handleSubmit = async () => {
+		try {
+			const res = await fetch('/api/missions', {
+				method: 'GET',
+				headers: { 'Content-Type': 'application/json' }
+			});
+			const { mission } = await res.json();
+
+			alert(`미션 (${mission}): ${text}\n데이터가 정상 저장되었습니다!`);
+			isSubmitting = false;
+		} catch (err) {
+			console.error(err);
+			alert('서버 통신 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
+		}
+	};
 </script>
 
 <div class="stage6">
@@ -29,8 +53,7 @@
 		<div class="letter-container">
 			<img src="/images/letter.svg" alt="편지 이미지" class="letter" />
 			<div class="letter-text">
-				~~ 미션 내용 ~~<br />
-				여기에 여기에
+				{mission}
 			</div>
 		</div>
 		<p class="desc">
@@ -101,13 +124,14 @@
 		top: 30%;
 		left: 50%;
 		transform: translate(-50%, -30%);
-		width: 80%;
+		width: 72%;
 		font-family: 'Pretendard-Regular', sans-serif;
 		font-size: 1rem;
 		color: #333;
 		text-align: center;
 		white-space: pre-wrap;
 		line-height: 1.4;
+		word-break: keep-all;
 	}
 	.link {
 		display: inline-block;
