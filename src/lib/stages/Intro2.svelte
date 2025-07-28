@@ -184,7 +184,7 @@
 	}
 
 	.clock {
-		width: 70%;
+		width: 60%;
 		aspect-ratio: 1 / 1;
 		justify-self: center;
 		display: flex;

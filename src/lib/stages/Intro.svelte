@@ -57,7 +57,7 @@
 	.intro1-page {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
+		justify-content: flex-start;
 		align-items: center;
 		width: 100%;
 		height: 100svh;
@@ -72,6 +72,7 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+		margin-top: 3rem;
 	}
 
 	.face {
