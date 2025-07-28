@@ -10,5 +10,6 @@ export const GET = async () => {
     }
     const mission = page.properties['text'].rich_text[0]?.plain_text ?? '미션을 불러오는 데 실패했습니다. 다시 시도해 주세요.';
 
-    return json({ mission });
+    return json({ id: randomIdx, mission });
+    // TODO: user 저장할 때 mission id 같이 저장해햐 함
 };

@@ -9,12 +9,30 @@
 		date: '',
 		caption: '',
 		likes: 0,
-		comments: []
+		comments: [],
+		feedId: 0
 	};
 
 	export let onBack = () => {};
 
-	const username = 'piccor_rica';
+	onMount(async () => {
+		// Fetch feed data from API
+		const res = await fetch(`/api/feed?feedId=${feed.feedId}`);
+		const { likes, comments: commentsJson } = await res.json();
+
+		// Apply likes
+		feed.likes = likes;
+
+		try {
+			feed.comments = JSON.parse(commentsJson);
+
+			console.log('feed.comments', feed);
+		} catch (err) {
+			console.error('Failed to parse feed comments JSON:', commentsJson, err);
+			feed.comments = [];
+		}
+	});
+
 	const userNickname = localStorage.getItem('nickname') || '익명';
 	let liked = false;
 	let bookmarked = false;
@@ -25,15 +43,13 @@
 
 	const addComment = () => {
 		if (newComment.trim()) {
-			const comment = {
-				nickname: userNickname,
-				text: newComment,
-				created_at: new Date().toISOString()
-			};
-			feed = {
-				...feed,
-				comments: [...feed.comments, comment]
-			};
+			feed.comments = [
+				...feed.comments,
+				{
+					userName: userNickname,
+					comment: newComment
+				}
+			];
 			newComment = '';
 		}
 	};
@@ -65,7 +81,7 @@
 	<div class="feed-header">
 		<img src="/images/insta/insta_profile.webp" alt="avatar" class="avatar" />
 		<div class="meta">
-			<div class="username">{username}</div>
+			<div class="username">piccor_rica</div>
 			<div class="date">{feed.date}</div>
 		</div>
 		<div class="menu">⋯</div>
@@ -99,24 +115,26 @@
 		{feed.likes}명이 좋아합니다
 	</div>
 
-	<div class="feed-caption">
-		<strong>{username}</strong>
-		{feed.caption}
-	</div>
+	{#if feed.comments && feed.comments.length > 0}
+		<div class="feed-caption">
+			<strong>{feed.comments[0].userName}</strong>
+			{feed.comments[0].comment}
+		</div>
+	{/if}
 
 	<div class="feed-comments">
-		{#each feed.comments as comment}
+		{#each feed.comments || [] as comment}
 			<div class="comment">
 				<div class="comment-header">
-					<strong>{comment.nickname}</strong>
-					<span class="comment-date"
+					<strong>{comment.userName}</strong>
+					<!-- <span class="comment-date"
 						>{new Date(comment.created_at).toLocaleDateString('ko-KR', {
 							month: 'short',
 							day: 'numeric'
 						})}</span
-					>
+					> -->
 				</div>
-				<div class="comment-text">{comment.text}</div>
+				<div class="comment-text">{comment.comment}</div>
 			</div>
 		{/each}
 	</div>

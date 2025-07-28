@@ -80,14 +80,14 @@
 
 	{#if activeTab === 'posts'}
 		<section class="gallery">
-			{#each [...posts].reverse() as post}
+			{#each [...posts].reverse() as post, index}
 				<button
 					type="button"
 					class="gallery-item"
 					style="background-image: url({post.images[0]})"
 					on:click={() => {
 						history.pushState(null, '', window.location.href);
-						selectedPost = { ...post };
+						selectedPost = { ...post, feedId: index };
 					}}
 					aria-label="Open post"
 				></button>
