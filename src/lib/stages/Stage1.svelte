@@ -112,7 +112,7 @@
 		height: 100%;
 		background-repeat: no-repeat;
 		background-size: cover;
-		background-position: top center;
+		background-position: center center;
 	}
 
 	.img-left {
