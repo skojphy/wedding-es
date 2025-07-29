@@ -30,7 +30,7 @@
 		}
 	};
 
-	const handleNext = () => {
+	const handleNext = async () => {
 		if (!nickname.trim().length) {
 			alert('이름 또는 닉네임을 입력해 주세요.');
 			nicknameInput?.focus();
@@ -38,7 +38,17 @@
 		}
 		userNickname.set(nickname);
 		localStorage.setItem('nickname', nickname);
-		goto('/g4Pz8Kq2');
+		const res = await fetch('/api/users/createUser', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ name: nickname })
+		});
+		const data = await res.json();
+		if (data.success && data.pageId) {
+			goto('/g4Pz8Kq2');
+		} else {
+			alert('잠시 후 다시 시도해 주세요.');
+		}
 	};
 </script>
 
