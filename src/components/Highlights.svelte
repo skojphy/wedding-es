@@ -73,7 +73,9 @@
 						alt={texts[selectedIndex][0]}
 						class="modal-img"
 					/>
-					<span class="modal-label">{texts[selectedIndex][0]}</span>
+					<span class="modal-label" data-text={texts[selectedIndex][0]}>
+						{texts[selectedIndex][0]}
+					</span>
 				</div>
 				<div class={`modal-item ${colors[selectedIndex]} ${colors[selectedIndex]}-border`}>
 					<img
@@ -81,7 +83,9 @@
 						alt={texts[selectedIndex][1]}
 						class="modal-img"
 					/>
-					<span class="modal-label">{texts[selectedIndex][1]}</span>
+					<span class="modal-label" data-text={texts[selectedIndex][1]}>
+						{texts[selectedIndex][1]}
+					</span>
 				</div>
 			</div>
 		</div>
@@ -248,7 +252,7 @@
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		filter: blur(4px); /* 이미지에 블러 효과 적용 */
+		filter: blur(4px);
 	}
 	.modal-label {
 		position: absolute;
@@ -261,5 +265,17 @@
 		text-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
 		pointer-events: none;
 		font-size: 1.3rem;
+	}
+
+	.modal-label::before {
+		content: attr(data-text);
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		color: black;
+		filter: blur(4px);
+		z-index: -1;
+		white-space: nowrap;
 	}
 </style>
