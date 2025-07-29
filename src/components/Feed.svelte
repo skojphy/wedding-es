@@ -65,6 +65,21 @@
 		}
 	};
 
+	const handleLike = async () => {
+		liked = !liked;
+		feed.likes += liked ? 1 : -1;
+
+		try {
+			await fetch('/api/feed/updateLikes', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ feedIndex: feed.feedId, liked })
+			});
+		} catch (err) {
+			console.error('Failed to update likes on server:', err);
+		}
+	};
+
 	onMount(() => {
 		register();
 	});
@@ -118,7 +133,7 @@
 		<Buttons
 			{liked}
 			{bookmarked}
-			onLike={() => (liked = !liked)}
+			onLike={handleLike}
 			onBookmark={() => (bookmarked = !bookmarked)}
 		/>
 	</div>

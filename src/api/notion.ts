@@ -47,7 +47,7 @@ export async function fetchFeed(idx) {
  * Feed DB의 id(Title 프로퍼티)로 좋아요 수를 1 증가시킵니다.
  * @param idx Feed DB의 id 프로퍼티 값 (0~n)
  */
-export async function updateFeedLikeByIndex(idx: number) {
+export async function updateFeedLikeByIndex(idx, liked) {
     const res = await notion.databases.query({
         database_id: feedDatabaseId,
         filter: {
@@ -62,10 +62,11 @@ export async function updateFeedLikeByIndex(idx: number) {
     const page = res.results[0];
     const pageId = page.id;
     const current = page.properties['liked'].number ?? 0;
+    const newCount = liked ? current + 1 : Math.max(0, current - 1);
     await notion.pages.update({
         page_id: pageId,
         properties: {
-            liked: { number: current + 1 }
+            liked: { number: newCount }
         }
     });
 }
