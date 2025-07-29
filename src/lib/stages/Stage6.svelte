@@ -11,30 +11,34 @@
 
 	let missionText = '';
 	let missionId = null;
-
-	onMount(async () => {
-		const res = await fetch('/api/missions');
-		const { id, text } = await res.json();
-		missionId = id;
-		missionText = text;
-	});
 	let isSubmitting = false;
 
-	const handleSubmit = async () => {
+	const recordMission = async (missionText) => {
+		if (isSubmitting) return;
 		try {
-			const res = await fetch('/api/missions', {
-				method: 'GET',
-				headers: { 'Content-Type': 'application/json' }
-			});
-			const { mission } = await res.json();
+			isSubmitting = true;
 
-			alert(`미션 (${mission}): ${text}\n데이터가 정상 저장되었습니다!`);
+			const res = await fetch('/api/users/updateUser', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ name: nickname, missionId })
+			});
+			const data = await res.json();
+
 			isSubmitting = false;
 		} catch (err) {
 			console.error(err);
 			alert('서버 통신 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
 		}
 	};
+
+	onMount(async () => {
+		const res = await fetch('/api/missions');
+		const { id, text } = await res.json();
+		missionId = id;
+		missionText = text;
+		await recordMission(missionText);
+	});
 </script>
 
 <div class="stage6">
@@ -56,7 +60,7 @@
 		<div class="letter-container">
 			<img src="/images/letter.svg" alt="편지 이미지" class="letter" />
 			<div class="letter-text">
-				{mission}
+				{missionText}
 			</div>
 		</div>
 		<p class="desc">

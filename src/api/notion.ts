@@ -11,7 +11,6 @@ if (!VITE_NOTION_TOKEN || !userDatabaseId || !missionDatabaseId || !feedDatabase
 
 export const notion = new Client({ auth: VITE_NOTION_TOKEN });
 
-
 export async function fetchMissionByIndex(idx) {
     const res = await notion.databases.query({
         database_id: missionDatabaseId,
@@ -129,6 +128,56 @@ export async function createUser(name) {
                 ]
             },
             startTime: {
+                date: { start: now }
+            }
+        }
+    });
+    return res;
+}
+
+/**
+ * 이름(name)으로 유저 페이지를 조회합니다.
+ * @param name Users DB의 name 프로퍼티 값
+ */
+export async function getUserByName(name) {
+    const res = await notion.databases.query({
+        database_id: userDatabaseId,
+        filter: {
+            property: 'name',
+            title: { equals: name }
+        },
+        page_size: 1
+    });
+    return res.results[0];
+}
+
+/**
+ * 사용자 페이지를 이름(name)으로 찾아 미션 relation과 endTime을 업데이트합니다.
+ * @param name Notion Users DB의 name 프로퍼티 값
+ * @param data 업데이트할 필드들: { missionId: number }
+ */
+export async function updateUserByName(name, data) {
+    const { missionId } = data;
+    if (missionId === undefined) {
+        throw new Error('missionId가 필요합니다.');
+    }
+    // 1) 이름으로 유저 페이지 조회
+    const user = await getUserByName(name);
+    if (!user) {
+        throw new Error(`User with name ${name} not found`);
+    }
+    // 2) 해당 미션 페이지 조회
+    const missionPage = await fetchMissionByIndex(missionId);
+    // 3) 현재 시간 기록
+    const now = new Date().toISOString();
+    // 4) 페이지 업데이트
+    const res = await notion.pages.update({
+        page_id: user.id,
+        properties: {
+            mission: {
+                relation: [{ id: missionPage.id }]
+            },
+            endTime: {
                 date: { start: now }
             }
         }
