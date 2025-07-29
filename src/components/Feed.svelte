@@ -129,47 +129,54 @@
 		{/if}
 	</swiper-container>
 
-	<div class="feed-actions">
-		<Buttons
-			{liked}
-			{bookmarked}
-			onLike={handleLike}
-			onBookmark={() => (bookmarked = !bookmarked)}
-		/>
-	</div>
-	<div class="likes-count">
-		{feed.likes}명이 좋아합니다
-	</div>
+	<div class="feed-bottom">
+		<div class="feed-actions">
+			<Buttons
+				{liked}
+				{bookmarked}
+				onLike={handleLike}
+				onBookmark={() => (bookmarked = !bookmarked)}
+			/>
+		</div>
+		<div class="likes-count">
+			{feed.likes}명이 좋아합니다
+		</div>
 
-	<div class="feed-comments">
-		{#each feed.comments || [] as comment}
-			<div class="comment">
-				<div class="comment-header">
-					<strong>{comment.userName}</strong>
-					<span class="comment-date">
-						{formatTimeAgo(comment.created_at)}
-					</span>
+		<div class="feed-caption">
+			<strong>piccor_rica</strong>
+			{feed.caption}
+		</div>
+
+		<div class="feed-comments">
+			{#each feed.comments || [] as comment}
+				<div class="comment">
+					<div class="comment-header">
+						<strong>{comment.userName}</strong>
+						<span class="comment-date">
+							{formatTimeAgo(comment.created_at)}
+						</span>
+					</div>
+					<div class="comment-text">{comment.comment}</div>
 				</div>
-				<div class="comment-text">{comment.comment}</div>
-			</div>
-		{/each}
-	</div>
+			{/each}
+		</div>
 
-	<form class="comment-form" on:submit|preventDefault={addComment}>
-		<input class="comment-input" bind:value={newComment} placeholder="댓글 달기" />
-		<button type="submit" aria-label="댓글 작성">
-			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-				<path
-					fill="none"
-					stroke="currentColor"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					stroke-width="2"
-					d="M18 6v6a3 3 0 0 1-3 3H5l4-4m0 8l-4-4"
-				/>
-			</svg>
-		</button>
-	</form>
+		<form class="comment-form" on:submit|preventDefault={addComment}>
+			<input class="comment-input" bind:value={newComment} placeholder="댓글 달기" />
+			<button type="submit" aria-label="댓글 작성">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+					<path
+						fill="none"
+						stroke="currentColor"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M18 6v6a3 3 0 0 1-3 3H5l4-4m0 8l-4-4"
+					/>
+				</svg>
+			</button>
+		</form>
+	</div>
 </div>
 
 <style>
@@ -238,6 +245,16 @@
 		font-size: 0.85rem;
 		margin-top: 0.5rem;
 		padding-top: 0.7rem;
+	}
+
+	.feed-caption {
+		padding: 0 0.5rem 0.5rem;
+		font-size: 0.9rem;
+	}
+
+	.feed-bottom {
+		padding: 0 0.8rem 0.8rem;
+		font-size: 0.9rem;
 	}
 
 	.comment-form {
