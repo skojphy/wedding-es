@@ -9,11 +9,14 @@
 		return () => clearTimeout(timer);
 	});
 
-	let mission = '';
+	let missionText = '';
+	let missionId = null;
 
 	onMount(async () => {
 		const res = await fetch('/api/missions');
-		({ mission } = await res.json());
+		const { id, text } = await res.json();
+		missionId = id;
+		missionText = text;
 	});
 	let isSubmitting = false;
 
