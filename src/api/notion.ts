@@ -111,3 +111,27 @@ export async function addFeedCommentByIndex(idx, commentObj) {
         }
     });
 }
+
+export async function createUser(name) {
+    const now = new Date().toISOString();
+    const res = await notion.pages.create({
+        parent: {
+            database_id: userDatabaseId
+        },
+        properties: {
+            name: {
+                title: [
+                    {
+                        text: {
+                            content: name
+                        }
+                    }
+                ]
+            },
+            startTime: {
+                date: { start: now }
+            }
+        }
+    });
+    return res;
+}
