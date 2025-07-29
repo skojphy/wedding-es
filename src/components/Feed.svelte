@@ -3,6 +3,7 @@
 	import 'swiper/element/bundle';
 	import { onMount } from 'svelte';
 	import { register } from 'swiper/element/bundle';
+	import { formatTimeAgo } from '$lib/utils/date.js';
 
 	export let feed = {
 		images: [''],
@@ -16,17 +17,13 @@
 	export let onBack = () => {};
 
 	onMount(async () => {
-		// Fetch feed data from API
 		const res = await fetch(`/api/feed?feedId=${feed.feedId}`);
 		const { likes, comments: commentsJson } = await res.json();
 
-		// Apply likes
 		feed.likes = likes;
 
 		try {
 			feed.comments = JSON.parse(commentsJson);
-
-			console.log('feed.comments', feed);
 		} catch (err) {
 			console.error('Failed to parse feed comments JSON:', commentsJson, err);
 			feed.comments = [];
@@ -41,16 +38,30 @@
 		? `border: 15px solid; border-color: ${feed.borders.join(' ')};`
 		: '';
 
-	const addComment = () => {
-		if (newComment.trim()) {
-			feed.comments = [
-				...feed.comments,
-				{
-					userName: userNickname,
-					comment: newComment
-				}
-			];
-			newComment = '';
+	const addComment = async () => {
+		if (!newComment.trim()) return;
+
+		const commentObj = {
+			userName: userNickname,
+			comment: newComment,
+			created_at: new Date().toISOString()
+		};
+
+		feed.comments = [...feed.comments, commentObj];
+
+		newComment = '';
+
+		try {
+			await fetch('/api/feed/updateComment', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					feedIndex: feed.feedId,
+					comments: JSON.stringify(feed.comments)
+				})
+			});
+		} catch (err) {
+			console.error('Failed to submit comment to server:', err);
 		}
 	};
 
@@ -115,24 +126,14 @@
 		{feed.likes}명이 좋아합니다
 	</div>
 
-	{#if feed.comments && feed.comments.length > 0}
-		<div class="feed-caption">
-			<strong>{feed.comments[0].userName}</strong>
-			{feed.comments[0].comment}
-		</div>
-	{/if}
-
 	<div class="feed-comments">
 		{#each feed.comments || [] as comment}
 			<div class="comment">
 				<div class="comment-header">
 					<strong>{comment.userName}</strong>
-					<!-- <span class="comment-date"
-						>{new Date(comment.created_at).toLocaleDateString('ko-KR', {
-							month: 'short',
-							day: 'numeric'
-						})}</span
-					> -->
+					<span class="comment-date">
+						{formatTimeAgo(comment.created_at)}
+					</span>
 				</div>
 				<div class="comment-text">{comment.comment}</div>
 			</div>
@@ -217,15 +218,9 @@
 		font-size: 0.9rem;
 	}
 
-	.feed-caption {
-		padding: 0 0.5rem 0.5rem;
-		font-size: 0.9rem;
-	}
-
 	.feed-comments {
 		padding: 0 0.5rem;
 		font-size: 0.85rem;
-		border-top: 1px solid #eee;
 		margin-top: 0.5rem;
 		padding-top: 0.7rem;
 	}
@@ -305,7 +300,7 @@
 	}
 
 	.comment-text {
-		font-size: 0.9rem;
+		font-size: 0.95rem;
 		margin-left: 0.1rem;
 		color: #000;
 	}
