@@ -13,7 +13,7 @@
 	let missionId = null;
 	let isSubmitting = false;
 
-	const recordMission = async (missionText) => {
+	const recordMission = async () => {
 		if (isSubmitting) return;
 		try {
 			isSubmitting = true;
@@ -33,11 +33,25 @@
 	};
 
 	onMount(async () => {
+		const storedId = localStorage.getItem('missionId');
+		const storedText = localStorage.getItem('missionText');
+		if (storedId && storedText) {
+			missionId = Number(storedId);
+			missionText = storedText;
+			await recordMission();
+
+			return;
+		}
+
 		const res = await fetch('/api/missions');
 		const { id, text } = await res.json();
 		missionId = id;
 		missionText = text;
-		await recordMission(missionText);
+
+		localStorage.setItem('missionId', String(id));
+		localStorage.setItem('missionText', text);
+
+		await recordMission();
 	});
 </script>
 
