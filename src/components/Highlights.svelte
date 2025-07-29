@@ -9,6 +9,16 @@
 		['광주', '크리스마스'],
 		['라이온즈', '포항']
 	];
+	const bgMap = {
+		은하수: '/images/insta/feed11_1.webp',
+		제주: '/images/insta/feed8_1.webp',
+		놋네눨느: '/images/insta/feed3_1.webp',
+		'100일': '/images/insta/feed1_1.webp',
+		광주: '/images/insta/feed4_1.webp',
+		크리스마스: '/images/insta/feed5_1.webp',
+		라이온즈: '/images/insta/feed6_1.webp',
+		포항: '/images/insta/feed10_1.webp'
+	};
 
 	const colors = ['green', 'red', 'blue', 'purple'];
 
@@ -58,10 +68,20 @@
 			<button class="modal-close" on:click={closeModal} aria-label="Close modal">×</button>
 			<div class="modal-image-box">
 				<div class={`modal-item ${colors[selectedIndex]} ${colors[selectedIndex]}-border`}>
-					{texts[selectedIndex][0]}
+					<img
+						src={bgMap[texts[selectedIndex][0]]}
+						alt={texts[selectedIndex][0]}
+						class="modal-img"
+					/>
+					<span class="modal-label">{texts[selectedIndex][0]}</span>
 				</div>
 				<div class={`modal-item ${colors[selectedIndex]} ${colors[selectedIndex]}-border`}>
-					{texts[selectedIndex][1]}
+					<img
+						src={bgMap[texts[selectedIndex][1]]}
+						alt={texts[selectedIndex][1]}
+						class="modal-img"
+					/>
+					<span class="modal-label">{texts[selectedIndex][1]}</span>
 				</div>
 			</div>
 		</div>
@@ -162,6 +182,11 @@
 	}
 
 	.modal-item {
+		position: relative;
+		flex: 1;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		font-size: 1.5rem;
 		font-weight: bold;
 	}
@@ -190,8 +215,8 @@
 		background-color: black;
 	}
 	.modal-image-box {
-		width: 200px;
-		height: 400px;
+		width: 220px;
+		height: 440px;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
@@ -199,14 +224,7 @@
 		box-sizing: border-box;
 	}
 
-	.modal-item {
-		flex: 1;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		font-size: 1.5rem;
-		font-weight: bold;
-	}
+	/* The modal-item rule is above and updated */
 
 	.modal-item + .modal-item {
 		margin-top: -5px;
@@ -221,5 +239,27 @@
 		font-size: 2rem;
 		color: white;
 		cursor: pointer;
+	}
+
+	.modal-img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		filter: blur(4px); /* 이미지에 블러 효과 적용 */
+	}
+	.modal-label {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 1;
+		color: white;
+		font-weight: bold;
+		text-shadow: 0 0 4px rgba(0, 0, 0, 0.7);
+		pointer-events: none;
+		font-size: 1.3rem;
 	}
 </style>
