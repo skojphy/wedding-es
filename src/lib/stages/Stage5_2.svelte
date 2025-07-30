@@ -59,10 +59,12 @@
 
 		if (isMatch) {
 			isLoading = true;
-			showMessage = true;
+			// 2초 동안 셀들 애니메이션
 			setTimeout(() => {
+				showMessage = true;
+				// 메시지 표시 직후 이동
 				goto('/Wk7Mn3Xp');
-			}, 2000);
+			}, 2500);
 		} else {
 			alert('당신은 휴먼이 아닙니까?');
 		}
@@ -75,7 +77,7 @@
 			<h2>결혼준비</h2>
 			<p>에 필요한 타일을 모두 선택하세요.<br />아무것도 없으면 건너뛰기를 클릭하세요.</p>
 		</div>
-		<div class="grid-container">
+		<div class="grid-container {isLoading ? 'reveal' : ''}">
 			{#each grid as image, index}
 				<button
 					type="button"
@@ -101,7 +103,6 @@
 	</div>
 	{#if isLoading}
 		<div class="overlay">
-			<div class="spinner"></div>
 			{#if showMessage}
 				<p class="message">정답입니다!</p>
 			{/if}
@@ -172,7 +173,7 @@
 	}
 
 	.grid-cell.selected::after {
-		background-color: rgba(255, 0, 0, 0.3);
+		background-color: rgba(255, 0, 0, 0.35);
 	}
 
 	.grid-cell img {
@@ -211,7 +212,6 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		background-color: rgba(0, 0, 0, 0.4);
 		z-index: 999;
 	}
 
@@ -237,5 +237,29 @@
 		margin-top: 1rem;
 		color: white;
 		font-size: 1.25rem;
+	}
+
+	@keyframes highlightSelected {
+		from {
+			background-color: rgba(255, 0, 0, 0.35);
+		}
+		to {
+			background-color: rgba(255, 0, 0, 0.75);
+		}
+	}
+	@keyframes dimOthers {
+		from {
+			background-color: transparent;
+		}
+		to {
+			background-color: rgba(0, 0, 0, 0.3);
+		}
+	}
+
+	.grid-container.reveal .grid-cell.selected::after {
+		animation: highlightSelected 1.8s forwards;
+	}
+	.grid-container.reveal .grid-cell:not(.selected)::after {
+		animation: dimOthers 1.8s forwards;
 	}
 </style>
